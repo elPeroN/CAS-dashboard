@@ -14,6 +14,9 @@ import TotalCustomers from './TotalCustomers';
 import TotalProfit from './TotalProfit';
 import TrafficByDevice from './TrafficByDevice';
 
+import { Redirect} from "react-router-dom";
+import { connect } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
@@ -23,9 +26,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Dashboard = () => {
+function  Dashboard(props) {
   const classes = useStyles();
 
+  if(props.isLogged)
   return (
     <Page
       className={classes.root}
@@ -112,6 +116,11 @@ const Dashboard = () => {
       </Container>
     </Page>
   );
+  else return <Redirect to='/login'/>;
 };
 
-export default Dashboard;
+function mapStateToProps(state){
+  return { isLogged: state.isLogged };
+};
+
+export default connect(mapStateToProps)(Dashboard);

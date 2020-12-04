@@ -13,12 +13,15 @@ const useStyles = makeStyles(({
   root: {},
   toolbar: {
     height: 64
+  },
+  logo: {
+    height: 60
   }
 }));
 
 const TopBar = ({ className, ...rest }) => {
   const classes = useStyles();
-
+  
   return (
     <AppBar
       className={clsx(classes.root, className)}
@@ -27,7 +30,7 @@ const TopBar = ({ className, ...rest }) => {
     >
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
-          <Logo />
+          <Logo className={classes.logo}/>
         </RouterLink>
       </Toolbar>
     </AppBar>
