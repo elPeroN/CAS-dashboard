@@ -1,14 +1,23 @@
 import { userConstants } from "../constants/action-types";
 
 export const userActions = {
-  login,
-  logout
+  loginSuccess: data => ({
+    type: userConstants.LOGIN_SUCCESS,
+    payload: data
+  }),
+  loginError: data => ({
+    type: userConstants.LOGIN_ERROR,
+    payload: data
+  }),
+  logout: () =>({
+    type: userConstants.LOGOUT
+  }),
+  registerSuccess: data => ({
+    type: userConstants.REGISTER_SUCCESS,
+    payload: data
+  }),
+  registerError: data => ({
+    type: userConstants.REGISTER_ERROR,
+    payload: data
+  })
 };
-
-function login(){
-  return {type: userConstants.LOGIN}
-}
-
-function logout(){
-  return {type: userConstants.LOGOUT}
-}

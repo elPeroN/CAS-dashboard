@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import {connect} from 'react-redux';
-import {userActions} from "src/redux/actions/actions"
+import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +24,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LoginView = (props) => {
+
+
+function LoginView(props){
+
   const classes = useStyles();
-  if(props.isLogged) return (<Redirect to="/app/dashboard"/>)
+
+  if(props.state.isLogged) return (<Redirect to="/app/dashboard"/>)
 
   else return (
     <Page
@@ -42,15 +46,16 @@ const LoginView = (props) => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'demo@cas.it',
-              password: 'Password123'
+              email: '',
+              password: ''
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={() => {
-              props.login();
+            onSubmit={(values,actions) => {
+              props.login(values).then(actions.setSubmitting(false));
+              //TODO: creare modal per spiegare errore (es. Login errato )
             }}
           >
             {({
@@ -140,11 +145,11 @@ const LoginView = (props) => {
 };
 
 function mapStateToProps(state){
-  return {isLogged: state.isLogged};
+  return {state: state};
 };
 
-const actionCreators = {
-  login: userActions.login
+const actions = {
+  login: actionsCreator.login
 }
 
-export default connect(mapStateToProps,actionCreators)(LoginView);
+export default connect(mapStateToProps,actions)(LoginView);

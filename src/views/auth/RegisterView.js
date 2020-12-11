@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Redirect } from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
@@ -14,6 +14,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
+import {connect} from 'react-redux';
+import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,10 +26,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RegisterView = () => {
+function RegisterView(props){
   const classes = useStyles();
 
-  return (
+  if(props.state.isLogged) return (<Redirect to="/app/dashboard"/>)
+
+  else return (
     <Page
       className={classes.root}
       title="Register"
@@ -45,6 +49,7 @@ const RegisterView = () => {
               firstName: '',
               lastName: '',
               password: '',
+              passwordConfirmation:'',
               policy: false
             }}
             validationSchema={
@@ -53,11 +58,13 @@ const RegisterView = () => {
                 firstName: Yup.string().max(255).required('First name is required'),
                 lastName: Yup.string().max(255).required('Last name is required'),
                 password: Yup.string().max(255).required('password is required'),
-                policy: Yup.boolean().oneOf([true], 'This field must be checked')
+                passwordConfirmation: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Confirmation is required'),
+                policy: Yup.boolean().oneOf([true], 'This field must be checked'),
               })
             }
-            onSubmit={() => {
-
+            onSubmit={(values) => {
+              props.register(values).then(actions.setSubmitting(false));
+              //TODO: creare modal per spiegare errore (es. email già utilizzata )
             }}
           >
             {({
@@ -135,6 +142,19 @@ const RegisterView = () => {
                   value={values.password}
                   variant="outlined"
                 />
+                <TextField
+                  error={Boolean(touched.passwordConfirmation && errors.passwordConfirmation)}
+                  fullWidth
+                  helperText={touched.passwordConfirmation && errors.passwordConfirmation}
+                  label="Confirm Password"
+                  margin="normal"
+                  name="passwordConfirmation"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  type="password"
+                  value={values.passwordConfirmation}
+                  variant="outlined"
+                />
                 <Box
                   alignItems="center"
                   display="flex"
@@ -202,4 +222,12 @@ const RegisterView = () => {
   );
 };
 
-export default RegisterView;
+function mapStateToProps(state){
+  return {state: state};
+};
+
+const actions = {
+  register: actionsCreator.register
+}
+
+export default connect(mapStateToProps,actions)(RegisterView);

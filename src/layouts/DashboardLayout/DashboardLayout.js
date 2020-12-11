@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar/NavBar';
 import TopBar from './TopBar';
 import SimpleTopBar from './SimpleTopBar';
 
 import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
-
-import {userActions} from "src/redux/actions/actions"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,10 +56,6 @@ function DashboardLayout(props){
     navigation = <SimpleTopBar/>;
   }
 
-  function test(){
-    console.log(props.isLogged);
-  }
-
   return (
     <div className={classes.root}>
       {navigation}
@@ -80,9 +74,4 @@ function mapStateToProps(state){
   return { isLogged: state.isLogged };
 };
 
-const actionCreators = {
-  login: userActions.login,
-  logout: userActions.logout
-}
-
-export default withRouter(connect(mapStateToProps, actionCreators)(DashboardLayout));
+export default withRouter(connect(mapStateToProps)(DashboardLayout));
