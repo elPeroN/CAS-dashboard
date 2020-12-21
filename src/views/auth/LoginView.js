@@ -53,8 +53,8 @@ function LoginView(props){
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
-            onSubmit={(values,actions) => {
-              props.login(values).then(actions.setSubmitting(false));
+            onSubmit={(values,act) => {
+              props.login(values).then(act.setSubmitting(false));
               //TODO: creare modal per spiegare errore (es. Login errato )
             }}
           >

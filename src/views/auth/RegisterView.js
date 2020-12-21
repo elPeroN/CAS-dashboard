@@ -30,7 +30,7 @@ function RegisterView(props){
   const classes = useStyles();
 
   if(props.state.isLogged) return (<Redirect to="/app/dashboard"/>)
-
+  else if(props.state.registered) return(<Redirect to='/login'/>)//TODO inserire messaggio di conferma iscrizione
   else return (
     <Page
       className={classes.root}
@@ -62,8 +62,8 @@ function RegisterView(props){
                 policy: Yup.boolean().oneOf([true], 'This field must be checked'),
               })
             }
-            onSubmit={(values) => {
-              props.register(values).then(actions.setSubmitting(false));
+            onSubmit={(values,act) => {
+              props.register(values).then(act.setSubmitting(false));
               //TODO: creare modal per spiegare errore (es. email già utilizzata )
             }}
           >

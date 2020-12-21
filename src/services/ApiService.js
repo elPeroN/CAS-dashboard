@@ -8,7 +8,7 @@ export const apiCall = (
   url,
   content_type,
   data = false,
-  headers = {}
+  headers ,
 ) => {
   let base = data === false ? {} : { body: JSON.stringify(data) };
   return fetch(url, {
@@ -41,8 +41,9 @@ export const jsonAuthReq = (url, httpReqType, content_type, authToken, data) =>
   }).then(_ => _.json());
 
 export const authGET = (url, content_type, authToken) =>
-  apiCall("GET", url, content_type, false, authHeader(authToken)).then(_ =>
-    _.json()
+  apiCall("GET", url, content_type, false, authHeader(authToken)).then(response =>
+    {console.log(response);}
+    //response.json()
   );
 
 export const authPOST = (url, content_type, data, authToken) =>

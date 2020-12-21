@@ -4,7 +4,8 @@ const initialState = ({
   isLogged: false,
   token: "",
   error: null,
-  time: null
+  time: null,
+  data: null
 });
 
 export function rootReducer(state = initialState, action) {
@@ -12,7 +13,9 @@ export function rootReducer(state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
       return  {
         ...state,
-        isLogged: true
+        isLogged: true,
+        data: action.payload,
+        token: action.payload.token
       };
     case userConstants.LOGIN_ERROR:
       return {
@@ -25,7 +28,7 @@ export function rootReducer(state = initialState, action) {
     case userConstants.REGISTER_SUCCESS:
       return  {
         ...state,
-        isLogged: true
+        registered: action.payload
       };
     case userConstants.REGISTER_ERROR:
       return {

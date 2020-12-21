@@ -78,3 +78,6 @@ cas-dashboard
 - Email Us:
 	- stefano.propato@gmail.com
 	- perrisalvatore95@gmail.com
+
+## TODO:
+	- back-end restituisce solo token al login, come comportarci? (modifichiamo back o workaround?)

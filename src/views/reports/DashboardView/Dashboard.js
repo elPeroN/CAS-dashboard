@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Container,
   Grid,
+  Button,
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
@@ -16,6 +17,7 @@ import TrafficByDevice from './TrafficByDevice';
 
 import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
+import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +31,13 @@ const useStyles = makeStyles((theme) => ({
 function  Dashboard(props) {
   const classes = useStyles();
 
-  if(props.isLogged)
+  function test(){
+    console.log(props.token);
+    props.fetchActivities(props.token);
+  }
+
+  if(props.isLogged){
+    console.log(props.token);
   return (
     <Page
       className={classes.root}
@@ -114,13 +122,21 @@ function  Dashboard(props) {
           </Grid>
         </Grid>
       </Container>
+      <Button onClick={test}>PRESSME</Button>
     </Page>
   );
+}
   else return <Redirect to='/login'/>;
 };
 
 function mapStateToProps(state){
-  return { isLogged: state.isLogged };
+  return {
+    token: state.token,
+    isLogged: state.isLogged };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+const actions = {
+  fetchActivities: actionsCreator.fetchActivities
+}
+
+export default connect(mapStateToProps,actions)(Dashboard);

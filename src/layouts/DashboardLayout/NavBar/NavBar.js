@@ -11,6 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+import {connect} from 'react-redux';
 import {
   BarChart as BarChartIcon,
   Settings as SettingsIcon,
@@ -70,13 +71,12 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const NavBar = ({ onMobileClose, openMobile }) => {
+const NavBar = (props) => {
   const classes = useStyles();
   const location = useLocation();
-
   useEffect(() => {
-    if (openMobile && onMobileClose) {
-      onMobileClose();
+    if (props.openMobile && props.onMobileClose) {
+      props.onMobileClose();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
@@ -104,7 +104,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {props.name + " " + props.surname}
         </Typography>
         <Typography
           color="textSecondary"
@@ -135,8 +135,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         <Drawer
           anchor="left"
           classes={{ paper: classes.mobileDrawer }}
-          onClose={onMobileClose}
-          open={openMobile}
+          onClose={props.onMobileClose}
+          open={props.openMobile}
           variant="temporary"
         >
           {content}
@@ -166,5 +166,9 @@ NavBar.defaultProps = {
   openMobile: false
 };
 
+function mapStateToProps(state){
+  return {name: state.data.name,
+          surname: state.data.surname};
+};
 
-export default NavBar;
+export default connect(mapStateToProps)(NavBar);
