@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -8,11 +7,13 @@ import {
   CardContent,
   Grid,
   Typography,
+  Button,
   colors,
   makeStyles
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,14 +33,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Budget = ({ className, ...rest }) => {
+function Metrics(props) {
   const classes = useStyles();
 
+  function test(){
+    console.log(props.activities)
+  }
+
+  let text;
+  if(props.activities){
+    text = props.activities.length;
+  }else text = "Loading...";
+
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card>
       <CardContent>
         <Grid
           container
@@ -52,13 +59,13 @@ const Budget = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              BUDGET
+              Total Metrics
             </Typography>
             <Typography
               color="textPrimary"
               variant="h3"
             >
-              $24,000
+              {text}
             </Typography>
           </Grid>
           <Grid item>
@@ -87,12 +94,18 @@ const Budget = ({ className, ...rest }) => {
           </Typography>
         </Box>
       </CardContent>
+      <Button onClick={test}>Test</Button>
     </Card>
   );
 };
 
-Budget.propTypes = {
+Metrics.propTypes = {
   className: PropTypes.string
 };
 
-export default Budget;
+function mapStateToProps(state){
+  return {
+    activities: state.activities};
+};
+
+export default connect(mapStateToProps)(Metrics);

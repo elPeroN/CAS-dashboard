@@ -4,8 +4,9 @@ const initialState = ({
   isLogged: false,
   token: "",
   error: null,
-  time: null,
-  data: null
+  data: null,
+  startDate: null,
+  endDate: null
 });
 
 export function rootReducer(state = initialState, action) {
@@ -20,8 +21,7 @@ export function rootReducer(state = initialState, action) {
     case userConstants.LOGIN_ERROR:
       return {
         ...state,
-        error:action.payload,
-        time: new Date()
+        error:action.payload
       };
     case userConstants.LOGOUT:
       return { initialState };
@@ -33,9 +33,18 @@ export function rootReducer(state = initialState, action) {
     case userConstants.REGISTER_ERROR:
       return {
         ...state,
-        error:action.payload,
-        time: new Date()
+        error:action.payload
       };
+    case userConstants.ACTIVITIES_REPORT:
+      return {
+        ...state,
+        activities:action.payload,
+      };
+    case userConstants.SET_END_DATE:
+      return {
+        ...state,
+        endDate: action.payload
+      }
     default: return state;
   }
 };

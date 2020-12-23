@@ -6,7 +6,8 @@ export const actionsCreator = {
   login,
   logout,
   register,
-  fetchActivities
+  fetchActivities,
+  setEndDate
 };
 
 function login(values){
@@ -36,11 +37,14 @@ function register(values){
 
 function fetchActivities(token){
   return dispatch => getActivities(token).then( (response) =>{
-    console.log(response.data);
     if(response.status === 200){
-
+      dispatch(userActions.activitiesReport(response.data.activities));
     } else {
-
+      //TODO: gestione errore
     }
   })
+}
+
+function setEndDate(date){
+  return dispatch => dispatch(userActions.setEndDate(date));
 }

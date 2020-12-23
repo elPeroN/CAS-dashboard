@@ -1,7 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Bar } from 'react-chartjs-2';
+import { connect } from 'react-redux';
+import { Line } from 'react-chartjs-2';
 import {
   Box,
   Button,
@@ -9,35 +9,38 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  useTheme,
-  makeStyles,
-  colors
+  useTheme
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-const useStyles = makeStyles(() => ({
-  root: {}
-}));
 
-const Sales = ({ className, ...rest }) => {
-  const classes = useStyles();
+function Stats(props){
   const theme = useTheme();
+
+  let numbers = [0];
+  let labels = ["No data to show"];
+
+  function createStats(activities){
+    console.log(activities);
+    const map = activities.reduce((acc, e) => acc.set(e.end_time.slice(0,10), (acc.get(e.end_time.slice(0,10)) || 0) + 1), new Map());
+    const sortedMap = new Map([...map].sort((a, b) => a[0] > b[0] ? 1 : -1));
+    labels = [...sortedMap.keys()];
+    numbers = [ ...sortedMap.values()];
+  }
+  if (props.activities){createStats(props.activities)}
 
   const data = {
     datasets: [
       {
-        backgroundColor: colors.indigo[500],
-        data: [18, 5, 19, 27, 29, 19, 20],
-        label: 'This year'
-      },
-      {
-        backgroundColor: colors.grey[200],
-        data: [11, 20, 12, 29, 30, 25, 13],
-        label: 'Last year'
+        fill: false,
+        backgroundColor: theme.palette.primary.main,
+        borderColor: theme.palette.secondary.main,
+        data: numbers,
+        label: 'Daily Metrics'
       }
     ],
-    labels: ['1 Aug', '2 Aug', '3 Aug', '4 Aug', '5 Aug', '6 Aug']
+    labels: labels
   };
 
   const options = {
@@ -96,10 +99,7 @@ const Sales = ({ className, ...rest }) => {
   };
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
+    <Card>
       <CardHeader
         action={(
           <Button
@@ -110,7 +110,7 @@ const Sales = ({ className, ...rest }) => {
             Last 7 days
           </Button>
         )}
-        title="Latest Sales"
+        title="Statistics"
       />
       <Divider />
       <CardContent>
@@ -118,7 +118,7 @@ const Sales = ({ className, ...rest }) => {
           height={400}
           position="relative"
         >
-          <Bar
+          <Line
             data={data}
             options={options}
           />
@@ -143,8 +143,13 @@ const Sales = ({ className, ...rest }) => {
   );
 };
 
-Sales.propTypes = {
+Stats.propTypes = {
   className: PropTypes.string
 };
 
-export default Sales;
+function mapStateToProps(state){
+  return {
+    activities: state.activities };
+};
+
+export default connect(mapStateToProps)(Stats);

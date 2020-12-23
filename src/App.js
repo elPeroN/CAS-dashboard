@@ -6,7 +6,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout';
 import LoginView from 'src/views/auth/LoginView';
 import RegisterView from 'src/views/auth/RegisterView';
-import DashboardView from 'src/views/reports/DashboardView/Dashboard';
+import DashboardView from 'src/views/dashboard/Dashboard';
 import NotFoundView from 'src/views/errors/NotFoundView';
 
 import theme from 'src/theme/theme';

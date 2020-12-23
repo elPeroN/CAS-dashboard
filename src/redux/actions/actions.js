@@ -19,5 +19,13 @@ export const userActions = {
   registerError: data => ({
     type: userConstants.REGISTER_ERROR,
     payload: data
+  }),
+  activitiesReport: data =>({
+    type: userConstants.ACTIVITIES_REPORT,
+    payload: data
+  }),
+  setEndDate: data => ({
+    type: userConstants.SET_END_DATE,
+    payload: data
   })
 };
