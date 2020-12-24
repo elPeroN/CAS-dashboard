@@ -8,6 +8,7 @@ import Page from 'src/components/Page';
 import Metrics from './Metrics';
 import Plugins from './Plugins';
 import Stats from './Stats';
+import Lines from './Lines';
 import LatestOrders from './LatestOrders';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
@@ -31,7 +32,7 @@ function  Dashboard(props) {
   const classes = useStyles();
 
   if(props.isLogged){
-    props.fetchActivities(props.token);
+
     return (
       <Page
         className={classes.root}
@@ -94,7 +95,7 @@ function  Dashboard(props) {
               xl={3}
               xs={12}
             >
-              <TrafficByDevice />
+              <Lines/>
             </Grid>
             <Grid
               item

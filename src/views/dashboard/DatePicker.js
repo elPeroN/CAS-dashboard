@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {actionsCreator} from "src/redux/actions/actionsCreator";
 import {
@@ -6,26 +6,16 @@ import {
   CardContent,
   Grid,
   Typography,
-  Button
+  Divider
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardDatePicker,
+  KeyboardDatePicker
 } from '@material-ui/pickers';
 
 function StaticDatePicker(props) {
-
-  const [selectedDate, setSelectedDate] = useState(new Date('2014-08-18T21:11:54'));
-
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
-  function testDate(){
-    props.setEndDate("1111/11/11");
-  }
 
   return (
     <Card>
@@ -46,26 +36,31 @@ function StaticDatePicker(props) {
                 </Typography>
                <KeyboardDatePicker
                  autoOk
+                 label="Start Date"
                  inputVariant="outlined"
                  variant="inline"
                  format="dd/MM/yyyy"
-                 value={selectedDate}
-                 onChange={handleDateChange}
+                 maxDate={props.endDate}
+                 value={props.startDate}
+                 onChange={props.setStartDate}
                />
-
+             </Grid>
+             <Grid item>
                <KeyboardDatePicker
                  autoOk
+                 label="End Date"
                  inputVariant="outlined"
                  variant="inline"
                  openTo="date"
                  format="dd/MM/yyyy"
+                 minDate={props.startDate}
+                 maxDate={new Date()}
                  value={props.endDate}
                  onChange={props.setEndDate}
                />
             </Grid>
           </MuiPickersUtilsProvider >
         </Grid>
-        <Button onClick={testDate}>TEST</Button>
       </CardContent>
     </Card>
   );
@@ -76,10 +71,13 @@ StaticDatePicker.propTypes = {
 };
 
 function mapStateToProps(state){
-  return{ endDate: state.endDate }
+  return{
+    startDate: state.startDate,
+    endDate: state.endDate }
 };
 
 const actions = {
+  setStartDate: actionsCreator.setStartDate,
   setEndDate: actionsCreator.setEndDate
 };
 

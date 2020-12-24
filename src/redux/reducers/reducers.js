@@ -44,6 +44,11 @@ export function rootReducer(state = initialState, action) {
       return {
         ...state,
         endDate: action.payload
+      };
+    case userConstants.SET_START_DATE:
+      return {
+        ...state,
+        startDate: action.payload
       }
     default: return state;
   }

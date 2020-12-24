@@ -14,20 +14,20 @@ import {
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
+let numbers = [0];
+let labels = ["No data to show"];
+
+function createStats(activities){
+  const map = activities.reduce((acc, e) => acc.set(e.end_time.slice(0,10), (acc.get(e.end_time.slice(0,10)) || 0) + 1), new Map());
+  const sortedMap = new Map([...map].sort((a, b) => a[0] > b[0] ? 1 : -1));
+  labels = [...sortedMap.keys()];
+  numbers = [ ...sortedMap.values()];
+}
 
 function Stats(props){
   const theme = useTheme();
 
-  let numbers = [0];
-  let labels = ["No data to show"];
 
-  function createStats(activities){
-    console.log(activities);
-    const map = activities.reduce((acc, e) => acc.set(e.end_time.slice(0,10), (acc.get(e.end_time.slice(0,10)) || 0) + 1), new Map());
-    const sortedMap = new Map([...map].sort((a, b) => a[0] > b[0] ? 1 : -1));
-    labels = [...sortedMap.keys()];
-    numbers = [ ...sortedMap.values()];
-  }
   if (props.activities){createStats(props.activities)}
 
   const data = {
@@ -101,15 +101,6 @@ function Stats(props){
   return (
     <Card>
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
-            Last 7 days
-          </Button>
-        )}
         title="Statistics"
       />
       <Divider />

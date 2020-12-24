@@ -27,5 +27,9 @@ export const userActions = {
   setEndDate: data => ({
     type: userConstants.SET_END_DATE,
     payload: data
+  }),
+  setStartDate: data => ({
+    type: userConstants.SET_START_DATE,
+    payload: data
   })
 };
