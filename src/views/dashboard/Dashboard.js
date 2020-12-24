@@ -8,11 +8,10 @@ import Page from 'src/components/Page';
 import Metrics from './Metrics';
 import Plugins from './Plugins';
 import Stats from './Stats';
-import Lines from './Lines';
+import PieChart from './PieChart';
 import LatestOrders from './LatestOrders';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
-import TrafficByDevice from './TrafficByDevice';
 import StaticDatePicker from './DatePicker';
 
 import { Redirect} from "react-router-dom";
@@ -95,7 +94,7 @@ function  Dashboard(props) {
               xl={3}
               xs={12}
             >
-              <Lines/>
+              <PieChart/>
             </Grid>
             <Grid
               item

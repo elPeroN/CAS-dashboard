@@ -11,7 +11,6 @@ import {
   Divider,
   useTheme
 } from '@material-ui/core';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 let numbers = [0];

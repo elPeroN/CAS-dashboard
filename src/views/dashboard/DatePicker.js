@@ -5,8 +5,7 @@ import {
   Card,
   CardContent,
   Grid,
-  Typography,
-  Divider
+  Typography
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';

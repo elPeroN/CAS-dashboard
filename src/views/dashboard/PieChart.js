@@ -1,6 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Box,
@@ -10,27 +8,46 @@ import {
   Divider,
   Typography,
   colors,
-  makeStyles,
   useTheme
 } from '@material-ui/core';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import PhoneIcon from '@material-ui/icons/Phone';
-import TabletIcon from '@material-ui/icons/Tablet';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import EditIcon from '@material-ui/icons/Edit';
+import {connect} from 'react-redux';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    height: '100%'
-  }
-}));
+let numbers = [0];
+let labels = ["No data to show"];
+let total = 0;
+let addPercentage = 0;
+let delPercentage = 0;
+let changePercentage = 0;
 
-const TrafficByDevice = ({ className, ...rest }) => {
-  const classes = useStyles();
+function arrangeStats(activity){
+  return activity.activity_type.replace('eclipse_','').replace('atom_','').replace('deleted','delete');
+}
+
+function createStats(activities){
+  //TODO: 1)gestione O statistiche in periodo scelto
+  //2) percentuali?
+  let filtered = activities.filter(name => name.activity_type.includes('lines'));
+  const map = filtered.reduce((acc, item) => acc.set(arrangeStats(item),(acc.get(arrangeStats(item)) || 0) + 1), new Map());
+  const sortedMap = new Map([...map].sort((a, b) => a[0] < b[0] ? 1 : -1));
+  labels = [...sortedMap.keys()];
+  numbers = [...sortedMap.values()];
+  total = numbers.reduce((a,b)=> a + b, 0)
+  addPercentage = Math.round(numbers[0]/total*100);
+  delPercentage = Math.round(numbers[1]/total*100);
+  changePercentage = Math.round(numbers[2]/total*100);
+}
+
+function PieChart(props) {
   const theme = useTheme();
 
+  if (props.activities){createStats(props.activities)}
   const data = {
     datasets: [
       {
-        data: [63, 15, 22],
+        data: numbers,
         backgroundColor: [
           colors.indigo[500],
           colors.red[600],
@@ -41,11 +58,13 @@ const TrafficByDevice = ({ className, ...rest }) => {
         hoverBorderColor: colors.common.white
       }
     ],
-    labels: ['Desktop', 'Tablet', 'Mobile']
+    labels: labels
   };
 
   const options = {
-    animation: false,
+    animation: {
+      animateRotate :true
+    },
     cutoutPercentage: 80,
     layout: { padding: 0 },
     legend: {
@@ -68,31 +87,28 @@ const TrafficByDevice = ({ className, ...rest }) => {
 
   const devices = [
     {
-      title: 'Desktop',
-      value: 63,
-      icon: LaptopMacIcon,
+      title: 'Lines Added',
+      value: addPercentage,
+      icon: AddCircleOutlineIcon,
       color: colors.indigo[500]
     },
     {
-      title: 'Tablet',
-      value: 15,
-      icon: TabletIcon,
+      title: 'Lines Deleted',
+      value: delPercentage,
+      icon: RemoveCircleOutlineIcon,
       color: colors.red[600]
     },
     {
-      title: 'Mobile',
-      value: 23,
-      icon: PhoneIcon,
+      title: 'Lines Changed',
+      value: changePercentage,
+      icon: EditIcon,
       color: colors.orange[600]
     }
   ];
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardHeader title="Traffic by Device" />
+    <Card >
+      <CardHeader title="Lines" />
       <Divider />
       <CardContent>
         <Box
@@ -142,8 +158,9 @@ const TrafficByDevice = ({ className, ...rest }) => {
   );
 };
 
-TrafficByDevice.propTypes = {
-  className: PropTypes.string
+function mapStateToProps(state){
+  return {
+    activities: state.activities };
 };
 
-export default TrafficByDevice;
+export default connect(mapStateToProps)(PieChart);
