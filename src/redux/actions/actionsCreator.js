@@ -8,7 +8,8 @@ export const actionsCreator = {
   register,
   fetchActivities,
   setStartDate,
-  setEndDate
+  setEndDate,
+  clearSnackbar
 };
 
 function login(values){
@@ -20,9 +21,13 @@ function login(values){
     dispatch(userActions.setStartDate(startDate));
     dispatch(userActions.setEndDate(endDate));
     dispatch(fetchActivities(response.data.token,startDate,endDate));
+    dispatch(userActions.sendNotification({message:'SUCCESSFULLY LOGIN', severity:'success'}));
   })
-  .catch( error => dispatch(userActions.loginError(error)));
-  }
+  .catch( error => {
+    dispatch(userActions.loginError(error));
+    dispatch(userActions.sendNotification({message:error.toString(), severity:'error'}));//TODO: switch sui casi di errore
+  });
+}
 
 function logout(){
   return userActions.logout;
@@ -30,8 +35,13 @@ function logout(){
 
 function register(values){
   return dispatch => registerUser(values.firstName, values.lastName, values.email, values.password).then(
-    response => dispatch(userActions.registerSuccess(true)))
-    .catch( error => dispatch(userActions.registerError(error)));
+    response => {
+      dispatch(userActions.registerSuccess(true));
+      dispatch(userActions.sendNotification({message:'SUCCESSFULLY REGISTER', severity:'success'}));
+    }).catch( error => {
+      dispatch(userActions.registerError(error));
+      dispatch(userActions.sendNotification({message:error.toString(), severity:'error'}));//TODO: switch sui casi di errore
+    });
 }
 
 function fetchActivities(token,startDate,endDate){
@@ -41,7 +51,7 @@ function fetchActivities(token,startDate,endDate){
   })
   .catch( error =>{
      dispatch(userActions.activitiesReport(null));
-     //TODO: notifica
+     dispatch(userActions.sendNotification({message:"NO DATA IN SELECTED PERIOD", severity:'warning'}));//TODO: switch sui casi di errore
   })
 }
 
@@ -56,5 +66,11 @@ function setStartDate(date){
   return (dispatch, getState) => {
     dispatch(userActions.setStartDate(date));
     dispatch(fetchActivities(getState().token,getState().startDate,getState().endDate));
+  }
+}
+
+function clearSnackbar(){
+  return dispatch => {
+    dispatch(userActions.clearSnackbar())
   }
 }

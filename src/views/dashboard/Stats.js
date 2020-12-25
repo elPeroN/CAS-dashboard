@@ -13,8 +13,8 @@ import {
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
-let numbers = [0];
-let labels = ["No data to show"];
+let numbers ;
+let labels ;
 
 function createStats(activities){
   const map = activities.reduce((acc, e) => acc.set(e.end_time.slice(0,10), (acc.get(e.end_time.slice(0,10)) || 0) + 1), new Map());
@@ -28,7 +28,11 @@ function Stats(props){
 
 
   if (props.activities){createStats(props.activities)}
-
+  else {
+    numbers = [0];
+    labels = ["No data to show"];
+  }
+  
   const data = {
     datasets: [
       {

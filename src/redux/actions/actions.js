@@ -31,5 +31,12 @@ export const userActions = {
   setStartDate: data => ({
     type: userConstants.SET_START_DATE,
     payload: data
+  }),
+  sendNotification: data =>({
+    type: userConstants.SEND_NOTIFICATION,
+    payload: data
+  }),
+  clearSnackbar: () =>({
+    type: userConstants.CLEAR_SNACKBAR
   })
 };

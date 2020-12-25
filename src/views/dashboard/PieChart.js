@@ -15,12 +15,12 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import EditIcon from '@material-ui/icons/Edit';
 import {connect} from 'react-redux';
 
-let numbers = [0];
-let labels = ["No data to show"];
-let total = 0;
-let addPercentage = 0;
-let delPercentage = 0;
-let changePercentage = 0;
+let numbers;
+let labels;
+let total;
+let addPercentage;
+let delPercentage;
+let changePercentage;
 
 function arrangeStats(activity){
   return activity.activity_type.replace('eclipse_','').replace('atom_','').replace('deleted','delete');
@@ -44,6 +44,15 @@ function PieChart(props) {
   const theme = useTheme();
 
   if (props.activities){createStats(props.activities)}
+  else {
+    labels =["No data to show"];
+    numbers = [0];
+    total = 0;
+    addPercentage = 0;
+    delPercentage = 0;
+    changePercentage = 0;
+  }
+
   const data = {
     datasets: [
       {

@@ -24,8 +24,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 function LoginView(props){
 
   const classes = useStyles();
@@ -149,7 +147,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  login: actionsCreator.login
+  login: actionsCreator.login,
+  sendNotification: actionsCreator.sendNotification
 }
 
 export default connect(mapStateToProps,actions)(LoginView);

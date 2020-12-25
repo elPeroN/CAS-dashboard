@@ -6,7 +6,8 @@ const initialState = ({
   error: null,
   data: null,
   startDate: null,
-  endDate: null
+  endDate: null,
+  snackbar : null
 });
 
 export function rootReducer(state = initialState, action) {
@@ -49,6 +50,20 @@ export function rootReducer(state = initialState, action) {
       return {
         ...state,
         startDate: action.payload
+      }
+    case userConstants.SEND_NOTIFICATION:
+      return {
+        ...state,
+        snackbar: {
+          isOpen: true,
+          severity: action.payload.severity,
+          message: action.payload.message
+        }
+      }
+    case userConstants.CLEAR_SNACKBAR:
+      return {
+        ...state,
+        snackbar: null
       }
     default: return state;
   }
