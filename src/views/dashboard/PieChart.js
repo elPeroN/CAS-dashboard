@@ -27,8 +27,6 @@ function arrangeStats(activity){
 }
 
 function createStats(activities){
-  //TODO: 1)gestione O statistiche in periodo scelto
-  //2) percentuali?
   let filtered = activities.filter(name => name.activity_type.includes('lines'));
   const map = filtered.reduce((acc, item) => acc.set(arrangeStats(item),(acc.get(arrangeStats(item)) || 0) + 1), new Map());
   const sortedMap = new Map([...map].sort((a, b) => a[0] < b[0] ? 1 : -1));

@@ -92,7 +92,9 @@ function Stats(props){
   };
 
   const options = {
-    animation: false,
+    animation:  {
+          linear :true
+        },
     cornerRadius: 20,
     layout: { padding: 0 },
     legend: { display: false },

@@ -11,6 +11,7 @@ import Stats from './Stats';
 import PieChart from './PieChart';
 import Files from './Files';
 import StaticDatePicker from './DatePicker';
+import SimpleBackdrop from './SimpleBackdrop';
 
 import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
@@ -96,6 +97,7 @@ function  Dashboard(props) {
             </Grid>
           </Grid>
         </Container>
+        <SimpleBackdrop/>
       </Page>
     );
   }

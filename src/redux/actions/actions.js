@@ -38,5 +38,8 @@ export const userActions = {
   }),
   clearSnackbar: () =>({
     type: userConstants.CLEAR_SNACKBAR
+  }),
+  closeBackdrop: () =>({
+    type: userConstants.CLOSE_BACKDROP
   })
 };

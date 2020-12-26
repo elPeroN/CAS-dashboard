@@ -49,8 +49,9 @@ function register(values){
 
 function fetchActivities(token,startDate,endDate){
 
-  return dispatch => getActivities(token,startDate,endDate).then( (response) =>{
+  return (dispatch, getState) => getActivities(token,startDate,endDate).then( (response) =>{
     dispatch(userActions.activitiesReport(response.data.activities));
+    if(getState().backdrop) dispatch(userActions.closeBackdrop())
   })
   .catch( error =>{
      dispatch(userActions.activitiesReport(null));

@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function LoginView(props){
-
   const classes = useStyles();
 
   if(props.state.isLogged) return (<Redirect to="/app/dashboard"/>)

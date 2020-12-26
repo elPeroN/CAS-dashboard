@@ -7,7 +7,8 @@ const initialState = ({
   data: null,
   startDate: null,
   endDate: null,
-  snackbar : null
+  snackbar : null,
+  backdrop : true
 });
 
 export function rootReducer(state = initialState, action) {
@@ -25,7 +26,7 @@ export function rootReducer(state = initialState, action) {
         error:action.payload
       };
     case userConstants.LOGOUT:
-      return { initialState };
+      return { ...initialState };
     case userConstants.REGISTER_SUCCESS:
       return  {
         ...state,
@@ -39,7 +40,7 @@ export function rootReducer(state = initialState, action) {
     case userConstants.ACTIVITIES_REPORT:
       return {
         ...state,
-        activities:action.payload,
+        activities:action.payload
       };
     case userConstants.SET_END_DATE:
       return {
@@ -65,6 +66,11 @@ export function rootReducer(state = initialState, action) {
         ...state,
         snackbar: null
       }
+    case userConstants.CLOSE_BACKDROP:
+     return {
+       ...state,
+       backdrop: false
+     }
     default: return state;
   }
 };
