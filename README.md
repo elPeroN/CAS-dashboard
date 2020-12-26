@@ -12,11 +12,11 @@
 
 - Install dependencies: `npm install` or `yarn`
 
+- Start the Mongo-db:	`sudo service mongod start ` or `yarn db`
+
+- Start the server CAS-BACKEND(if main directory of innometrics-backend is at same level of CAS-dash you can run `yarn server`)
+
 - Start the server: `npm run start` or `yarn start`
-
-- Start the server CAS-BACKEND
-
-- Start the Mongo-db:	`sudo service mongod start`
 
 - Views are on: `localhost:3000`
 
@@ -80,4 +80,4 @@ cas-dashboard
 	- perrisalvatore95@gmail.com
 
 ## TODO:
-	- 
+	-

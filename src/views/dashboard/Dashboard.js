@@ -9,9 +9,7 @@ import Metrics from './Metrics';
 import Plugins from './Plugins';
 import Stats from './Stats';
 import PieChart from './PieChart';
-import LatestOrders from './LatestOrders';
-import TasksProgress from './TasksProgress';
-import TotalCustomers from './TotalCustomers';
+import Files from './Files';
 import StaticDatePicker from './DatePicker';
 
 import { Redirect} from "react-router-dom";
@@ -49,34 +47,16 @@ function  Dashboard(props) {
               xl={3}
               xs={12}
             >
-              <Metrics />
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <TotalCustomers />
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
-              <TasksProgress />
-            </Grid>
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
-              xs={12}
-            >
               <StaticDatePicker />
+            </Grid>
+            <Grid
+              item
+              lg={3}
+              sm={6}
+              xl={3}
+              xs={12}
+            >
+              <Metrics />
             </Grid>
             <Grid
               item
@@ -97,6 +77,15 @@ function  Dashboard(props) {
               <PieChart/>
             </Grid>
             <Grid
+            item
+            lg={8}
+            md={12}
+            xl={9}
+            xs={12}
+            >
+            <Files />
+            </Grid>
+            <Grid
               item
               lg={4}
               md={6}
@@ -104,15 +93,6 @@ function  Dashboard(props) {
               xs={12}
             >
               <Plugins />
-            </Grid>
-            <Grid
-              item
-              lg={8}
-              md={12}
-              xl={9}
-              xs={12}
-            >
-              <LatestOrders />
             </Grid>
           </Grid>
         </Container>

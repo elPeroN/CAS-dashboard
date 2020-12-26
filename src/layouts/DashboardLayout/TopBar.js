@@ -17,7 +17,7 @@ import {ExitToApp} from '@material-ui/icons';
 import Logo from 'src/components/Logo';
 
 import { connect } from "react-redux";
-import {userActions} from "src/redux/actions/actions"
+import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 
 const useStyles = makeStyles(() => ({
@@ -81,7 +81,7 @@ function mapStateToProps(state){
 };
 
 const actionCreators = {
-  logout: userActions.logout
+  logout: actionsCreator.logout
 }
 
 export default connect(mapStateToProps, actionCreators)(TopBar);

@@ -30,7 +30,10 @@ function login(values){
 }
 
 function logout(){
-  return userActions.logout;
+  return dispatch => {
+    dispatch(userActions.logout());
+    dispatch(userActions.sendNotification({message:'SUCCESSFULLY LOGOUT', severity:'success'}));
+  }
 }
 
 function register(values){

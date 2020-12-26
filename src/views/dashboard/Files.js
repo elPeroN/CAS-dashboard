@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   Box,
   Card,
@@ -10,16 +10,44 @@ import {
   Divider,
   useTheme
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 let numbers ;
 let labels ;
+let time ;
+
+//function get filename from path
+function arrangeStats(activity){
+  return activity.executable_name.replace(/^.*(\\|\/)/, '');
+}
+
+function getTime(activity){
+  var diff = Math.abs(new Date(activity.end_time) - new Date(activity.start_time));
+  return diff;
+}
 
 function createStats(activities){
-  const map = activities.reduce((acc, e) => acc.set(e.end_time.slice(0,10), (acc.get(e.end_time.slice(0,10)) || 0) + 1), new Map());
-  const sortedMap = new Map([...map].sort((a, b) => a[0] > b[0] ? 1 : -1));
-  labels = [...sortedMap.keys()];
-  numbers = [ ...sortedMap.values()];
+  let filtered = activities.filter(name => name.executable_name.includes('.'));
+
+  const map = filtered.reduce((acc, item) => {
+      if( acc[arrangeStats(item)]) {
+        acc[arrangeStats(item)].items = acc[arrangeStats(item)].items + 1 ;
+        acc[arrangeStats(item)].time = acc[arrangeStats(item)].time + getTime(item);
+      }
+      else acc[arrangeStats(item)] = {items:1, time:getTime(item)};
+      return acc;
+  },{});
+
+  labels = [];
+  numbers = [];
+  time = [];
+  for (const prop in map) {
+    //show only files with > 20 metrics
+    if(map[prop].items > 20){
+      labels.push(prop);
+      time.push(map[prop].time);
+      numbers.push(map[prop].items);
+    }
+  }
 }
 
 function Stats(props){
@@ -30,6 +58,7 @@ function Stats(props){
   else {
     numbers = [0];
     labels = ["No data to show"];
+    time = [0];
   }
 
   const data = {
@@ -39,7 +68,24 @@ function Stats(props){
         backgroundColor: theme.palette.primary.main,
         borderColor: theme.palette.secondary.main,
         data: numbers,
-        label: 'Daily Metrics'
+        yAxisID: 'A',
+        label: 'Metrics',
+        maxBarThickness: 10,
+        barThickness: 12,
+        barPercentage: 0.5,
+        categoryPercentage: 0.5
+      },
+      {
+        fill: false,
+        backgroundColor: theme.palette.secondary.main,
+        borderColor: theme.palette.primary.main,
+        data: time,
+        yAxisID: 'B',
+        label: 'Time (ms)',
+        maxBarThickness: 10,
+        barThickness: 12,
+        barPercentage: 0.5,
+        categoryPercentage: 0.5
       }
     ],
     labels: labels
@@ -55,10 +101,6 @@ function Stats(props){
     scales: {
       xAxes: [
         {
-          barThickness: 12,
-          maxBarThickness: 10,
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
           ticks: {
             fontColor: theme.palette.text.secondary
           },
@@ -70,6 +112,26 @@ function Stats(props){
       ],
       yAxes: [
         {
+          position:'right',
+          id: 'A',
+          ticks: {
+            fontColor: theme.palette.text.secondary,
+            beginAtZero: true,
+            min: 0
+          },
+          gridLines: {
+            borderDash: [2],
+            borderDashOffset: [2],
+            color: theme.palette.divider,
+            drawBorder: false,
+            zeroLineBorderDash: [2],
+            zeroLineBorderDashOffset: [2],
+            zeroLineColor: theme.palette.divider
+          }
+        },
+        {
+          position:'left',
+          id: 'B',
           ticks: {
             fontColor: theme.palette.text.secondary,
             beginAtZero: true,
@@ -85,6 +147,7 @@ function Stats(props){
             zeroLineColor: theme.palette.divider
           }
         }
+
       ]
     },
     tooltips: {
@@ -103,15 +166,15 @@ function Stats(props){
   return (
     <Card>
       <CardHeader
-        title="Statistics"
-      />
+        title="File Statistics"
+        />
       <Divider />
       <CardContent>
         <Box
           height={400}
           position="relative"
         >
-          <Line
+          <Bar
             data={data}
             options={options}
           />
