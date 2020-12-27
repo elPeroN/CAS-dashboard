@@ -1,5 +1,5 @@
 export const config = {
-  URL: "http://127.0.0.1",
+  URL: "http://localhost",
 
   PORT_NUMBER: "8120",
   OAUTH_PORT: "9094",

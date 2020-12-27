@@ -10,7 +10,6 @@ import {
   Divider,
   useTheme
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 let numbers ;
 let labels ;
@@ -24,7 +23,6 @@ function createStats(activities){
 
 function Stats(props){
   const theme = useTheme();
-
 
   if (props.activities){createStats(props.activities)}
   else {

@@ -1,10 +1,18 @@
 import { userConstants } from "../constants/action-types";
+import jwt_decode from 'jwt-decode';
+
+const isValidToken = (token) => {
+  let decoded = jwt_decode(token)
+  return new Date(decoded.exp*1000) > new Date() ? decoded : null;
+}
 
 const initialState = ({
-  isLogged: false,
-  token: "",
+  navbar: false,
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+  user: localStorage.getItem('token') ? isValidToken(localStorage.getItem('token')) : null,
   error: null,
-  data: null,
+  name: localStorage.getItem('name') ? localStorage.getItem('name') : null,
+  surname: localStorage.getItem('surname') ? localStorage.getItem('surname') : null,
   startDate: null,
   endDate: null,
   snackbar : null,
@@ -16,9 +24,10 @@ export function rootReducer(state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
       return  {
         ...state,
-        isLogged: true,
-        data: action.payload,
-        token: action.payload.token
+        name: action.payload.name,
+        surname: action.payload.surname,
+        token: action.payload.token,
+        user: jwt_decode(action.payload.token),
       };
     case userConstants.LOGIN_ERROR:
       return {
@@ -26,7 +35,10 @@ export function rootReducer(state = initialState, action) {
         error:action.payload
       };
     case userConstants.LOGOUT:
-      return { ...initialState };
+      return { ...initialState,
+        token: null,
+        user: null
+      };
     case userConstants.REGISTER_SUCCESS:
       return  {
         ...state,
@@ -70,6 +82,11 @@ export function rootReducer(state = initialState, action) {
      return {
        ...state,
        backdrop: false
+     }
+     case userConstants.SET_NAVBAR:
+     return {
+       ...state,
+       mobileNav: action.payload
      }
     default: return state;
   }

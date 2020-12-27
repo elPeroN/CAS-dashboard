@@ -4,6 +4,7 @@ import { getActivities } from "src/services/activities";
 
 export const actionsCreator = {
   login,
+  loggedFlow,
   logout,
   register,
   fetchActivities,
@@ -14,13 +15,10 @@ export const actionsCreator = {
 
 function login(values){
   return dispatch => loginUser(values.email, values.password).then( response =>{
+    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('name', response.data.name);
+    localStorage.setItem('surname', response.data.surname);
     dispatch(userActions.loginSuccess(response.data));
-    let endDate = new Date();
-    let startDate = new Date();
-    startDate.setDate(startDate.getDate() - 7);
-    dispatch(userActions.setStartDate(startDate));
-    dispatch(userActions.setEndDate(endDate));
-    dispatch(fetchActivities(response.data.token,startDate,endDate));
     dispatch(userActions.sendNotification({message:'SUCCESSFULLY LOGIN', severity:'success'}));
   })
   .catch( error => {
@@ -29,7 +27,19 @@ function login(values){
   });
 }
 
+function loggedFlow(token){
+  return dispatch => {
+    let endDate = new Date();
+    let startDate = new Date();
+    startDate.setDate(startDate.getDate() - 7);
+    dispatch(userActions.setStartDate(startDate));
+    dispatch(userActions.setEndDate(endDate));
+    //dispatch(userActions.setNavbar());
+    dispatch(fetchActivities(token,startDate,endDate));
+  }
+}
 function logout(){
+  localStorage.clear();
   return dispatch => {
     dispatch(userActions.logout());
     dispatch(userActions.sendNotification({message:'SUCCESSFULLY LOGOUT', severity:'success'}));
@@ -48,7 +58,6 @@ function register(values){
 }
 
 function fetchActivities(token,startDate,endDate){
-
   return (dispatch, getState) => getActivities(token,startDate,endDate).then( (response) =>{
     dispatch(userActions.activitiesReport(response.data.activities));
     if(getState().backdrop) dispatch(userActions.closeBackdrop())

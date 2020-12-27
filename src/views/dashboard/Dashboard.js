@@ -29,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
 function  Dashboard(props) {
   const classes = useStyles();
 
-  if(props.isLogged){
-
-    return (
+  if(props.user){
+  return (
       <Page
         className={classes.root}
         title="Dashboard"
@@ -100,18 +99,18 @@ function  Dashboard(props) {
         <SimpleBackdrop/>
       </Page>
     );
-  }
-  else return <Redirect to='/login'/>;
-};
+  }else return (<Redirect to="/login"/>)
+}
 
 function mapStateToProps(state){
   return {
-    token: state.token,
-    isLogged: state.isLogged };
+    user: state.user,
+    token: state.token
+  };
 };
 
-const actions = {
-  fetchActivities: actionsCreator.fetchActivities
+const act = {
+  loggedFlow : actionsCreator.loggedFlow
 }
 
-export default connect(mapStateToProps,actions)(Dashboard);
+export default connect(mapStateToProps,act)(Dashboard);

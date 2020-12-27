@@ -182,13 +182,6 @@ function Stats(props){
           />
         </Box>
       </CardContent>
-      <Divider />
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-      </Box>
     </Card>
   );
 };

@@ -41,5 +41,9 @@ export const userActions = {
   }),
   closeBackdrop: () =>({
     type: userConstants.CLOSE_BACKDROP
+  }),
+  setMobileNavOpen: data =>({
+    type: userConstants.SET_NAVBAR,
+    payload: data
   })
 };

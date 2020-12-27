@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Avatar,
   Box,
+  Button,
   Divider,
   Drawer,
   Hidden,
@@ -11,8 +11,10 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
+
 import {connect} from 'react-redux';
 import {
+  ExitToApp as ExitToAppIcon,
   BarChart as BarChartIcon,
   Settings as SettingsIcon,
   Shop as ShoppingBagIcon,
@@ -20,6 +22,9 @@ import {
   Group as UsersIcon
 } from '@material-ui/icons';
 import NavItem from './NavItem';
+import {actionsCreator} from "src/redux/actions/actionsCreator";
+import {userActions} from "src/redux/actions/actions"
+
 
 const user = {
   avatar: '/static/images/avatars/avatar_3.png',
@@ -70,63 +75,69 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const NavBar = (props) => {
-  const classes = useStyles();
-  const location = useLocation();
-  useEffect(() => {
-    if (props.openMobile && props.onMobileClose) {
-      props.onMobileClose();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
 
-  const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
-      <Box
-        alignItems="center"
-        display="flex"
-        flexDirection="column"
-        p={2}
-      >
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
-        <Typography
-          className={classes.name}
-          color="textPrimary"
-          variant="h5"
-        >
-          {props.name + " " + props.surname}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
-      </Box>
-      <Divider />
-      <Box p={2}>
-        <List>
-          {items.map((item) => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-        </List>
-      </Box>
-    </Box>
-  );
+function NavBar(props){
+
+  function logout(){
+    props.logout();
+  }
+  const classes = useStyles();
+
+  let name = '';
+  let surname = '';
+  if (props.name){
+    name = props.name;
+    surname = props.surname;
+  }
+ const content = (
+   <Box
+     height="100%"
+     display="flex"
+     flexDirection="column"
+   >
+     <Box
+       alignItems="center"
+       display="flex"
+       flexDirection="column"
+       p={2}
+     >
+       <Avatar
+         className={classes.avatar}
+         component={RouterLink}
+         src={user.avatar}
+         to="/app/account"
+       />
+       <Typography
+         className={classes.name}
+         color="textPrimary"
+         variant="h5"
+       >
+         {name+" "+surname}
+       </Typography>
+       <Button
+          variant="contained"
+          color="primary"
+          size="small"
+          startIcon={<ExitToAppIcon/>}
+          onClick={logout}>
+          Logout
+      </Button>
+     </Box>
+     <Divider />
+     <Box p={2}>
+       <List>
+         {items.map((item) => (
+           <NavItem
+             href={item.href}
+             key={item.title}
+             title={item.title}
+             icon={item.icon}
+           />
+         ))}
+       </List>
+     </Box>
+   </Box>
+ );
 
   return (
     <>
@@ -134,11 +145,11 @@ const NavBar = (props) => {
         <Drawer
           anchor="left"
           classes={{ paper: classes.mobileDrawer }}
-          onClose={props.onMobileClose}
-          open={props.openMobile}
+          onClose={() => props.setMobileNavOpen(false)}
+          open={props.mobileNav}
           variant="temporary"
         >
-          {content}
+        {content}
         </Drawer>
       </Hidden>
       <Hidden mdDown>
@@ -148,26 +159,24 @@ const NavBar = (props) => {
           open
           variant="persistent"
         >
-          {content}
+        {content}
         </Drawer>
       </Hidden>
     </>
   );
 };
 
-NavBar.propTypes = {
-  onMobileClose: PropTypes.func,
-  openMobile: PropTypes.bool
-};
-
-NavBar.defaultProps = {
-  onMobileClose: () => {},
-  openMobile: false
-};
-
 function mapStateToProps(state){
-  return {name: state.data.name,
-          surname: state.data.surname};
-};
+  return {
+    name : state.name,
+    surname: state.surname,
+    mobileNav: state.mobileNav
+  };
+}
 
-export default connect(mapStateToProps)(NavBar);
+const actionCreators = {
+  logout: actionsCreator.logout,
+  setMobileNavOpen: userActions.setMobileNavOpen
+}
+
+export default connect(mapStateToProps,actionCreators)(NavBar);

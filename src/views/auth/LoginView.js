@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
 function LoginView(props){
   const classes = useStyles();
 
-  if(props.state.isLogged) return (<Redirect to="/app/dashboard"/>)
-
+  if(props.state.user){
+     return ( <Redirect to="/app/dashboard"/>)
+   }
   else return (
     <Page
       className={classes.root}
@@ -52,7 +53,6 @@ function LoginView(props){
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
-              //TODO: creare modal per spiegare errore (es. Login errato )
             }}
           >
             {({
@@ -147,7 +147,8 @@ function mapStateToProps(state){
 
 const actions = {
   login: actionsCreator.login,
-  sendNotification: actionsCreator.sendNotification
+  loggedFlow: actionsCreator.loggedFlow,
+  sendNotification: actionsCreator.sendNotification,
 }
 
 export default connect(mapStateToProps,actions)(LoginView);

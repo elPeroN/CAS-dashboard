@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
   AppBar,
   Badge,
@@ -13,12 +12,10 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import {ExitToApp} from '@material-ui/icons';
 import Logo from 'src/components/Logo';
 
 import { connect } from "react-redux";
-import {actionsCreator} from "src/redux/actions/actionsCreator"
-
+import {userActions} from "src/redux/actions/actions"
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -31,9 +28,14 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function TopBar (props) {
+function TopBar(props) {
   const classes = useStyles();
   const [notifications] = useState([]);
+
+  function openMobile(){
+    props.setMobileNavOpen(true)
+  }
+
   return (
     <AppBar
       className={clsx(classes.root)}
@@ -54,14 +56,11 @@ function TopBar (props) {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit" onClick={props.logout}>
-            <ExitToApp />
-          </IconButton>
         </Hidden>
         <Hidden lgUp>
           <IconButton
             color="inherit"
-            onClick={props.onMobileNavOpen}
+            onClick={openMobile}
           >
             <MenuIcon />
           </IconButton>
@@ -71,17 +70,12 @@ function TopBar (props) {
   );
 };
 
-TopBar.propTypes = {
-  className: PropTypes.string,
-  onMobileNavOpen: PropTypes.func
-};
-
 function mapStateToProps(state){
-  return { isLogged: state.isLogged };
+  return { mobileNav: state.mobileNav};
 };
 
-const actionCreators = {
-  logout: actionsCreator.logout
+const act = {
+  setMobileNavOpen : userActions.setMobileNavOpen
 }
 
-export default connect(mapStateToProps, actionCreators)(TopBar);
+export default connect(mapStateToProps,act)(TopBar);

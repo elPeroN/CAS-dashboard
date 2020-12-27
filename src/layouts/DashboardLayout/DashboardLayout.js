@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar/NavBar';
 import TopBar from './TopBar';
 import SimpleTopBar from './SimpleTopBar';
 import SimpleSnackBar from './SimpleSnackBar';
 
-import { withRouter} from "react-router-dom";
 import { connect } from "react-redux";
+import {actionsCreator} from "src/redux/actions/actionsCreator"
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,17 +43,14 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardLayout(props){
   const classes = useStyles();
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   let navigation;
 
-  if(props.isLogged){
+  if(props.user){
+    props.loggedFlow(props.token);
     navigation =
     <React.Fragment>
-      <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} />
-      <NavBar
-        onMobileClose={() => setMobileNavOpen(false)}
-        openMobile={isMobileNavOpen}
-      />
+      <TopBar/>
+      <NavBar/>
     </React.Fragment>;
   }else{
     navigation = <SimpleTopBar/>;
@@ -73,7 +72,14 @@ function DashboardLayout(props){
 };
 
 function mapStateToProps(state){
-  return { isLogged: state.isLogged };
+  return {
+    user: state.user,
+    token: state.token
+   };
 };
 
-export default withRouter(connect(mapStateToProps)(DashboardLayout));
+const act = {
+  loggedFlow : actionsCreator.loggedFlow
+}
+
+export default connect(mapStateToProps,act)(DashboardLayout);
