@@ -1,5 +1,5 @@
 import { userActions } from "./actions"
-import { loginUser, registerUser} from "src/services/auth";
+import { loginUser, registerUser, loginGit} from "src/services/auth";
 import { getActivities } from "src/services/activities";
 
 export const actionsCreator = {
@@ -10,7 +10,8 @@ export const actionsCreator = {
   fetchActivities,
   setStartDate,
   setEndDate,
-  clearSnackbar
+  clearSnackbar,
+  loginGitlab
 };
 
 function login(values){
@@ -86,4 +87,13 @@ function clearSnackbar(){
   return dispatch => {
     dispatch(userActions.clearSnackbar())
   }
+}
+
+function loginGitlab(values){
+  return dispatch => loginGit(values.token).then( response =>{
+    console.log(response);
+  })
+  .catch( error => {
+    console.log(error);
+  });
 }

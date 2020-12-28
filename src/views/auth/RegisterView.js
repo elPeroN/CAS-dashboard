@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
 function RegisterView(props){
   const classes = useStyles();
 
-  if(props.state.user) return (<Redirect to="/app/dashboard"/>);
-  else if(props.state.registered) return(<Redirect to='/login'/>);
+  if(props.state.user) return (<Redirect to="/dashboard"/>);
+  else if(props.state.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
   else return (
     <Page
       className={classes.root}

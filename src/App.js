@@ -8,6 +8,7 @@ import LoginView from 'src/views/auth/LoginView';
 import RegisterView from 'src/views/auth/RegisterView';
 import DashboardView from 'src/views/dashboard/Dashboard';
 import NotFoundView from 'src/views/errors/NotFoundView';
+import GitlabPage from 'src/views/gitlab/GitlabPage';
 
 import theme from 'src/theme/theme';
 import store from 'src/redux/store/store';
@@ -22,11 +23,12 @@ class App extends Component{
             <DashboardLayout >
               <Switch>
                 <Route exact path="/">
-                  <Redirect to="/app/dashboard" />
+                  <Redirect to="/dashboard" />
                 </Route>
-                <Route exact path='/app/dashboard' component={DashboardView}/>
+                <Route exact path='/dashboard' component={DashboardView}/>
                 <Route exact path="/login" component={LoginView} />
                 <Route exact path="/register" component={RegisterView}/>
+                <Route exact path='/gitlab' component={GitlabPage}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>

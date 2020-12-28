@@ -27,10 +27,7 @@ const useStyles = makeStyles((theme) => ({
 function LoginView(props){
   const classes = useStyles();
 
-  if(props.state.user){
-     return ( <Redirect to="/dashboard"/>)
-   }
-  else return (
+  return (
     <Page
       className={classes.root}
       title="Login"
@@ -44,12 +41,10 @@ function LoginView(props){
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: '',
-              password: ''
+              token: ''
             }}
             validationSchema={Yup.object().shape({
-              email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-              password: Yup.string().max(255).required('Password is required')
+              token: Yup.string().max(20).required('Personal Token is required'),
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
@@ -70,40 +65,18 @@ function LoginView(props){
                     color="textPrimary"
                     variant="h2"
                   >
-                    Sign in
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    gutterBottom
-                    variant="body2"
-                  >
-                    Sign in on the internal platform
+                    Gitlab Sign in
                   </Typography>
                 </Box>
                 <TextField
-                  error={Boolean(touched.email && errors.email)}
+                  error={Boolean(touched.token && errors.token)}
                   fullWidth
-                  helperText={touched.email && errors.email}
-                  label="Email Address"
+                  label="PERSONAL TOKEN"
                   margin="normal"
-                  name="email"
+                  name="token"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  type="email"
-                  value={values.email}
-                  variant="outlined"
-                />
-                <TextField
-                  error={Boolean(touched.password && errors.password)}
-                  fullWidth
-                  helperText={touched.password && errors.password}
-                  label="Password"
-                  margin="normal"
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="password"
-                  value={values.password}
+                  value={values.token}
                   variant="outlined"
                 />
                 <Box my={2}>
@@ -124,13 +97,11 @@ function LoginView(props){
                 >
                   Don&apos;t have an account?
                   {' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="h6"
+                  <Button
+                    onClick={() => window.location = "http://localhost:8929/users/sign_up"}
                   >
                     Sign up
-                  </Link>
+                  </Button>
                 </Typography>
               </form>
             )}
@@ -146,9 +117,7 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  login: actionsCreator.login,
-  loggedFlow: actionsCreator.loggedFlow,
-  sendNotification: actionsCreator.sendNotification,
+  login: actionsCreator.loginGitlab,
 }
 
 export default connect(mapStateToProps,actions)(LoginView);

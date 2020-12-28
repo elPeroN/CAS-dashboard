@@ -21,6 +21,7 @@ import {
   Person as UserIcon,
   Group as UsersIcon
 } from '@material-ui/icons';
+import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import NavItem from './NavItem';
 import {actionsCreator} from "src/redux/actions/actionsCreator";
 import {userActions} from "src/redux/actions/actions"
@@ -33,14 +34,14 @@ const user = {
 
 const items = [
   {
-    href: '/app/dashboard',
+    href: '/dashboard',
     icon: BarChartIcon,
     title: 'Dashboard'
   },
   {
-    href: '/app/customers',
-    icon: UsersIcon,
-    title: 'Customers'
+    href: '/gitlab',
+    icon: GitlabIcon,
+    title: 'Gitlab'
   },
   {
     href: '/app/products',

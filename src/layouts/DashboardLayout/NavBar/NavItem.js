@@ -23,11 +23,8 @@ const useStyles = makeStyles((theme) => ({
     textTransform: 'none',
     width: '100%'
   },
-  icon: {
-    marginRight: theme.spacing(1)
-  },
   title: {
-    marginRight: 'auto'
+    marginLeft: theme.spacing(1)
   },
   active: {
     color: theme.palette.primary.main,
