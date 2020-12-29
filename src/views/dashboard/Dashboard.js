@@ -4,7 +4,7 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
-import Page from 'src/components/Page';
+import DashPage from 'src/components/DashPage';
 import Metrics from './Metrics';
 import Plugins from './Plugins';
 import Stats from './Stats';
@@ -13,9 +13,7 @@ import Files from './Files';
 import StaticDatePicker from './DatePicker';
 import SimpleBackdrop from './SimpleBackdrop';
 
-import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
-import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,9 +27,8 @@ const useStyles = makeStyles((theme) => ({
 function  Dashboard(props) {
   const classes = useStyles();
 
-  if(props.user){
   return (
-      <Page
+      <DashPage
         className={classes.root}
         title="Dashboard"
       >
@@ -97,9 +94,8 @@ function  Dashboard(props) {
           </Grid>
         </Container>
         <SimpleBackdrop/>
-      </Page>
+      </DashPage>
     );
-  }else return (<Redirect to="/login"/>)
 }
 
 function mapStateToProps(state){
@@ -109,8 +105,4 @@ function mapStateToProps(state){
   };
 };
 
-const act = {
-  loggedFlow : actionsCreator.loggedFlow
-}
-
-export default connect(mapStateToProps,act)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

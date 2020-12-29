@@ -47,6 +47,8 @@ function DashboardLayout(props){
 
   if(props.user){
     props.loggedFlow(props.token);
+    console.log(props);
+    if(props.gitlabToken) props.gitlabFlow(props.gitlabToken);
     navigation =
     <React.Fragment>
       <TopBar/>
@@ -74,12 +76,14 @@ function DashboardLayout(props){
 function mapStateToProps(state){
   return {
     user: state.user,
-    token: state.token
+    token: state.token,
+    gitlabToken: state.gitlabToken
    };
 };
 
 const act = {
-  loggedFlow : actionsCreator.loggedFlow
+  loggedFlow : actionsCreator.loggedFlow,
+  gitlabFlow : actionsCreator.gitlabFlow
 }
 
 export default connect(mapStateToProps,act)(DashboardLayout);

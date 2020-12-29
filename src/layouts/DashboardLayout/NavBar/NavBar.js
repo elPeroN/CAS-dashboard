@@ -18,8 +18,7 @@ import {
   BarChart as BarChartIcon,
   Settings as SettingsIcon,
   Shop as ShoppingBagIcon,
-  Person as UserIcon,
-  Group as UsersIcon
+  Person as UserIcon
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import NavItem from './NavItem';

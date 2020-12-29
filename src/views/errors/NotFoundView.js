@@ -5,7 +5,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import Page from 'src/components/Page';
+import DashPage from 'src/components/DashPage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +26,7 @@ const NotFoundView = () => {
   const classes = useStyles();
 
   return (
-    <Page
+    <DashPage
       className={classes.root}
       title="404"
     >
@@ -61,7 +61,7 @@ const NotFoundView = () => {
           </Box>
         </Container>
       </Box>
-    </Page>
+    </DashPage>
   );
 };
 

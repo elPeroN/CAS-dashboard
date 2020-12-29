@@ -7,12 +7,13 @@ const isValidToken = (token) => {
 }
 
 const initialState = ({
-  navbar: false,
-  token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
-  user: localStorage.getItem('token') ? isValidToken(localStorage.getItem('token')) : null,
-  error: null,
   name: localStorage.getItem('name') ? localStorage.getItem('name') : null,
   surname: localStorage.getItem('surname') ? localStorage.getItem('surname') : null,
+  user: localStorage.getItem('token') ? isValidToken(localStorage.getItem('token')) : null,
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+  gitlabToken: localStorage.getItem('gitlabToken') ? localStorage.getItem('gitlabToken') : null,
+  navbar: false,
+  error: null,
   startDate: null,
   endDate: null,
   snackbar : null,
@@ -83,11 +84,16 @@ export function rootReducer(state = initialState, action) {
        ...state,
        backdrop: false
      }
-     case userConstants.SET_NAVBAR:
+    case userConstants.SET_NAVBAR:
      return {
        ...state,
        mobileNav: action.payload
      }
+    case userConstants.SET_GITLAB_TOKEN:
+      return {
+        ...state,
+        gitlabToken: action.payload
+    }
     default: return state;
   }
 };

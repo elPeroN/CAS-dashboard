@@ -45,5 +45,9 @@ export const userActions = {
   setMobileNavOpen: data =>({
     type: userConstants.SET_NAVBAR,
     payload: data
+  }),
+  setGitlabToken : data =>({
+    type: userConstants.SET_GITLAB_TOKEN,
+    payload:data
   })
 };

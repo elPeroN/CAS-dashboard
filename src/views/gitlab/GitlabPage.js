@@ -1,15 +1,11 @@
 import React from 'react';
-import {
-  Container,
-  Grid,
-  makeStyles
-} from '@material-ui/core';
-import Page from 'src/components/Page';
+import {  makeStyles } from '@material-ui/core';
+import DashPage from 'src/components/DashPage';
 
 import GitlabLogin from './GitlabLogin'
-import { Redirect} from "react-router-dom";
+
 import { connect } from "react-redux";
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,20 +18,22 @@ const useStyles = makeStyles((theme) => ({
 
 function  GitlabPage(props) {
   const classes = useStyles();
+  let content;
+  if (props.gitlabToken) content = <div>LOGGED</div>
+  else content = <GitlabLogin/>;
   return (
-      <Page
+      <DashPage
         className={classes.root}
         title="Gitlab"
       >
-      <GitlabLogin/>
-      </Page>
+      {content}
+      </DashPage>
     );
 }
 
 function mapStateToProps(state){
   return {
-    user: state.user,
-    token: state.token
+    gitlabToken: state.gitlabToken
   };
 };
 

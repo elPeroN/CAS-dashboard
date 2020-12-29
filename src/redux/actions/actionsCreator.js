@@ -1,5 +1,6 @@
 import { userActions } from "./actions"
-import { loginUser, registerUser, loginGit} from "src/services/auth";
+import { loginUser, registerUser} from "src/services/auth";
+import { checkToken } from "src/services/gitlab"
 import { getActivities } from "src/services/activities";
 
 export const actionsCreator = {
@@ -11,7 +12,8 @@ export const actionsCreator = {
   setStartDate,
   setEndDate,
   clearSnackbar,
-  loginGitlab
+  loginGitlab,
+  gitlabFlow
 };
 
 function login(values){
@@ -35,7 +37,6 @@ function loggedFlow(token){
     startDate.setDate(startDate.getDate() - 7);
     dispatch(userActions.setStartDate(startDate));
     dispatch(userActions.setEndDate(endDate));
-    //dispatch(userActions.setNavbar());
     dispatch(fetchActivities(token,startDate,endDate));
   }
 }
@@ -90,10 +91,22 @@ function clearSnackbar(){
 }
 
 function loginGitlab(values){
-  return dispatch => loginGit(values.token).then( response =>{
-    console.log(response);
+  return dispatch => checkToken(values.token).then( response =>{
+    localStorage.setItem('gitlabToken', values.token);
+    dispatch(userActions.setGitlabToken(values.token));
   })
   .catch( error => {
-    console.log(error);
+    dispatch(userActions.sendNotification({message:"Wrong token", severity:'error'}));
+  });
+}
+
+function gitlabFlow(token){
+  return dispatch => checkToken(token).then( response =>{
+    //fetch
+  })
+  .catch( error => {
+    dispatch(userActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
+    localStorage.removeItem('gitlabToken');
+    dispatch(userActions.setGitlabToken(null));
   });
 }

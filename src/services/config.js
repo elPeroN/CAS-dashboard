@@ -2,6 +2,7 @@ export const config = {
   URL: "http://localhost",
 
   PORT_NUMBER: "8120",
+  GITLAB_PORT_NUMBER: "8929",
   OAUTH_PORT: "9094",
 
   API: {
@@ -28,6 +29,7 @@ export const config = {
     PROJECT_DATA: "projectData",
     PROJECT_LIST: "projectList",
     PERMISSION_FOR_USER: "Admin/User/Permissions",
+    GITLAB_TOKEN: "api/v4/personal_access_tokens"
   },
 
   CONTENT_TYPES: {

@@ -1,37 +1,19 @@
 import React from 'react';
-import { Link as RouterLink, Redirect} from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
   Container,
-  Link,
   TextField,
-  Typography,
-  makeStyles
+  Typography
 } from '@material-ui/core';
-import Page from 'src/components/Page';
 import {connect} from 'react-redux';
 import {actionsCreator} from "src/redux/actions/actionsCreator"
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.dark,
-    height: '95%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
-  }
-}));
-
 function LoginView(props){
-  const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Login"
-    >
       <Box
         display="flex"
         flexDirection="column"
@@ -108,7 +90,6 @@ function LoginView(props){
           </Formik>
         </Container>
       </Box>
-    </Page>
   );
 };
 

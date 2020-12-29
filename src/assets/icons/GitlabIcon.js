@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, InlineIcon } from '@iconify/react';
+import { InlineIcon } from '@iconify/react';
 import gitlabIcon from '@iconify-icons/mdi/gitlab';
 
 export default function GitlabIcon(){

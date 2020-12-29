@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, Redirect} from 'react-router-dom';
+import { Link as RouterLink} from 'react-router-dom';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
@@ -11,7 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import Page from 'src/components/Page';
+import AuthPage from 'src/components/AuthPage';
 import {connect} from 'react-redux';
 import {actionsCreator} from "src/redux/actions/actionsCreator"
 
@@ -27,11 +27,8 @@ const useStyles = makeStyles((theme) => ({
 function LoginView(props){
   const classes = useStyles();
 
-  if(props.state.user){
-     return ( <Redirect to="/dashboard"/>)
-   }
-  else return (
-    <Page
+ return (
+    <AuthPage
       className={classes.root}
       title="Login"
     >
@@ -137,7 +134,7 @@ function LoginView(props){
           </Formik>
         </Container>
       </Box>
-    </Page>
+    </AuthPage>
   );
 };
 

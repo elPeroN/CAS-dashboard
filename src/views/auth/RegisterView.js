@@ -13,7 +13,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import Page from 'src/components/Page';
+import AuthPage from 'src/components/AuthPage';
 import {connect} from 'react-redux';
 import {actionsCreator} from "src/redux/actions/actionsCreator"
 
@@ -29,10 +29,9 @@ const useStyles = makeStyles((theme) => ({
 function RegisterView(props){
   const classes = useStyles();
 
-  if(props.state.user) return (<Redirect to="/dashboard"/>);
-  else if(props.state.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
+  if(props.state.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
   else return (
-    <Page
+    <AuthPage
       className={classes.root}
       title="Register"
     >
@@ -218,7 +217,7 @@ function RegisterView(props){
           </Formik>
         </Container>
       </Box>
-    </Page>
+    </AuthPage>
   );
 };
 
