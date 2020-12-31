@@ -21,21 +21,18 @@ const data = [
     id: uuid(),
     name: 'Atom',
     imageUrl: '/static/images/plugins/atom.png',
-    updatedAt: moment().subtract(2, 'hours'),
     repository: 'https://github.com/elPeroN/atom-logger'
   },
   {
     id: uuid(),
     name: 'IntelliJ Idea',
     imageUrl: '/static/images/plugins/idea.png',
-    updatedAt: moment().subtract(2, 'hours'),
     repository: 'https://gitlab.com/fulvio1993/logger-intellij'
   },
   {
     id: uuid(),
     name: 'Eclipse',
     imageUrl: '/static/images/plugins/eclipse.png',
-    updatedAt: moment().subtract(3, 'hours'),
     repository: 'https://gitlab.com/Siber93/cas-eclipse-plugin'
   }
 ];
@@ -75,7 +72,6 @@ function Plugins(props){
             </ListItemAvatar>
             <ListItemText
               primary={product.name}
-              secondary={`Updated ${product.updatedAt.fromNow()}`}
             />
             <Tooltip title='Go to repository'>
               <IconButton

@@ -47,7 +47,6 @@ function DashboardLayout(props){
 
   if(props.user){
     props.loggedFlow(props.token);
-    console.log(props);
     if(props.gitlabToken) props.gitlabFlow(props.gitlabToken);
     navigation =
     <React.Fragment>

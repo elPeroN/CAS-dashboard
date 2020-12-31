@@ -1,0 +1,25 @@
+import { colors } from '@material-ui/core';
+
+export const colorsForGraphs = [
+  colors.red[600],
+  colors.orange[600],
+  colors.yellow[600],
+  colors.green[600],
+  colors.blue[600],
+  colors.indigo[600],
+  colors.purple[600],
+  colors.red[400],
+  colors.orange[400],
+  colors.yellow[400],
+  colors.green[400],
+  colors.blue[400],
+  colors.indigo[400],
+  colors.purple[400],
+  colors.red[200],
+  colors.orange[200],
+  colors.yellow[200],
+  colors.green[200],
+  colors.blue[200],
+  colors.indigo[200],
+  colors.purple[200],
+];

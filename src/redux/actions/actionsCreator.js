@@ -1,7 +1,10 @@
 import { userActions } from "./actions"
 import { loginUser, registerUser} from "src/services/auth";
-import { checkToken } from "src/services/gitlab"
+import { checkToken, fetchGitlab } from "src/services/gitlab"
 import { getActivities } from "src/services/activities";
+
+
+const gitlabRoute = 'http://localhost:8929/api/v4/projects';
 
 export const actionsCreator = {
   login,
@@ -91,22 +94,25 @@ function clearSnackbar(){
 }
 
 function loginGitlab(values){
-  return dispatch => checkToken(values.token).then( response =>{
+  return dispatch => checkToken(values.token).then( (res) =>{
+    console.log(res);
     localStorage.setItem('gitlabToken', values.token);
     dispatch(userActions.setGitlabToken(values.token));
   })
-  .catch( error => {
+  .catch( (e) => {
+    console.log(e);
     dispatch(userActions.sendNotification({message:"Wrong token", severity:'error'}));
   });
 }
 
+
 function gitlabFlow(token){
-  return dispatch => checkToken(token).then( response =>{
-    //fetch
+  return dispatch => fetchGitlab(token, gitlabRoute).then( response => {
+      dispatch(userActions.gitlabReport(response.data));
   })
   .catch( error => {
     dispatch(userActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
-    localStorage.removeItem('gitlabToken');
-    dispatch(userActions.setGitlabToken(null));
+    //localStorage.removeItem('gitlabToken');
+    //dispatch(userActions.setGitlabToken(null));
   });
 }

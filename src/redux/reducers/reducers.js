@@ -94,6 +94,17 @@ export function rootReducer(state = initialState, action) {
         ...state,
         gitlabToken: action.payload
     }
+    case userConstants.GITLAB_REPORT:
+      return {
+        ...state,
+        gitlabRepos: action.payload,
+        gitlabIndex: 0
+      }
+    case userConstants.SET_GITLAB_INDEX:
+     return {
+       ...state,
+       gitlabIndex: action.payload
+     }
     default: return state;
   }
 };

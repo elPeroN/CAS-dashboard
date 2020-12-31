@@ -49,5 +49,13 @@ export const userActions = {
   setGitlabToken : data =>({
     type: userConstants.SET_GITLAB_TOKEN,
     payload:data
+  }),
+  gitlabReport: data => ({
+    type:userConstants.GITLAB_REPORT,
+    payload:data
+  }),
+  setGitlabIndex: data =>({
+    type:userConstants.SET_GITLAB_INDEX,
+    payload:data
   })
 };
