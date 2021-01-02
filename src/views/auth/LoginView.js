@@ -1,24 +1,34 @@
 import React from 'react';
 import { Link as RouterLink} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {actionsCreator} from "src/redux/actions/actionsCreator"
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
   Container,
+  Grid,
+  InputAdornment,
   Link,
   TextField,
   Typography,
   makeStyles
 } from '@material-ui/core';
+import {
+  MailOutline as MailOutlineIcon,
+  VpnKey as VpnKeyIcon
+} from '@material-ui/icons';
+import Logo from 'src/components/Logo';
 import AuthPage from 'src/components/AuthPage';
-import {connect} from 'react-redux';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
-    height: '95%',
+    height: '100%',
+    overflow: 'hidden',
+    border: "4px solid " + theme.palette.primary.main,
+    borderRadius: theme.spacing(3),
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3)
   }
@@ -28,17 +38,15 @@ function LoginView(props){
   const classes = useStyles();
 
  return (
-    <AuthPage
-      className={classes.root}
-      title="Login"
-    >
-      <Box
-        display="flex"
-        flexDirection="column"
-        height="100%"
-        justifyContent="center"
+  <AuthPage>
+    <Container className={classes.root} maxWidth="md">
+      <Grid
+        container
+        spacing={3}
+        alignItems="center"
+        justify="center"
       >
-        <Container maxWidth="sm">
+        <Grid item sm={6} >
           <Formik
             initialValues={{
               email: '',
@@ -89,6 +97,13 @@ function LoginView(props){
                   type="email"
                   value={values.email}
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <MailOutlineIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <TextField
                   error={Boolean(touched.password && errors.password)}
@@ -102,6 +117,13 @@ function LoginView(props){
                   type="password"
                   value={values.password}
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <VpnKeyIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <Box my={2}>
                   <Button
@@ -132,9 +154,13 @@ function LoginView(props){
               </form>
             )}
           </Formik>
-        </Container>
-      </Box>
-    </AuthPage>
+        </Grid>
+        <Grid item sm={6} xs={12}>
+          <Logo width="100%"/>
+        </Grid>
+      </Grid>
+    </Container>
+  </AuthPage>
   );
 };
 

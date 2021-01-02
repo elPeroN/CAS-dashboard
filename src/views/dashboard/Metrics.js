@@ -1,15 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   Avatar,
-  Card,
-  CardContent,
   Grid,
   Typography,
   colors,
   makeStyles
 } from '@material-ui/core';
-import MoneyIcon from '@material-ui/icons/Money';
+import EqualizerIcon from '@material-ui/icons/Equalizer';
 import {connect} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
@@ -18,15 +15,8 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     backgroundColor: colors.red[600],
-    height: 56,
-    width: 56
-  },
-  differenceIcon: {
-    color: colors.red[900]
-  },
-  differenceValue: {
-    color: colors.red[900],
-    marginRight: theme.spacing(1)
+    height: 64,
+    width: 64
   }
 }));
 
@@ -38,17 +28,15 @@ function Metrics(props) {
   }else text = "Loading...";
 
   return (
-    <Card>
-      <CardContent>
         <Grid
           container
-          justify="space-between"
-          spacing={3}
+          justify="center"
+          alignItems="center"
+          spacing={1}
         >
           <Grid item>
             <Typography
               color="textSecondary"
-              gutterBottom
               variant="h6"
             >
               Total Metrics
@@ -59,20 +47,20 @@ function Metrics(props) {
             >
               {text}
             </Typography>
+            <Typography
+            color="textSecondary"
+            variant="caption"
+            >
+            Max(10000)
+            </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <MoneyIcon />
+              <EqualizerIcon />
             </Avatar>
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
   );
-};
-
-Metrics.propTypes = {
-  className: PropTypes.string
 };
 
 function mapStateToProps(state){

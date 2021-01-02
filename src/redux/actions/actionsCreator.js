@@ -95,12 +95,10 @@ function clearSnackbar(){
 
 function loginGitlab(values){
   return dispatch => checkToken(values.token).then( (res) =>{
-    console.log(res);
     localStorage.setItem('gitlabToken', values.token);
     dispatch(userActions.setGitlabToken(values.token));
   })
   .catch( (e) => {
-    console.log(e);
     dispatch(userActions.sendNotification({message:"Wrong token", severity:'error'}));
   });
 }
@@ -108,11 +106,15 @@ function loginGitlab(values){
 
 function gitlabFlow(token){
   return dispatch => fetchGitlab(token, gitlabRoute).then( response => {
-      dispatch(userActions.gitlabReport(response.data));
+    let filter = response.data.filter( (item) =>{
+      if(item.name !== "Monitoring") return item;
+      else return null;
+    })
+      dispatch(userActions.gitlabReport(filter));
   })
   .catch( error => {
     dispatch(userActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
-    //localStorage.removeItem('gitlabToken');
-    //dispatch(userActions.setGitlabToken(null));
+    localStorage.removeItem('gitlabToken');
+    dispatch(userActions.setGitlabToken(null));
   });
 }

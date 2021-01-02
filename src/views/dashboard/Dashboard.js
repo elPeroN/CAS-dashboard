@@ -5,7 +5,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import DashPage from 'src/components/DashPage';
-import Metrics from './Metrics';
 import Plugins from './Plugins';
 import Stats from './Stats';
 import PieChart from './PieChart';
@@ -19,8 +18,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
   }
 }));
 
@@ -28,66 +25,57 @@ function  Dashboard(props) {
   const classes = useStyles();
 
   return (
-      <DashPage
-        className={classes.root}
-        title="Dashboard"
-      >
-        <Container maxWidth={false}>
+      <DashPage>
+        <Container maxWidth={false} className={classes.root}>
           <Grid
             container
             spacing={3}
           >
-            <Grid
-              item
-              lg={3}
-              sm={6}
-              xl={3}
+            <Grid item
+              sm={12}
+              lg={12}
+              xl={12}
               xs={12}
             >
-              <StaticDatePicker />
+              <StaticDatePicker/>
             </Grid>
             <Grid
               item
-              lg={3}
-              sm={6}
-              xl={3}
               xs={12}
-            >
-              <Metrics />
-            </Grid>
-            <Grid
-              item
-              lg={8}
-              md={12}
-              xl={9}
-              xs={12}
+              sm={12}
+              md={9}
+              lg={9}
+              xl={5}
             >
               <Stats />
             </Grid>
             <Grid
               item
-              lg={4}
-              md={6}
-              xl={3}
               xs={12}
+              sm={12}
+              md={3}
+              lg={3}
+              xl={2}
             >
               <PieChart/>
             </Grid>
             <Grid
             item
-            lg={8}
-            md={12}
-            xl={9}
             xs={12}
+            sm={12}
+            md={9}
+            lg={9}
+            xl={5}
             >
             <Files />
             </Grid>
             <Grid
               item
-              lg={4}
-              md={6}
-              xl={3}
               xs={12}
+              sm={12}
+              md={3}
+              lg={3}
+              xl={3}
             >
               <Plugins />
             </Grid>

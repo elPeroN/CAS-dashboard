@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar,
@@ -10,7 +9,9 @@ import {
 import Logo from 'src/components/Logo';
 
 const useStyles = makeStyles(({
-  root: {},
+  root: {
+    position: "absolute"
+  },
   toolbar: {
     height: 64
   },
@@ -19,14 +20,13 @@ const useStyles = makeStyles(({
   }
 }));
 
-const TopBar = ({ className, ...rest }) => {
+const TopBar = () => {
   const classes = useStyles();
-  
+
   return (
     <AppBar
-      className={clsx(classes.root, className)}
+    className={classes.root}
       elevation={0}
-      {...rest}
     >
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">

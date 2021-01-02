@@ -12,31 +12,10 @@ import {actionsCreator} from "src/redux/actions/actionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
     display: 'flex',
-    height: '99vh',
-    overflow: 'hidden',
-    width: '100%'
-  },
-  wrapper: {
-    display: 'flex',
-    flex: '1 1 auto',
-
-    overflow: 'hidden',
-    paddingTop: 64,
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: 256
-    }
-  },
-  contentContainer: {
-    display: 'flex',
-    flex: '1 1 auto',
-    overflow: 'hidden'
-  },
-  content: {
-    flex: '1 1 auto',
     height: '100%',
-    overflow: 'auto'
+    width:'100%',
+    overflow: 'hidden'
   }
 }));
 
@@ -61,13 +40,7 @@ function DashboardLayout(props){
     <div className={classes.root}>
       {navigation}
       <SimpleSnackBar/>
-      <div className={classes.wrapper}>
-        <div className={classes.contentContainer}>
-          <div className={classes.content}>
-            {props.children}
-          </div>
-        </div>
-      </div>
+      {props.children}
     </div>
   );
 };

@@ -5,22 +5,38 @@ import {
   Box,
   Button,
   Container,
+  IconButton,
+  InputAdornment,
   TextField,
-  Typography
+  Typography,
+  Tooltip,
+  makeStyles
 } from '@material-ui/core';
+import Help from './Help';
+import HelpIcon from '@material-ui/icons/Help';
+import FingerprintIcon from '@material-ui/icons/Fingerprint';
+
+import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import {connect} from 'react-redux';
 import {actionsCreator} from "src/redux/actions/actionsCreator"
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100%',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.dark,
+    border: "4px solid " + theme.palette.primary.main,
+    borderRadius: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(3)
+  }
+}));
+
 function LoginView(props){
+  const classes = useStyles();
 
   return (
-      <Box
-        display="flex"
-        flexDirection="column"
-        height="100%"
-        justifyContent="center"
-      >
-        <Container maxWidth="sm">
+        <Container className={classes.root} maxWidth="sm">
           <Formik
             initialValues={{
               token: ''
@@ -60,6 +76,13 @@ function LoginView(props){
                   onChange={handleChange}
                   value={values.token}
                   variant="outlined"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <FingerprintIcon />
+                      </InputAdornment>
+                    ),
+                  }}
                 />
                 <Box my={2}>
                   <Button
@@ -77,19 +100,30 @@ function LoginView(props){
                   color="textSecondary"
                   variant="body1"
                 >
-                  Don&apos;t have an account?
+                  Don&apos;t have a Token? Request it on
                   {' '}
+
                   <Button
+                    variant="contained"
+                    color="secondary"
                     onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    startIcon={<GitlabIcon/>}
                   >
-                    Sign up
+                    Gitlab
                   </Button>
+                  <IconButton aria-label='help'>
+                    <Tooltip
+                      placement="right"
+                      title={<Help/>}
+                    >
+                      <HelpIcon/>
+                    </Tooltip>
+                  </IconButton>
                 </Typography>
               </form>
             )}
           </Formik>
         </Container>
-      </Box>
   );
 };
 

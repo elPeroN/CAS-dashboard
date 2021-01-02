@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {actionsCreator} from "src/redux/actions/actionsCreator";
 import {
   Card,
@@ -20,19 +19,29 @@ function StaticDatePicker(props) {
     <Card>
       <CardContent>
         <Grid
+          direction="row"
           container
-          justify="space-between"
           spacing={3}
+          justify="center"
+          alignItems="center"
         >
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Grid item>
-                <Typography
-                  color="textSecondary"
-                  gutterBottom
-                  variant="h6"
-                >
-                  Period
-                </Typography>
+            <Grid item
+              xs={12}
+              sm={12}
+              md={6}
+            >
+              <Typography
+              variant="h3"
+              >
+                Logger Dashboard
+              </Typography>
+            </Grid>
+            <Grid item
+              xs={12}
+              sm={6}
+              md={3}
+            >
                <KeyboardDatePicker
                  autoOk
                  label="Start Date"
@@ -44,7 +53,11 @@ function StaticDatePicker(props) {
                  onChange={props.setStartDate}
                />
              </Grid>
-             <Grid item>
+             <Grid item
+                xs={12}
+                sm={6}
+                md={3}
+             >
                <KeyboardDatePicker
                  autoOk
                  label="End Date"
@@ -63,10 +76,6 @@ function StaticDatePicker(props) {
       </CardContent>
     </Card>
   );
-};
-
-StaticDatePicker.propTypes = {
-  className: PropTypes.string
 };
 
 function mapStateToProps(state){

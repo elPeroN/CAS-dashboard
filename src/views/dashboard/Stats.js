@@ -10,7 +10,7 @@ import {
   Divider,
   useTheme
 } from '@material-ui/core';
-
+import Metrics from './Metrics';
 let numbers ;
 let labels ;
 
@@ -104,6 +104,7 @@ function Stats(props){
     <Card>
       <CardHeader
         title="Statistics"
+        action= <Metrics/>
       />
       <Divider />
       <CardContent>
@@ -117,13 +118,6 @@ function Stats(props){
           />
         </Box>
       </CardContent>
-      <Divider />
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-      </Box>
     </Card>
   );
 };

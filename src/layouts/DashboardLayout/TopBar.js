@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
 import {
   AppBar,
   Badge,
@@ -18,10 +17,12 @@ import { connect } from "react-redux";
 import {userActions} from "src/redux/actions/actions"
 
 const useStyles = makeStyles(() => ({
-  root: {},
   avatar: {
     width: 60,
     height: 60
+  },
+  toolbar: {
+    height: 64
   },
   logo: {
     height: 60
@@ -37,11 +38,8 @@ function TopBar(props) {
   }
 
   return (
-    <AppBar
-      className={clsx(classes.root)}
-      elevation={0}
-    >
-      <Toolbar>
+    <AppBar>
+      <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
           <Logo className={classes.logo}/>
         </RouterLink>

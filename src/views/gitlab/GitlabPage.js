@@ -3,11 +3,15 @@ import {
   Card,
   CardHeader,
   CardContent,
+  Container,
   Divider,
-  makeStyles } from '@material-ui/core';
+  Typography,
+  makeStyles
+} from '@material-ui/core';
 import DashPage from 'src/components/DashPage';
 import SelectedMenu from 'src/components/SelectedMenu';
 
+import GitlabIcon from 'src/assets/icons/GitlabIcon'
 import GitlabLogin from './GitlabLogin';
 import Developers from './Developers';
 
@@ -35,24 +39,30 @@ function  GitlabPage(props) {
       menu = props.gitlabRepos.map( item => item.name);
     }
     content = (
-      <Card >
-        <CardHeader
-          title="Gitlab recap"
-          action= <SelectedMenu list={menu} index={props.gitlabIndex} setSelectedIndex={props.setGitlabIndex}/>
+      <Container className= {classes.root}>
+        <Card >
+          <CardHeader
+            title=<Typography variant="h3">
+                    <GitlabIcon/>
+                    Gitlab Recap
+                  </Typography>
+            action= <SelectedMenu
+                      list={menu}
+                      index={props.gitlabIndex}
+                      setSelectedIndex={props.setGitlabIndex}
+                    />
           />
-        <Divider />
-        <CardContent>
-          <Developers/>
-        </CardContent>
-      </Card>
+          <Divider />
+          <CardContent>
+            <Developers/>
+          </CardContent>
+        </Card>
+      </Container>
   )
 };
 
   return (
-      <DashPage
-        className={classes.root}
-        title="Gitlab"
-      >
+      <DashPage>
         {content}
       </DashPage>
     );

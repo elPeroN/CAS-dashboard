@@ -10,5 +10,3 @@ export function checkToken(token){
 export function fetchGitlab(token, route){
   return axios({url: route, headers :{"PRIVATE-TOKEN":token}});
 }
-
-//xz6zj33LosvmUxXXs3bU

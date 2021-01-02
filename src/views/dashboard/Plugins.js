@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { v4 as uuid } from 'uuid';
-import moment from 'moment';
 import {
   Card,
   CardHeader,
@@ -15,25 +13,29 @@ import {
   makeStyles
 } from '@material-ui/core';
 import GitHubIcon from '@material-ui/icons/GitHub';
+import GitlabIcon from 'src/assets/icons/GitlabIcon';
 
 const data = [
   {
     id: uuid(),
     name: 'Atom',
     imageUrl: '/static/images/plugins/atom.png',
-    repository: 'https://github.com/elPeroN/atom-logger'
-  },
-  {
-    id: uuid(),
-    name: 'IntelliJ Idea',
-    imageUrl: '/static/images/plugins/idea.png',
-    repository: 'https://gitlab.com/fulvio1993/logger-intellij'
+    repository: 'https://github.com/elPeroN/atom-logger',
+    repositoryIcon: [<GitHubIcon key={uuid()}/>]
   },
   {
     id: uuid(),
     name: 'Eclipse',
     imageUrl: '/static/images/plugins/eclipse.png',
-    repository: 'https://gitlab.com/Siber93/cas-eclipse-plugin'
+    repository: 'https://gitlab.com/Siber93/cas-eclipse-plugin',
+    repositoryIcon: [<GitlabIcon key={uuid()}/>]
+  },
+  {
+    id: uuid(),
+    name: 'IntelliJ Idea',
+    imageUrl: '/static/images/plugins/idea.png',
+    repository: 'https://gitlab.com/fulvio1993/logger-intellij',
+    repositoryIcon: [<GitlabIcon key={uuid()}/>]
   }
 ];
 
@@ -79,7 +81,7 @@ function Plugins(props){
                 size="small"
                 onClick={() => window.location = product.repository}
               >
-                <GitHubIcon />
+                {product.repositoryIcon}
               </IconButton>
             </Tooltip>
           </ListItem>
@@ -88,10 +90,6 @@ function Plugins(props){
       <Divider />
     </Card>
   );
-};
-
-Plugins.propTypes = {
-  className: PropTypes.string
 };
 
 export default Plugins;
