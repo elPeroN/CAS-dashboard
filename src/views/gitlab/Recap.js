@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
+  Button,
   Card,
   CardHeader,
   Divider,
@@ -11,13 +12,21 @@ import {
   TableRow
 } from '@material-ui/core';
 import { v4 as uuid } from 'uuid';
-import {DataUsage as CircleIcon} from "@material-ui/icons";
+import {
+  DataUsage as CircleIcon,
+  ArrowForwardIos as ArrowForwardIosIcon
+} from "@material-ui/icons";
 import PieChart from './DevelPieChart';
-import { fetchGitlab } from "src/services/gitlab"
+import SelectedMenu from 'src/components/SelectedMenu';
+import { fetchGitlabRepositories } from "src/services/gitlab"
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
 
-function Developers(props){
+import {actionsCreator} from "src/redux/actions/actionsCreator";
+import {userActions} from "src/redux/actions/actions";
+
+
+function Recap(props){
 
   const [devs, setDevs] = useState(
     [{
@@ -27,10 +36,13 @@ function Developers(props){
   }]
   );
 
+  let menu = props.gitlabRepos.map( item => item.name);
+
   useEffect(() => {
     if(props.gitlabRepos){
-      let route = props.gitlabRepos[props.gitlabIndex]._links.self+"/repository/contributors" ;
-      fetchGitlab(props.gitlabToken, route).then( response =>{
+      let route = props.gitlabRepos[props.gitlabMenuIndex]._links.self+"/repository/contributors" ;
+      props.setRepositoryIndex(props.gitlabRepos[props.gitlabMenuIndex].id);
+      fetchGitlabRepositories(props.gitlabToken, route).then( response =>{
         let filtered = response.data.filter( (item,i) =>{
           item["key"] = uuid();
           item["color"] = colorsForGraphs[i];
@@ -39,23 +51,39 @@ function Developers(props){
         setDevs(filtered);
       })
     }
-  },[props.gitlabIndex,props.gitlabRepos,props.gitlabToken]);
+  },[props]);
 
   return (
 
-        <Grid
-          container
-          spacing={3}
-        >
+      <Grid
+        container
+        spacing={3}
+      >
         <Grid
           item
           xs={12}
           sm={12}
-          md={9}
-          lg={9}
+          md={6}
+          lg={6}
         >
-        <Card      >
-        <CardHeader title="Developers Stats" />
+          <PieChart stats={devs}/>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={6}
+        >
+        <Card >
+          <CardHeader
+            title="Developers Stats"
+            action={<SelectedMenu
+                       list={menu}
+                       index={props.gitlabMenuIndex}
+                       setSelectedIndex={props.setGitlabMenuIndex}
+                     />}
+          />
           <Divider />
             <Table>
               <TableHead>
@@ -66,11 +94,7 @@ function Developers(props){
                   <TableCell>
                     Commits
                   </TableCell>
-                  <TableCell >
-                    Additions
-                  </TableCell>
                   <TableCell>
-                    Deletions
                   </TableCell>
                   <TableCell>
                   </TableCell>
@@ -89,30 +113,23 @@ function Developers(props){
                       {dev.commits}
                     </TableCell>
                     <TableCell>
-                      {dev.additions}
+                    <CircleIcon style={{color: dev.color}}/>
                     </TableCell>
                     <TableCell>
-                      {dev.deletions}
-                    </TableCell>
-                    <TableCell>
-                      <CircleIcon style={{color: dev.color}}/>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        endIcon={<ArrowForwardIosIcon/>}
+                        onClick={ () => props.getDevelStats(props.gitlabToken,dev.name)}
+                      > Details </Button>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
-            </Card>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={3}
-            lg={3}
-          >
-          <PieChart stats={devs}/>
-          </Grid>
-          </Grid>
+          </Card>
+        </Grid>
+      </Grid>
     );
   };
 
@@ -120,8 +137,14 @@ function mapStateToProps(state){
   return {
     gitlabToken: state.gitlabToken,
     gitlabRepos: state.gitlabRepos,
-    gitlabIndex: state.gitlabIndex
+    gitlabMenuIndex: state.gitlabMenuIndex
   };
 };
 
-export default connect(mapStateToProps)(Developers);
+const actions = {
+    setGitlabMenuIndex: userActions.setGitlabMenuIndex,
+    getDevelStats: actionsCreator.getDevelStats,
+    setRepositoryIndex: userActions.setRepositoryIndex
+}
+
+export default connect(mapStateToProps,actions)(Recap);

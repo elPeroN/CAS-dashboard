@@ -17,7 +17,8 @@ const initialState = ({
   startDate: null,
   endDate: null,
   snackbar : null,
-  backdrop : true
+  backdrop : false,
+  gitlabView : "recap"
 });
 
 export function rootReducer(state = initialState, action) {
@@ -79,10 +80,10 @@ export function rootReducer(state = initialState, action) {
         ...state,
         snackbar: null
       }
-    case userConstants.CLOSE_BACKDROP:
+    case userConstants.SET_BACKDROP:
      return {
        ...state,
-       backdrop: false
+       backdrop: action.payload
      }
     case userConstants.SET_NAVBAR:
      return {
@@ -98,13 +99,28 @@ export function rootReducer(state = initialState, action) {
       return {
         ...state,
         gitlabRepos: action.payload,
-        gitlabIndex: 0
+        gitlabMenuIndex: 0
       }
-    case userConstants.SET_GITLAB_INDEX:
+    case userConstants.SET_GITLAB_MENU_INDEX:
      return {
        ...state,
-       gitlabIndex: action.payload
+       gitlabMenuIndex: action.payload
      }
+    case userConstants.SET_REPOSITORY_INDEX:
+      return {
+        ...state,
+        repositoryIndex: action.payload
+      }
+    case userConstants.SET_GITLAB_VIEW:
+      return {
+        ...state,
+        gitlabView: action.payload
+      }
+    case userConstants.DEVEL_STATS:
+      return {
+        ...state,
+        develStats: action.payload
+      }
     default: return state;
   }
 };

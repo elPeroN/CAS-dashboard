@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
+import SimpleBackdrop from './SimpleBackdrop';
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -22,6 +23,7 @@ function DashPage (props){
     return (
       <div className={classes.wrapper}>
         {props.children}
+        <SimpleBackdrop/>
       </div>
     );
   }else return (<Redirect to="/login"/>)

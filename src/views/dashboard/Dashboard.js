@@ -10,7 +10,7 @@ import Stats from './Stats';
 import PieChart from './PieChart';
 import Files from './Files';
 import StaticDatePicker from './DatePicker';
-import SimpleBackdrop from './SimpleBackdrop';
+
 
 import { connect } from "react-redux";
 
@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.dark,
     minHeight: '100%',
+    paddingBottom: theme.spacing(3),
+    paddingTop: theme.spacing(3)
   }
 }));
 
@@ -81,7 +83,6 @@ function  Dashboard(props) {
             </Grid>
           </Grid>
         </Container>
-        <SimpleBackdrop/>
       </DashPage>
     );
 }

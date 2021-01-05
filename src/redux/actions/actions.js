@@ -39,8 +39,9 @@ export const userActions = {
   clearSnackbar: () =>({
     type: userConstants.CLEAR_SNACKBAR
   }),
-  closeBackdrop: () =>({
-    type: userConstants.CLOSE_BACKDROP
+  setBackdrop: data =>({
+    type: userConstants.SET_BACKDROP,
+    payload: data
   }),
   setMobileNavOpen: data =>({
     type: userConstants.SET_NAVBAR,
@@ -54,8 +55,20 @@ export const userActions = {
     type:userConstants.GITLAB_REPORT,
     payload:data
   }),
-  setGitlabIndex: data =>({
-    type:userConstants.SET_GITLAB_INDEX,
+  setGitlabMenuIndex: data =>({
+    type:userConstants.SET_GITLAB_MENU_INDEX,
+    payload:data
+  }),
+  setRepositoryIndex: data =>({
+    type:userConstants.SET_REPOSITORY_INDEX,
+    payload:data
+  }),
+  setGitlabView: data =>({
+    type:userConstants.SET_GITLAB_VIEW,
+    payload:data
+  }),
+  develStats: data =>({
+    type:userConstants.DEVEL_STATS,
     payload:data
   })
 };

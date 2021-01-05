@@ -1,10 +1,7 @@
 import { userActions } from "./actions"
 import { loginUser, registerUser} from "src/services/auth";
-import { checkToken, fetchGitlab } from "src/services/gitlab"
+import { checkToken, fetchGitlabRepositories, fetchGitlabCommits } from "src/services/gitlab"
 import { getActivities } from "src/services/activities";
-
-
-const gitlabRoute = 'http://localhost:8929/api/v4/projects';
 
 export const actionsCreator = {
   login,
@@ -16,7 +13,9 @@ export const actionsCreator = {
   setEndDate,
   clearSnackbar,
   loginGitlab,
-  gitlabFlow
+  gitlabFlow,
+  logoutGitlab,
+  getDevelStats
 };
 
 function login(values){
@@ -40,6 +39,7 @@ function loggedFlow(token){
     startDate.setDate(startDate.getDate() - 7);
     dispatch(userActions.setStartDate(startDate));
     dispatch(userActions.setEndDate(endDate));
+    dispatch(userActions.setBackdrop(true));
     dispatch(fetchActivities(token,startDate,endDate));
   }
 }
@@ -65,16 +65,18 @@ function register(values){
 function fetchActivities(token,startDate,endDate){
   return (dispatch, getState) => getActivities(token,startDate,endDate).then( (response) =>{
     dispatch(userActions.activitiesReport(response.data.activities));
-    if(getState().backdrop) dispatch(userActions.closeBackdrop())
+    dispatch(userActions.setBackdrop(false))
   })
   .catch( error =>{
      dispatch(userActions.activitiesReport(null));
      dispatch(userActions.sendNotification({message:"NO DATA IN SELECTED PERIOD", severity:'warning'}));//TODO: switch sui casi di errore
+     dispatch(userActions.setBackdrop(false));
   })
 }
 
 function setEndDate(date){
   return (dispatch, getState) => {
+    dispatch(userActions.setBackdrop(true));
     dispatch(userActions.setEndDate(date));
     dispatch(fetchActivities(getState().token,getState().startDate,getState().endDate));
   }
@@ -82,6 +84,7 @@ function setEndDate(date){
 
 function setStartDate(date){
   return (dispatch, getState) => {
+    dispatch(userActions.setBackdrop(true));
     dispatch(userActions.setStartDate(date));
     dispatch(fetchActivities(getState().token,getState().startDate,getState().endDate));
   }
@@ -105,16 +108,43 @@ function loginGitlab(values){
 
 
 function gitlabFlow(token){
-  return dispatch => fetchGitlab(token, gitlabRoute).then( response => {
+  return dispatch => fetchGitlabRepositories(token).then( response => {
     let filter = response.data.filter( (item) =>{
       if(item.name !== "Monitoring") return item;
       else return null;
     })
-      dispatch(userActions.gitlabReport(filter));
+    if(filter[0]) dispatch(userActions.gitlabReport(filter));
+    else dispatch(userActions.sendNotification({message:"GITLAB: No Repositories Found", severity:'warning'}));
   })
   .catch( error => {
     dispatch(userActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
+    dispatch(logoutGitlab());
+  });
+}
+
+function logoutGitlab(){
+  return dispatch => {
     localStorage.removeItem('gitlabToken');
     dispatch(userActions.setGitlabToken(null));
-  });
+  }
+}
+
+function getDevelStats(token,devel){
+  return (dispatch, getState) => {
+    dispatch(userActions.setGitlabView('devel'));
+    dispatch(userActions.setBackdrop(true));
+    dispatch(userActions.sendNotification({message:"it may take some time", severity:'info'}));
+    fetchGitlabCommits(getState().gitlabToken,getState().repositoryIndex).then(response=>{
+      let filter = response.data.filter( item =>{
+        if(item.author_name === devel) return item;
+        else return null;
+      })
+      dispatch(userActions.develStats(filter));
+      dispatch(userActions.setBackdrop(false));
+    })
+    .catch(error =>{
+      dispatch(userActions.setBackdrop(false));
+      dispatch(userActions.sendNotification({message:error, severity:'warning'}));
+    })
+  }
 }

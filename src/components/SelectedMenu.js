@@ -43,6 +43,7 @@ export default function SimpleListMenu(props) {
           aria-controls="menu"
           aria-label="select-repository"
           onClick={handleClickListItem}
+          variant="menu"
         >
           <ListItemText primary="Repository" secondary={props.list[selectedIndex]} />
           <ExpandMore />

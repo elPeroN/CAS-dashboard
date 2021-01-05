@@ -8,9 +8,15 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  IconButton,
+  Typography,
   useTheme
 } from '@material-ui/core';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import Metrics from './Metrics';
+import {actionsCreator} from "src/redux/actions/actionsCreator"
+
+
 let numbers ;
 let labels ;
 
@@ -103,7 +109,16 @@ function Stats(props){
   return (
     <Card>
       <CardHeader
-        title="Statistics"
+        title=<Typography
+                variant="h4">
+                Statistics
+                <IconButton aria-label="refresh" >
+                  <RefreshIcon
+                    color="primary"
+                    fontSize="big"
+                    onClick={()=>props.loggedFlow(props.token)}/>
+                </IconButton>
+              </Typography>
         action= <Metrics/>
       />
       <Divider />
@@ -128,7 +143,13 @@ Stats.propTypes = {
 
 function mapStateToProps(state){
   return {
-    activities: state.activities };
+    activities: state.activities ,
+    token: state.token
+  };
 };
 
-export default connect(mapStateToProps)(Stats);
+const actions = {
+  loggedFlow : actionsCreator.loggedFlow
+}
+
+export default connect(mapStateToProps,actions)(Stats);
