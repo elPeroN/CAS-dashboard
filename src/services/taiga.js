@@ -38,7 +38,7 @@ export function fetchToken(usr, psw){
     -s http://localhost:8000/api/v1/users/me
 */
 // Lo user ID è necessario per poter poi ottenere le stats dell'utente
-function fetchUserId(token){
+export function fetchUserId(token){
     let route = `taigaRoute${USERS}/me`
 
     return axios({
