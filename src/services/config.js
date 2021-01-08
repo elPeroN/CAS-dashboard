@@ -4,6 +4,7 @@ export const config = {
   PORT_NUMBER: "8120",
   GITLAB_PORT_NUMBER: "8929",
   OAUTH_PORT: "9094",
+  TAIGA_PORT_NUMBER: "8000",
 
   API: {
     VERSION: "V1",
@@ -29,7 +30,10 @@ export const config = {
     PROJECT_DATA: "projectData",
     PROJECT_LIST: "projectList",
     PERMISSION_FOR_USER: "Admin/User/Permissions",
-    GITLAB_TOKEN: "api/v4/personal_access_tokens"
+    GITLAB_TOKEN: "api/v4/personal_access_tokens",
+    TAIGA_TOKEN: "api/v1/auth",
+    TAIGA_PROJECTS: "api/v1/projects",
+    TAIGA_USERS: "api/v1/users"
   },
 
   CONTENT_TYPES: {
