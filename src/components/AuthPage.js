@@ -38,7 +38,7 @@ AuthPage.propTypes = {
 
 function mapStateToProps(state){
   return {
-    user: state.user
+    user: state.logger.user
   };
 };
 

@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 
 import {connect} from 'react-redux';
-import {userActions} from 'src/redux/actions/actions'
+import {gitlabActions} from 'src/redux/actions/Gitlab/gitlabActions'
 
 let author;
 let labels ;
@@ -189,12 +189,12 @@ function Devel(props){
 
 function mapStateToProps(state){
   return {
-    develStats: state.develStats
+    develStats: state.gitlab.develStats
   };
 };
 
 const actions = {
-  setGitlabView: userActions.setGitlabView
+  setGitlabView: gitlabActions.setGitlabView
 }
 
 export default connect(mapStateToProps,actions)(Devel);

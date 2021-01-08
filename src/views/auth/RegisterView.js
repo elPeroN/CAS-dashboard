@@ -21,7 +21,7 @@ import {
 } from '@material-ui/icons';
 import AuthPage from 'src/components/AuthPage';
 import {connect} from 'react-redux';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 function RegisterView(props){
   const classes = useStyles();
 
-  if(props.state.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
+  if(props.logger.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
   else return (
     <AuthPage >
       <Container className={classes.root} maxWidth="sm">
@@ -254,11 +254,11 @@ function RegisterView(props){
 };
 
 function mapStateToProps(state){
-  return {state: state};
+  return {logger: state.logger};
 };
 
 const actions = {
-  register: actionsCreator.register
+  register: loggerActionsCreator.register
 }
 
 export default connect(mapStateToProps,actions)(RegisterView);

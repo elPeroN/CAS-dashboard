@@ -2,19 +2,15 @@ import React from 'react';
 import DashPage from 'src/components/DashPage';
 
 import GitlabLogin from './GitlabLogin';
-import Commits from './Commits';
-import NoRepositoryFound from './NoRepositoryFound';
+import GitlabDash from './GitlabDash';
 
 import { connect } from "react-redux";
-import {userActions} from 'src/redux/actions/actions'
 
 function  GitlabPage(props) {
-
   let content;
 
   if (!props.gitlabToken) content = <GitlabLogin/>;
-  else if(props.gitlabRepos) content = <Commits/>;
-  else content = <NoRepositoryFound/>;
+  else content = <GitlabDash/>;
 
   return (
       <DashPage>
@@ -25,15 +21,9 @@ function  GitlabPage(props) {
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlabToken,
-    gitlabRepos: state.gitlabRepos,
-    GitlabMenuIndex: state.GitlabMenuIndex
+    gitlabToken: state.gitlab.gitlabToken,
+    gitlabRepos: state.gitlab.gitlabRepos
   };
 };
 
-const actions = {
-  setGitlabMenuIndex: userActions.setGitlabMenuIndex,
-  gitlabFlow: userActions.gitlabFlow
-}
-
-export default connect(mapStateToProps,actions)(GitlabPage);
+export default connect(mapStateToProps)(GitlabPage);

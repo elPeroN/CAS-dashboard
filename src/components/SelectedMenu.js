@@ -10,7 +10,7 @@ import {ExpandMore} from '@material-ui/icons';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
-  },
+  }
 }));
 
 

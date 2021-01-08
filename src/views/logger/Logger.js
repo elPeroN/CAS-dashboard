@@ -23,9 +23,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function  Dashboard(props) {
+function Logger(props) {
   const classes = useStyles();
-
   return (
       <DashPage>
         <Container maxWidth={false} className={classes.root}>
@@ -89,9 +88,10 @@ function  Dashboard(props) {
 
 function mapStateToProps(state){
   return {
-    user: state.user,
-    token: state.token
+    state:state,
+    user: state.logger.user,
+    token: state.logger.token
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Logger);

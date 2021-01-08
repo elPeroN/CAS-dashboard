@@ -1,14 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import NavBar from './NavBar/NavBar';
-import TopBar from './TopBar';
-import SimpleTopBar from './SimpleTopBar';
-import SimpleSnackBar from './SimpleSnackBar';
+import TopBar from './TopBar/TopBar';
+import SimpleTopBar from './TopBar/SimpleTopBar';
+import SimpleSnackBar from 'src/components/SimpleSnackBar';
 
 import { connect } from "react-redux";
-import {actionsCreator} from "src/redux/actions/actionsCreator"
-
-
+import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,10 +22,7 @@ const useStyles = makeStyles((theme) => ({
 function DashboardLayout(props){
   const classes = useStyles();
   let navigation;
-
   if(props.user){
-    props.loggedFlow(props.token);
-    if(props.gitlabToken) props.gitlabFlow(props.gitlabToken);
     navigation =
     <React.Fragment>
       <TopBar/>
@@ -47,15 +43,15 @@ function DashboardLayout(props){
 
 function mapStateToProps(state){
   return {
-    user: state.user,
-    token: state.token,
-    gitlabToken: state.gitlabToken
+    user: state.logger.user,
+    token: state.logger.token,
+    gitlabToken: state.gitlab.gitlabToken
    };
 };
 
-const act = {
-  loggedFlow : actionsCreator.loggedFlow,
-  gitlabFlow : actionsCreator.gitlabFlow
+const actions = {
+  loggedFlow : loggerActionsCreator.loggedFlow,
+  gitlabFlow : gitlabActionsCreator.gitlabFlow
 }
 
-export default connect(mapStateToProps,act)(DashboardLayout);
+export default connect(mapStateToProps,actions)(DashboardLayout);

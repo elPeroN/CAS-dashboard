@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -186,13 +185,9 @@ function Stats(props){
   );
 };
 
-Stats.propTypes = {
-  className: PropTypes.string
-};
-
 function mapStateToProps(state){
   return {
-    activities: state.activities };
+    activities: state.logger.activities };
 };
 
 export default connect(mapStateToProps)(Stats);

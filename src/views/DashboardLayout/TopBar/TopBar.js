@@ -14,7 +14,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import Logo from 'src/components/Logo';
 
 import { connect } from "react-redux";
-import {userActions} from "src/redux/actions/actions"
+import {appActions} from "src/redux/actions/App/appActions"
 
 const useStyles = makeStyles(() => ({
   avatar: {
@@ -69,11 +69,11 @@ function TopBar(props) {
 };
 
 function mapStateToProps(state){
-  return { mobileNav: state.mobileNav};
+  return { mobileNav: state.app.mobileNav};
 };
 
 const act = {
-  setMobileNavOpen : userActions.setMobileNavOpen
+  setMobileNavOpen : appActions.setMobileNavOpen
 }
 
 export default connect(mapStateToProps,act)(TopBar);

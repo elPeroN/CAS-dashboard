@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 }
 function mapStateToProps(state){
   return {
-    backdrop: state.backdrop
+    backdrop: state.app.backdrop
   }
 }
 export default connect(mapStateToProps)(SimpleBackdrop)

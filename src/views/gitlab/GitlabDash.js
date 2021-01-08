@@ -12,14 +12,15 @@ import {
 import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
-//TODO: unire gitlabPage.js con Commits.js
+
 import GitlabIcon from 'src/assets/icons/GitlabIcon'
 import Recap from './Recap';
 import Devel from './Devel';
+import NoRepositoryFound from './NoRepositoryFound';
 
 import { connect } from "react-redux";
-import {actionsCreator} from 'src/redux/actions/actionsCreator';
-import {userActions} from 'src/redux/actions/actions';
+import {gitlabActions} from 'src/redux/actions/Gitlab/gitlabActions';
+import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function  Commits(props) {
+function GitlabDash(props) {
   const classes = useStyles();
   let topbar;
   let content;
@@ -78,7 +79,8 @@ function  Commits(props) {
   </Card>
 )
 
-if(props.gitlabView === "recap") content = <Recap/>;
+if(!props.gitlabRepos) content = <NoRepositoryFound/>;
+else if(props.gitlabView === "recap") content = <Recap/>;
 else if(props.gitlabView === "devel") content = <Devel/>;
 
   return (
@@ -111,17 +113,17 @@ else if(props.gitlabView === "devel") content = <Devel/>;
 
 function mapStateToProps(state){
   return {
-    gitlabRepos: state.gitlabRepos,
-    gitlabMenuIndex: state.gitlabMenuIndex,
-    gitlabView: state.gitlabView
+    gitlabRepos: state.gitlab.gitlabRepos,
+    gitlabMenuIndex: state.gitlab.gitlabMenuIndex,
+    gitlabView: state.gitlab.gitlabView
   };
 };
 
 const actions = {
-  setRepositoryIndex: userActions.setRepositoryIndex,
-  setGitlabMenuIndex: userActions.setGitlabMenuIndex,
-  setGitlabView: userActions.setGitlabView,
-  gitlabLogout: actionsCreator.logoutGitlab
+  setRepositoryIndex: gitlabActions.setRepositoryIndex,
+  setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,
+  setGitlabView: gitlabActions.setGitlabView,
+  gitlabLogout: gitlabActionsCreator.logoutGitlab
 }
 
-export default connect(mapStateToProps,actions)(Commits);
+export default connect(mapStateToProps,actions)(GitlabDash);

@@ -65,7 +65,7 @@ function Metrics(props) {
 
 function mapStateToProps(state){
   return {
-    activities: state.activities};
+    activities: state.logger.activities};
 };
 
 export default connect(mapStateToProps)(Metrics);

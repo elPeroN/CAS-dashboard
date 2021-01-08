@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import PropTypes from 'prop-types';
 import { Redirect} from "react-router-dom";
 import { connect } from "react-redux";
 import SimpleBackdrop from './SimpleBackdrop';
@@ -31,13 +30,8 @@ function DashPage (props){
 
 function mapStateToProps(state){
   return {
-    user: state.user
+    user: state.logger.user
   };
-};
-
-DashPage.propTypes = {
-  children: PropTypes.node.isRequired,
-  title: PropTypes.string
 };
 
 export default connect(mapStateToProps)(DashPage);

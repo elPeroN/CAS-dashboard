@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 import { ThemeProvider } from '@material-ui/core';
 import { Provider as ReduxProvider } from "react-redux";
 
-import DashboardLayout from 'src/layouts/DashboardLayout/DashboardLayout';
+import DashboardLayout from 'src/views/DashboardLayout/DashboardLayout';
 import LoginView from 'src/views/auth/LoginView';
 import RegisterView from 'src/views/auth/RegisterView';
-import DashboardView from 'src/views/dashboard/Dashboard';
+import LoggerView from 'src/views/logger/Logger';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import GitlabPage from 'src/views/gitlab/GitlabPage';
 
@@ -23,9 +23,9 @@ class App extends Component{
             <DashboardLayout >
               <Switch>
                 <Route exact path="/">
-                  <Redirect to="/dashboard" />
+                  <Redirect to="/logger" />
                 </Route>
-                <Route exact path='/dashboard' component={DashboardView}/>
+                <Route exact path='/logger' component={LoggerView}/>
                 <Route exact path="/login" component={LoginView} />
                 <Route exact path="/register" component={RegisterView}/>
                 <Route exact path='/gitlab' component={GitlabPage}/>

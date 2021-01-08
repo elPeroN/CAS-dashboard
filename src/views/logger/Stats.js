@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 import {
@@ -14,7 +13,7 @@ import {
 } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Metrics from './Metrics';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
 
 
 let numbers ;
@@ -137,19 +136,15 @@ function Stats(props){
   );
 };
 
-Stats.propTypes = {
-  className: PropTypes.string
-};
-
 function mapStateToProps(state){
   return {
-    activities: state.activities ,
-    token: state.token
+    activities: state.logger.activities ,
+    token: state.logger.token
   };
 };
 
 const actions = {
-  loggedFlow : actionsCreator.loggedFlow
+  loggedFlow : loggerActionsCreator.loggedFlow
 }
 
 export default connect(mapStateToProps,actions)(Stats);

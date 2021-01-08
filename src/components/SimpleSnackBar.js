@@ -3,7 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import { connect } from 'react-redux';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+import {appActions} from "src/redux/actions/App/appActions";
 
 
 function Alert(props) {
@@ -41,13 +41,13 @@ function SimpleSnackBar(props) {
 
 function mapStateToProps(state){
   return {
-    snackbar: state.snackbar
+    snackbar: state.app.snackbar
   };
 }
 
 const actions = {
-  sendNotification: actionsCreator.sendNotification,
-  clearSnackbar: actionsCreator.clearSnackbar
+  sendNotification: appActions.sendNotification,
+  clearSnackbar: appActions.clearSnackbar
 }
 
 export default connect(mapStateToProps,actions)(SimpleSnackBar);

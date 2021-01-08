@@ -22,8 +22,8 @@ import { fetchGitlabRepositories } from "src/services/gitlab"
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
 
-import {actionsCreator} from "src/redux/actions/actionsCreator";
-import {userActions} from "src/redux/actions/actions";
+import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
+import {gitlabActions} from "src/redux/actions/Gitlab/gitlabActions";
 
 
 function Recap(props){
@@ -135,16 +135,16 @@ function Recap(props){
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlabToken,
-    gitlabRepos: state.gitlabRepos,
-    gitlabMenuIndex: state.gitlabMenuIndex
+    gitlabToken: state.gitlab.gitlabToken,
+    gitlabRepos: state.gitlab.gitlabRepos,
+    gitlabMenuIndex: state.gitlab.gitlabMenuIndex
   };
 };
 
 const actions = {
-    setGitlabMenuIndex: userActions.setGitlabMenuIndex,
-    getDevelStats: actionsCreator.getDevelStats,
-    setRepositoryIndex: userActions.setRepositoryIndex
+    setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,
+    getDevelStats: gitlabActionsCreator.getDevelStats,
+    setRepositoryIndex: gitlabActions.setRepositoryIndex
 }
 
 export default connect(mapStateToProps,actions)(Recap);

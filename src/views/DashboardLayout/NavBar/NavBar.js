@@ -22,8 +22,8 @@ import {
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import NavItem from './NavItem';
-import {actionsCreator} from "src/redux/actions/actionsCreator";
-import {userActions} from "src/redux/actions/actions"
+import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {appActions} from "src/redux/actions/App/appActions"
 
 
 const user = {
@@ -33,9 +33,9 @@ const user = {
 
 const items = [
   {
-    href: '/dashboard',
+    href: '/logger',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'Logger'
   },
   {
     href: '/gitlab',
@@ -168,15 +168,15 @@ function NavBar(props){
 
 function mapStateToProps(state){
   return {
-    name : state.name,
-    surname: state.surname,
-    mobileNav: state.mobileNav
+    name : state.logger.name,
+    surname: state.logger.surname,
+    mobileNav: state.app.mobileNav
   };
 }
 
-const actionCreators = {
-  logout: actionsCreator.logout,
-  setMobileNavOpen: userActions.setMobileNavOpen
+const actions = {
+  logout: loggerActionsCreator.logout,
+  setMobileNavOpen: appActions.setMobileNavOpen
 }
 
-export default connect(mapStateToProps,actionCreators)(NavBar);
+export default connect(mapStateToProps,actions)(NavBar);
