@@ -7,7 +7,6 @@ import {
   CardHeader,
   Divider,
   Typography,
-  colors,
   useTheme
 } from '@material-ui/core';
 import {connect} from 'react-redux';

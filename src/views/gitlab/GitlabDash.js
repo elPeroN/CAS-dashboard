@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Box,
   Button,
   Card,
   CardContent,
@@ -78,15 +79,20 @@ function GitlabDash(props) {
                     sm={6}
                     md={3}
                   >
-                    <Button
-                      className= {classes.button}
-                      variant="contained"
-                      color="secondary"
-                      endIcon={<ExitToAppIcon/>}
-                      onClick={() => props.gitlabLogout()}
+                    <Box
+                      display="flex"
+                      justifyContent="flex-end"
                     >
-                      Logout
-                    </Button>
+                      <Button
+                        className= {classes.button}
+                        variant="contained"
+                        color="secondary"
+                        endIcon={<ExitToAppIcon/>}
+                        onClick={() => props.gitlabLogout()}
+                      >
+                        Logout
+                      </Button>
+                    </Box>
                   </Grid>
                 </Grid>
               </CardContent>

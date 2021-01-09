@@ -53,7 +53,7 @@ function getDevelStats(token,devel){
     dispatch(gitlabActions.setGitlabView('devel'));
     dispatch(appActions.setBackdrop(true));
     dispatch(appActions.sendNotification({message:"it may take some time", severity:'info'}));
-    fetchGitlabCommits(getState().gitlab.gitlabToken,getState().gitlab.repositoryIndex).then(response=>{
+    fetchGitlabCommits(getState().gitlab.gitlabToken, getState().gitlab.repositoryIndex).then(response=>{
       let filter = response.data.filter( item =>{
         if(item.author_name === devel) return item;
         else return null;

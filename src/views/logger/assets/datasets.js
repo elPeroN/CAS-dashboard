@@ -77,10 +77,10 @@ export const filesData = (stats,theme) =>{
         borderColor: theme.palette.primary.main,
         data: stats.time,
         yAxisID: 'B',
-        label: 'Time (ms)',
+        label: 'Time(s)',
         maxBarThickness: 10,
         barThickness: 12,
-        barPercentage: 0.5,
+        barPercentage: 0.3,
         categoryPercentage: 0.5
       }
     ],

@@ -1,6 +1,7 @@
 function getTime(activity){
   var diff = Math.abs(new Date(activity.end_time) - new Date(activity.start_time));
-  return diff;
+  var seconds = (diff/1000);
+  return Math.trunc(seconds);
 }
 //function get filename from path
 function arrangeStats(activity){
@@ -36,9 +37,10 @@ export function createFileStats(activities){
       else acc[arrangeStats(item)] = {items:1, time:getTime(item)};
       return acc;
   },{});
+
   for (const prop in map) {
-    //show only files with > 20 metrics
-    if(map[prop].items > 20){
+    //show only files with metrics > 50 
+    if(map[prop].items > 50){
       stats.labels.push(prop);
       stats.time.push(map[prop].time);
       stats.numbers.push(map[prop].items);
