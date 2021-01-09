@@ -21,7 +21,7 @@ import {
   Person as UserIcon
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
-import TaigaIcon from 'src/assets/icons/taiga_icon';
+import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import NavItem from './NavItem';
 import {actionsCreator} from "src/redux/actions/actionsCreator";
 import {userActions} from "src/redux/actions/actions"

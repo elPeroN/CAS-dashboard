@@ -16,7 +16,7 @@ import {
 //import HelpIcon from '@material-ui/icons/Help';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
-import TaigaIcon from 'src/assets/icons/taiga_icon';
+import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import {connect} from 'react-redux';
 import { taigaCreator } from "src/redux/actions/taigaCreator"
 
@@ -43,8 +43,8 @@ function LoginView(props){
               password: ''
             }}
             validationSchema={Yup.object().shape({
-              username: Yup.string().max(20).required('Username is required'),
-              password: Yup.string.max(32).required('Passowrd is required')
+              username: Yup.string().max(32).required('Username is required'),
+              password: Yup.string().max(20).required('Passowrd is required')
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));

@@ -1,6 +1,10 @@
 import { config } from "./config";
 import axios from 'axios';
 
+/*
+ * NB: ONLY FOR TESTING WE USE AMINSEP SERVER
+*/
+const aminsep = "http://aminsep.disi.unibo.it/"
 const taigaRoute = `${config.URL}:${config.TAIGA_PORT_NUMBER}/`
 const PROJECTS = config.API.TAIGA_PROJECTS
 const USERS = config.API.TAIGA_USERS
@@ -18,7 +22,7 @@ function BEARER(token) {
 
 // POST request to API in order to login and receive the user token
 export function fetchToken(usr, psw){
-    const route = `taigaRoute${config.API.TAIGA_TOKEN}`
+    const route = `${aminsep}${config.API.TAIGA_TOKEN}`
     const credentials = {
         username: usr,
         password: psw,
@@ -26,7 +30,7 @@ export function fetchToken(usr, psw){
     }
 
     return axios({
-        type: POST,
+        method: 'POST',
         url: route,
         data: credentials
     });
