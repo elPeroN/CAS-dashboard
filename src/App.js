@@ -9,7 +9,7 @@ import RegisterView from 'src/views/auth/RegisterView';
 import DashboardView from 'src/views/dashboard/Dashboard';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import GitlabPage from 'src/views/gitlab/GitlabPage';
-import Taigapage from 'src/views/taiga/Taigapage'
+import TaigaPage from 'src/views/taiga/TaigaPage'
 
 import theme from 'src/theme/theme';
 import store from 'src/redux/store/store';

@@ -4,7 +4,7 @@ import DashPage from 'src/components/DashPage';
 import TaigaLogin from './TaigaLogin';
 //import Commits from './Commits';
 //import NoRepositoryFound from './NoRepositoryFound';
-
+import UserStats from './UserStats'
 import { connect } from "react-redux";
 import { taigaActions } from 'src/redux/actions/taiga-actions'
 

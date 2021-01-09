@@ -22,11 +22,11 @@ export function fetchToken(usr, psw){
     const credentials = {
         username: usr,
         password: psw,
-        type: normal
+        type: 'normal'
     }
 
     return axios({
-        type: REQ_TYPES.POST,
+        type: POST,
         url: route,
         data: credentials
     });
@@ -42,7 +42,7 @@ export function fetchUserId(token){
     let route = `taigaRoute${USERS}/me`
 
     return axios({
-        type: REQ_TYPES.GET,
+        type: GET,
         url: route,
         headers: {
             'Content-Type': APPLICATION_JSON,

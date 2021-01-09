@@ -16,7 +16,6 @@ import {
   DataUsage as CircleIcon,
   ArrowForwardIos as ArrowForwardIosIcon
 } from "@material-ui/icons";
-import PieChart from './DevelPieChart';
 import SelectedMenu from 'src/components/SelectedMenu';
 import { fetchUserStats } from "src/services/taiga"
 import { connect } from 'react-redux';
@@ -43,4 +42,4 @@ const actions = {
     getUserProjects: taigaCreator.getUserProjects
 }
 
-export default connect(mapStateToProps,actions)(Recap);
+export default connect(mapStateToProps,actions)(UserDetail);

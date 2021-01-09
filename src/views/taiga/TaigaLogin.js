@@ -12,8 +12,8 @@ import {
   Tooltip,
   makeStyles
 } from '@material-ui/core';
-import Help from './Help';
-import HelpIcon from '@material-ui/icons/Help';
+//import Help from './Help';
+//import HelpIcon from '@material-ui/icons/Help';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import TaigaIcon from 'src/assets/icons/taiga_icon';
@@ -128,19 +128,11 @@ function LoginView(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = "http://localhost:8929/users/sign_up"}
-                    startIcon={<GitlabIcon/>}
+                    //onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    startIcon={<TaigaIcon/>}
                   >
                     Taiga
                   </Button>
-                  <IconButton aria-label='help'>
-                    <Tooltip
-                      placement="right"
-                      title={<Help/>}
-                    >
-                      <HelpIcon/>
-                    </Tooltip>
-                  </IconButton>
                 </Typography>
               </form>
             )}
