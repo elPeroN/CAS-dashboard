@@ -12,7 +12,6 @@ function login(args){
     return dispatch => fetchToken(args.username, args.password).then( res => {
         localStorage.setItem('Taiga_Token', res.data.token);
         dispatch(taigaActions.login(res.data))
-
     })
 }
 

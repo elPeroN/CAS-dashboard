@@ -29,6 +29,7 @@ class App extends Component{
                 <Route exact path="/login" component={LoginView} />
                 <Route exact path="/register" component={RegisterView}/>
                 <Route exact path='/gitlab' component={GitlabPage}/>
+                <Route exact path='/taiga' component={TaigaPage}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>

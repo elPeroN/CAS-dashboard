@@ -21,6 +21,7 @@ import {
   Person as UserIcon
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
+import TaigaIcon from 'src/assets/icons/taiga_icon';
 import NavItem from './NavItem';
 import {actionsCreator} from "src/redux/actions/actionsCreator";
 import {userActions} from "src/redux/actions/actions"
@@ -41,6 +42,11 @@ const items = [
     href: '/gitlab',
     icon: GitlabIcon,
     title: 'Gitlab'
+  },
+  {
+    href: '/taiga',
+    icon: TaigaIcon,
+    title: 'Taiga'
   },
   {
     href: '/app/products',
