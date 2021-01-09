@@ -21,8 +21,7 @@ function  GitlabPage(props) {
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlab.gitlabToken,
-    gitlabRepos: state.gitlab.gitlabRepos
+    gitlabToken: state.gitlab.gitlabToken
   };
 };
 

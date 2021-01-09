@@ -19,9 +19,8 @@ import Devel from './Devel';
 import NoRepositoryFound from './NoRepositoryFound';
 
 import { connect } from "react-redux";
-import {gitlabActions} from 'src/redux/actions/Gitlab/gitlabActions';
-import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
-
+import { gitlabActions } from 'src/redux/actions/Gitlab/gitlabActions';
+import { gitlabActionsCreator } from "src/redux/actions/Gitlab/gitlabActionsCreator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,51 +36,12 @@ const useStyles = makeStyles((theme) => ({
 
 function GitlabDash(props) {
   const classes = useStyles();
-  let topbar;
+
   let content;
 
-  topbar= (<Card>
-    <CardContent>
-      <Grid
-        direction="row"
-        container
-        spacing={3}
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item
-          xs={12}
-          sm={6}
-          md={9}
-        >
-          <Typography variant="h3">
-            <GitlabIcon/>
-            Gitlab Recap
-          </Typography>
-        </Grid>
-        <Grid item
-          xs={12}
-          sm={6}
-          md={3}
-        >
-          <Button
-            className= {classes.button}
-            variant="contained"
-            color="secondary"
-            endIcon={<ExitToAppIcon/>}
-            onClick={() => props.gitlabLogout()}
-          >
-            Logout
-          </Button>
-        </Grid>
-      </Grid>
-    </CardContent>
-  </Card>
-)
-
-if(!props.gitlabRepos) content = <NoRepositoryFound/>;
-else if(props.gitlabView === "recap") content = <Recap/>;
-else if(props.gitlabView === "devel") content = <Devel/>;
+  if(!props.gitlabRepos) content = <NoRepositoryFound/>;
+  else if(props.gitlabView === "recap") content = <Recap/>;
+  else if(props.gitlabView === "devel") content = <Devel/>;
 
   return (
       <Container maxWidth={false} className= {classes.root}>
@@ -94,7 +54,43 @@ else if(props.gitlabView === "devel") content = <Devel/>;
             sm={12}
             md={12}
           >
-            {topbar}
+          <Card>
+              <CardContent>
+                <Grid
+                  direction="row"
+                  container
+                  spacing={3}
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Grid item
+                    xs={12}
+                    sm={6}
+                    md={9}
+                  >
+                    <Typography variant="h3">
+                      <GitlabIcon/>
+                      Gitlab Recap
+                    </Typography>
+                  </Grid>
+                  <Grid item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                  >
+                    <Button
+                      className= {classes.button}
+                      variant="contained"
+                      color="secondary"
+                      endIcon={<ExitToAppIcon/>}
+                      onClick={() => props.gitlabLogout()}
+                    >
+                      Logout
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
           </Grid>
           <Grid
             item

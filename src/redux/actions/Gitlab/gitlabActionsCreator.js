@@ -22,18 +22,23 @@ function loginGitlab(values){
 
 
 function gitlabFlow(token){
-  return dispatch => fetchGitlabRepositories(token).then( response => {
-    let filter = response.data.filter( (item) =>{
-      if(item.name !== "Monitoring") return item;
-      else return null;
-    })
+  return dispatch => {
+    dispatch(appActions.setBackdrop(true));
+    fetchGitlabRepositories(token).then( response => {
+      let filter = response.data.filter( (item) =>{
+        if(item.name !== "Monitoring") return item;
+        else return null;
+      })
     if(filter[0]) dispatch(gitlabActions.gitlabReport(filter));
     else dispatch(appActions.sendNotification({message:"GITLAB: No Repositories Found", severity:'warning'}));
-  })
-  .catch( error => {
-    dispatch(appActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
-    dispatch(logoutGitlab());
-  });
+    dispatch(appActions.setBackdrop(false));
+    })
+    .catch( error => {
+      dispatch(appActions.setBackdrop(false));
+      dispatch(appActions.sendNotification({message:"Gitlab token expired", severity:'warning'}));
+      dispatch(logoutGitlab());
+    });
+  }
 }
 
 function logoutGitlab(){

@@ -29,7 +29,8 @@ export const config = {
     PROJECT_DATA: "projectData",
     PROJECT_LIST: "projectList",
     PERMISSION_FOR_USER: "Admin/User/Permissions",
-    GITLAB_TOKEN: "api/v4/personal_access_tokens"
+    GITLAB_TOKEN: "api/v4/personal_access_tokens",
+    GITLAB_PROJECTS: "api/v4/projects"
   },
 
   CONTENT_TYPES: {
