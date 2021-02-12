@@ -43,8 +43,13 @@ function LoginView(props){
               password: ''
             }}
             validationSchema={Yup.object().shape({
-              username: Yup.string().max(20).required('Username is required'),
-              password: Yup.string.max(32).required('Passowrd is required')
+              username: Yup.string()
+                    .email('Must be a valid email')
+                    .max(255)
+                    .required('Username is required'),
+              password: Yup.string()
+                    .max(255)
+                    .required('Passowrd is required')
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
@@ -95,6 +100,7 @@ function LoginView(props){
                   name="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
+                  type="password"
                   value={values.password}
                   variant="outlined"
                   InputProps={{
