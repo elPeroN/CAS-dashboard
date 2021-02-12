@@ -12,11 +12,11 @@ import {
   Tooltip,
   makeStyles
 } from '@material-ui/core';
-import Help from './Help';
-import HelpIcon from '@material-ui/icons/Help';
+//import Help from './Help';
+//import HelpIcon from '@material-ui/icons/Help';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
-import TaigaIcon from 'src/assets/icons/taiga_icon';
+import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import {connect} from 'react-redux';
 import { taigaCreator } from "src/redux/actions/taigaCreator"
 
@@ -43,6 +43,7 @@ function LoginView(props){
               password: ''
             }}
             validationSchema={Yup.object().shape({
+<<<<<<< HEAD
               username: Yup.string()
                     .email('Must be a valid email')
                     .max(255)
@@ -50,6 +51,10 @@ function LoginView(props){
               password: Yup.string()
                     .max(255)
                     .required('Passowrd is required')
+=======
+              username: Yup.string().max(32).required('Username is required'),
+              password: Yup.string().max(20).required('Passowrd is required')
+>>>>>>> ad806c3b8f77803bd37841eec022cebcca1278c4
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
@@ -134,19 +139,11 @@ function LoginView(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = "http://localhost:8929/users/sign_up"}
-                    startIcon={<GitlabIcon/>}
+                    //onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    startIcon={<TaigaIcon/>}
                   >
                     Taiga
                   </Button>
-                  <IconButton aria-label='help'>
-                    <Tooltip
-                      placement="right"
-                      title={<Help/>}
-                    >
-                      <HelpIcon/>
-                    </Tooltip>
-                  </IconButton>
                 </Typography>
               </form>
             )}

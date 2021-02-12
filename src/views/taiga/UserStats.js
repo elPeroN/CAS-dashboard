@@ -13,8 +13,8 @@ import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 //TODO: unire gitlabPage.js con Commits.js
-import TaigaIcon from 'src/assets/icons/taiga_icon'
-
+import TaigaIcon from 'src/assets/icons/TaigaIcon'
+import UserDetail from './UserDetail'
 import { connect } from "react-redux";
 import { taigaCreator } from 'src/redux/actions/taigaCreator';
 import { taigaActions } from 'src/redux/actions/taiga-actions';
@@ -51,7 +51,7 @@ function UserStats(props) {
             md={9}
           >
             <Typography variant="h3">
-              <GitlabIcon/>
+              <TaigaIcon/>
               Taiga Recap
             </Typography>
           </Grid>
@@ -105,4 +105,16 @@ function UserStats(props) {
       </Container>
   )
 };
+
+function mapStateToProps(state){
+	return {
+	  taigaId: state.taigaId
+	};
+};
+
+const actions = {
+	login: taigaCreator.login,
+	fetchUserId: taigaCreator.fetchUserId
 }
+
+export default connect(mapStateToProps, actions)(UserStats);
