@@ -1,4 +1,5 @@
 import { taigaActions } from "./taiga-actions"
+import { userActions } from "./actions"
 import { fetchToken, fetchUserId, fetchUserStats, fetchUserProjects } from "src/services/taiga"
 
 export const taigaCreator = {
@@ -10,9 +11,14 @@ export const taigaCreator = {
 
 function login(args){
     return dispatch => fetchToken(args.username, args.password).then( res => {
-        localStorage.setItem('Taiga_Token', res.data.token);
-        dispatch(taigaActions.login(res.data))
+        console.log(res)
+	localStorage.setItem('Taiga_Token', res.data.token);
+	dispatch(userActions.sendNotification({message:'Logged in!', severity:'info'}))
+        dispatch(taigaActions.tokenReceived(res.data))
     })
+    .catch( error => {
+    	dispatch(userActions.sendNotification({message:error.toString(), severity:'error'}))
+    });
 }
 
 function getUserId(token){

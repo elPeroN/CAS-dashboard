@@ -43,18 +43,8 @@ function LoginView(props){
               password: ''
             }}
             validationSchema={Yup.object().shape({
-<<<<<<< HEAD
-              username: Yup.string()
-                    .email('Must be a valid email')
-                    .max(255)
-                    .required('Username is required'),
-              password: Yup.string()
-                    .max(255)
-                    .required('Passowrd is required')
-=======
               username: Yup.string().max(32).required('Username is required'),
               password: Yup.string().max(20).required('Passowrd is required')
->>>>>>> ad806c3b8f77803bd37841eec022cebcca1278c4
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
