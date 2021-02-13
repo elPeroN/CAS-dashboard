@@ -34,5 +34,6 @@ export const taigaReducer = (state = initialState, action) => {
                 ...state,
                 taigaUserStats: action.payload
             }
+        default: return state;
     }
 }

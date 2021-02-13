@@ -1,14 +1,12 @@
 export const config = {
-  URL: "http://192.168.122.57",
+  URL: "http://localhost",
 
   PORT_NUMBER: "8120",
   GITLAB_PORT_NUMBER: "8929",
   OAUTH_PORT: "9094",
-<<<<<<< HEAD
   TAIGA_PORT_NUMBER: "8000",
-=======
   MATTERMOST_PORT_NUMBER:"1080",
->>>>>>> 1e5302f5943f34048336904bda77a391f5cadfb1
+
 
   API: {
     VERSION: "V1",
@@ -35,14 +33,13 @@ export const config = {
     PROJECT_LIST: "projectList",
     PERMISSION_FOR_USER: "Admin/User/Permissions",
     GITLAB_TOKEN: "api/v4/personal_access_tokens",
-<<<<<<< HEAD
+
     TAIGA_TOKEN: "api/v1/auth",
     TAIGA_PROJECTS: "api/v1/projects",
-    TAIGA_USERS: "api/v1/users"
-=======
+    TAIGA_USERS: "api/v1/users",
     GITLAB_PROJECTS: "api/v4/projects",
     MATTERMOST_LOGIN: "api/v4/users/login"
->>>>>>> 1e5302f5943f34048336904bda77a391f5cadfb1
+
   },
 
   CONTENT_TYPES: {
