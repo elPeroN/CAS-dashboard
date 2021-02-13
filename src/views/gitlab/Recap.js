@@ -5,6 +5,7 @@ import {
   CardHeader,
   Divider,
   Grid,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -14,47 +15,47 @@ import {
 import { v4 as uuid } from 'uuid';
 import {
   DataUsage as CircleIcon,
-  ArrowForwardIos as ArrowForwardIosIcon
+  ArrowForwardIos as ArrowForwardIosIcon,
+  Refresh as RefreshIcon
 } from "@material-ui/icons";
 import PieChart from './DevelPieChart';
 import SelectedMenu from 'src/components/SelectedMenu';
-import { fetchGitlabRepositories } from "src/services/gitlab"
+import { fetchGitlabRepositories } from "src/services/gitlab";
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
 
-import {actionsCreator} from "src/redux/actions/actionsCreator";
-import {userActions} from "src/redux/actions/actions";
-
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator";
+import {gitlabActions} from "src/redux/actions/Gitlab/gitlabActions";
 
 function Recap(props){
 
   const [devs, setDevs] = useState(
     [{
-    key:"key",
-    name:"",
-    commits:0
-  }]
+      key:"key",
+      name:"",
+      commits:0
+    }]
   );
 
   let menu = props.gitlabRepos.map( item => item.name);
 
   useEffect(() => {
-    if(props.gitlabRepos){
-      let route = props.gitlabRepos[props.gitlabMenuIndex]._links.self+"/repository/contributors" ;
-      props.setRepositoryIndex(props.gitlabRepos[props.gitlabMenuIndex].id);
-      fetchGitlabRepositories(props.gitlabToken, route).then( response =>{
-        let filtered = response.data.filter( (item,i) =>{
-          item["key"] = uuid();
-          item["color"] = colorsForGraphs[i];
-          return item;
-        })
-        setDevs(filtered);
+    let route = props.gitlabRepos[props.gitlabMenuIndex]._links.self+"/repository/contributors" ;
+    props.setRepositoryIndex(props.gitlabRepos[props.gitlabMenuIndex].id);
+    fetchGitlabRepositories(props.gitlabToken, route).then( response =>{
+      let filtered = response.data.filter( (item,i) =>{
+        item["key"] = uuid();
+        item["color"] = colorsForGraphs[i];
+        return item;
       })
-    }
+      setDevs(filtered);
+    })
+    .catch(e =>{
+      props.refresh(props.gitlabToken)
+    })
   },[props]);
 
   return (
-
       <Grid
         container
         spacing={3}
@@ -77,7 +78,18 @@ function Recap(props){
         >
         <Card >
           <CardHeader
-            title="Developers Stats"
+            title=
+              <div>
+                Developer stats
+                <IconButton aria-label="refresh"
+                  onClick={()=>props.refresh(props.gitlabToken)}
+                >
+                  <RefreshIcon
+                    color="primary"
+                    fontSize="large"
+                  />
+                </IconButton>
+              </div>
             action={<SelectedMenu
                        list={menu}
                        index={props.gitlabMenuIndex}
@@ -135,16 +147,17 @@ function Recap(props){
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlabToken,
-    gitlabRepos: state.gitlabRepos,
-    gitlabMenuIndex: state.gitlabMenuIndex
+    gitlabToken: state.gitlab.gitlabToken,
+    gitlabRepos: state.gitlab.gitlabRepos,
+    gitlabMenuIndex: state.gitlab.gitlabMenuIndex
   };
 };
 
 const actions = {
-    setGitlabMenuIndex: userActions.setGitlabMenuIndex,
-    getDevelStats: actionsCreator.getDevelStats,
-    setRepositoryIndex: userActions.setRepositoryIndex
+    setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,
+    refresh: gitlabCreator.gitlabFlow,
+    getDevelStats: gitlabCreator.getDevelStats,
+    setRepositoryIndex: gitlabActions.setRepositoryIndex
 }
 
 export default connect(mapStateToProps,actions)(Recap);

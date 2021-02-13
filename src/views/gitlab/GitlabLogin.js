@@ -18,7 +18,7 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import {connect} from 'react-redux';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function LoginView(props){
+function GitlabLogin(props){
   const classes = useStyles();
-
   return (
         <Container className={classes.root} maxWidth="sm">
           <Formik
@@ -127,12 +126,8 @@ function LoginView(props){
   );
 };
 
-function mapStateToProps(state){
-  return {state: state};
-};
-
 const actions = {
-  login: actionsCreator.loginGitlab,
+  login: gitlabCreator.loginGitlab
 }
 
-export default connect(mapStateToProps,actions)(LoginView);
+export default connect(null, actions)(GitlabLogin);

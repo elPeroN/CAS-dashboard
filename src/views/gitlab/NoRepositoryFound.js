@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {actionsCreator} from "src/redux/actions/actionsCreator"
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator"
 import {
   Box,
   Button,
@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 
 function NoRepositoryFound(props){
   const classes = useStyles();
-
  return (
     <Container className={classes.root} maxWidth="md">
       <Grid
@@ -104,13 +103,13 @@ function NoRepositoryFound(props){
 
 function mapStateToProps(state){
   return {
-        gitlabToken: state.gitlabToken
+        gitlabToken: state.gitlab.gitlabToken
   };
 };
 
 const actions = {
-  gitlabLogout: actionsCreator.logoutGitlab,
-  refresh: actionsCreator.gitlabFlow
+  gitlabLogout: gitlabCreator.logoutGitlab,
+  refresh: gitlabCreator.gitlabFlow
 }
 
 export default connect(mapStateToProps,actions)(NoRepositoryFound);

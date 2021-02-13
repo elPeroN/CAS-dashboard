@@ -28,7 +28,7 @@ function AuthPage(props){
       </div>
       </div>
     );
-  }else return (<Redirect to="/dashboard"/>)
+  }else return (<Redirect to="/"/>)
 };
 
 AuthPage.propTypes = {
@@ -38,7 +38,7 @@ AuthPage.propTypes = {
 
 function mapStateToProps(state){
   return {
-    user: state.user
+    user: state.logger.user
   };
 };
 
