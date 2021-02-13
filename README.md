@@ -4,6 +4,8 @@
 
 > Dashboard for CAS server made with React and material UI
 
+## N.B. Ubuntu Server 20.04 is mandatory to run this environment!
+
 ## Quick start
 
 - [Download from Github](https://github.com/elPeroN/CAS-dashboard/archive/master.zip) or clone the repo: `git clone https://github.com/elPeroN/CAS-dashboard`
