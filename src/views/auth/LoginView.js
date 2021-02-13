@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link as RouterLink} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
 import {appActions} from "src/redux/actions/App/appActions";
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -170,8 +170,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  login: loggerActionsCreator.login,
-  loggedFlow: loggerActionsCreator.loggedFlow,
+  login: loggerCreator.login,
+  loggedFlow: loggerCreator.loggedFlow,
   sendNotification: appActions.sendNotification,
 }
 

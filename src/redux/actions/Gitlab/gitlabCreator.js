@@ -2,7 +2,7 @@ import { gitlabActions } from "./gitlabActions";
 import { appActions } from "src/redux/actions/App/appActions";
 import { checkToken, fetchGitlabRepositories, fetchGitlabCommits } from "src/services/gitlab"
 
-export const gitlabActionsCreator = {
+export const gitlabCreator = {
   loginGitlab,
   gitlabFlow,
   logoutGitlab,
@@ -16,7 +16,7 @@ function loginGitlab(values){
     dispatch(gitlabFlow(getState().gitlab.gitlabToken));
   })
   .catch( (e) => {
-    dispatch(gitlabActions.sendNotification({message:"Wrong token", severity:'error'}));
+    dispatch(appActions.sendNotification({message:"Wrong token", severity:'error'}));
   });
 }
 

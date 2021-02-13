@@ -6,8 +6,8 @@ import SimpleTopBar from './TopBar/SimpleTopBar';
 import SimpleSnackBar from 'src/components/SimpleSnackBar';
 
 import { connect } from "react-redux";
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
-import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,8 +50,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  loggedFlow : loggerActionsCreator.loggedFlow,
-  gitlabFlow : gitlabActionsCreator.gitlabFlow
+  loggedFlow : loggerCreator.loggedFlow,
+  gitlabFlow : gitlabCreator.gitlabFlow
 }
 
 export default connect(mapStateToProps,actions)(DashboardLayout);

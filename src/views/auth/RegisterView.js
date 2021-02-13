@@ -21,7 +21,7 @@ import {
 } from '@material-ui/icons';
 import AuthPage from 'src/components/AuthPage';
 import {connect} from 'react-redux';
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator"
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -258,7 +258,7 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  register: loggerActionsCreator.register
+  register: loggerCreator.register
 }
 
 export default connect(mapStateToProps,actions)(RegisterView);

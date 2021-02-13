@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import Metrics from './Metrics';
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
 import { createLineStats } from './assets/utils';
 import { lineData, lineOptions } from './assets/datasets';
 
@@ -32,11 +32,11 @@ function Stats(props){
         title=<Typography
                 variant="h4">
                 Statistics
-                <IconButton aria-label="refresh" >
+                <IconButton aria-label="refresh"   onClick={()=>props.loggedFlow(props.token)}>
                   <RefreshIcon
                     color="primary"
-                    fontSize="big"
-                    onClick={()=>props.loggedFlow(props.token)}/>
+                    fontSize="large"
+                  />
                 </IconButton>
               </Typography>
         action= <Metrics/>
@@ -65,7 +65,7 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  loggedFlow : loggerActionsCreator.loggedFlow
+  loggedFlow : loggerCreator.loggedFlow
 }
 
 export default connect(mapStateToProps,actions)(Stats);

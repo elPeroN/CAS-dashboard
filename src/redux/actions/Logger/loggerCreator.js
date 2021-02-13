@@ -3,7 +3,7 @@ import { appActions } from "src/redux/actions/App/appActions";
 import { loginUser, registerUser} from "src/services/auth";
 import { getActivities } from "src/services/activities";
 
-export const loggerActionsCreator = {
+export const loggerCreator = {
   login,
   loggedFlow,
   logout,
@@ -15,6 +15,7 @@ export const loggerActionsCreator = {
 
 function login(values){
   return dispatch => loginUser(values.email, values.password).then( response =>{
+    console.log(response);
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('name', response.data.name);
     localStorage.setItem('surname', response.data.surname);

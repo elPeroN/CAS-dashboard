@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator"
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator"
 import {
   Box,
   Button,
@@ -108,8 +108,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  gitlabLogout: gitlabActionsCreator.logoutGitlab,
-  refresh: gitlabActionsCreator.gitlabFlow
+  gitlabLogout: gitlabCreator.logoutGitlab,
+  refresh: gitlabCreator.gitlabFlow
 }
 
 export default connect(mapStateToProps,actions)(NoRepositoryFound);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
 import {
   Card,
   CardContent,
@@ -85,8 +85,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  setStartDate: loggerActionsCreator.setStartDate,
-  setEndDate: loggerActionsCreator.setEndDate
+  setStartDate: loggerCreator.setStartDate,
+  setEndDate: loggerCreator.setEndDate
 };
 
 export default connect(mapStateToProps,actions)(StaticDatePicker);

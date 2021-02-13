@@ -20,11 +20,11 @@ import {
 } from "@material-ui/icons";
 import PieChart from './DevelPieChart';
 import SelectedMenu from 'src/components/SelectedMenu';
-import { fetchGitlabRepositories } from "src/services/gitlab"
+import { fetchGitlabRepositories } from "src/services/gitlab";
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
 
-import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator";
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator";
 import {gitlabActions} from "src/redux/actions/Gitlab/gitlabActions";
 
 function Recap(props){
@@ -81,11 +81,13 @@ function Recap(props){
             title=
               <div>
                 Developer stats
-                <IconButton aria-label="refresh" >
+                <IconButton aria-label="refresh"
+                  onClick={()=>props.refresh(props.gitlabToken)}
+                >
                   <RefreshIcon
                     color="primary"
-                    fontSize="big"
-                    onClick={()=>props.refresh(props.gitlabToken)}/>
+                    fontSize="large"
+                  />
                 </IconButton>
               </div>
             action={<SelectedMenu
@@ -153,8 +155,8 @@ function mapStateToProps(state){
 
 const actions = {
     setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,
-    refresh: gitlabActionsCreator.gitlabFlow,
-    getDevelStats: gitlabActionsCreator.getDevelStats,
+    refresh: gitlabCreator.gitlabFlow,
+    getDevelStats: gitlabCreator.getDevelStats,
     setRepositoryIndex: gitlabActions.setRepositoryIndex
 }
 

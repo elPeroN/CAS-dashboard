@@ -21,7 +21,7 @@ import NoRepositoryFound from './NoRepositoryFound';
 
 import { connect } from "react-redux";
 import { gitlabActions } from 'src/redux/actions/Gitlab/gitlabActions';
-import { gitlabActionsCreator } from "src/redux/actions/Gitlab/gitlabActionsCreator";
+import { gitlabCreator } from "src/redux/actions/Gitlab/gitlabCreator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,7 +125,7 @@ const actions = {
   setRepositoryIndex: gitlabActions.setRepositoryIndex,
   setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,
   setGitlabView: gitlabActions.setGitlabView,
-  gitlabLogout: gitlabActionsCreator.logoutGitlab
+  gitlabLogout: gitlabCreator.logoutGitlab
 }
 
 export default connect(mapStateToProps,actions)(GitlabDash);

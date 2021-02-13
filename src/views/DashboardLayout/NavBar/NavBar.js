@@ -22,7 +22,7 @@ import {
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import NavItem from './NavItem';
-import {loggerActionsCreator} from "src/redux/actions/Logger/loggerActionsCreator";
+import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
 import {appActions} from "src/redux/actions/App/appActions"
 
 
@@ -175,7 +175,7 @@ function mapStateToProps(state){
 }
 
 const actions = {
-  logout: loggerActionsCreator.logout,
+  logout: loggerCreator.logout,
   setMobileNavOpen: appActions.setMobileNavOpen
 }
 

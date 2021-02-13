@@ -7,7 +7,7 @@ import {
   Grid,
   makeStyles
 } from '@material-ui/core';
-import { gitlabActionsCreator } from "src/redux/actions/Gitlab/gitlabActionsCreator"
+import { gitlabCreator } from "src/redux/actions/Gitlab/gitlabCreator"
 import {
   Home as HomeIcon
 } from '@material-ui/icons';
@@ -107,8 +107,8 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  gitlabLogout: gitlabActionsCreator.logoutGitlab,
-  refresh: gitlabActionsCreator.gitlabFlow
+  gitlabLogout: gitlabCreator.logoutGitlab,
+  refresh: gitlabCreator.gitlabFlow
 }
 
 export default connect(mapStateToProps,actions)(NoRepositoryFound);

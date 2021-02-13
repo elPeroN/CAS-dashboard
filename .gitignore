@@ -11,6 +11,9 @@
 # production
 /build
 
+# tesi
+/tesi
+
 # misc
 .DS_Store
 /.env

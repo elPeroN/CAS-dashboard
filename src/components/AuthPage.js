@@ -28,7 +28,7 @@ function AuthPage(props){
       </div>
       </div>
     );
-  }else return (<Redirect to="/dashboard"/>)
+  }else return (<Redirect to="/"/>)
 };
 
 AuthPage.propTypes = {

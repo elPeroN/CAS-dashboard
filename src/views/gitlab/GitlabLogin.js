@@ -18,7 +18,7 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import {connect} from 'react-redux';
-import {gitlabActionsCreator} from "src/redux/actions/Gitlab/gitlabActionsCreator"
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,7 +127,7 @@ function GitlabLogin(props){
 };
 
 const actions = {
-  login: gitlabActionsCreator.loginGitlab
+  login: gitlabCreator.loginGitlab
 }
 
 export default connect(null, actions)(GitlabLogin);
