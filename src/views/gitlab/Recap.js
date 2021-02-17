@@ -132,7 +132,7 @@ function Recap(props){
                         variant="contained"
                         color="primary"
                         endIcon={<ArrowForwardIosIcon/>}
-                        onClick={ () => props.getDevelStats(props.gitlabToken,dev.name)}
+                        onClick={ () => props.getDevelStats(props.gitlabToken, dev.name)}
                       > Details </Button>
                     </TableCell>
                   </TableRow>
