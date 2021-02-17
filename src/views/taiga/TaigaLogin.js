@@ -18,7 +18,7 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import {connect} from 'react-redux';
-import { taigaCreator } from "src/redux/actions/taigaCreator"
+import { taigaCreator } from "src/redux/actions/Taiga/creator"
 
 const useStyles = makeStyles((theme) => ({
   root: {

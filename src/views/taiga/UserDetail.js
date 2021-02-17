@@ -21,8 +21,8 @@ import { fetchUserStats } from "src/services/taiga"
 import { connect } from 'react-redux';
 import { colorsForGraphs } from 'src/theme/colors';
 
-import { taigaCreator } from "src/redux/actions/taigaCreator";
-import { taigaActions } from "src/redux/actions/taiga-actions";
+import { taigaCreator } from "src/redux/actions/Taiga/creator";
+import { taigaActions } from "src/redux/actions/Taiga/actions";
 
 function UserDetail(props) {
 

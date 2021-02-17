@@ -7,7 +7,9 @@ import axios from 'axios';
 const aminsep = "http://aminsep.disi.unibo.it/"
 const taigaRoute = `${config.URL}:${config.TAIGA_PORT_NUMBER}/`
 const PROJECTS = config.API.TAIGA_PROJECTS
+const TASKS = 'api/v1/tasks'
 const USERS = config.API.TAIGA_USERS
+const STORIES = config.API.TAIGA_U_STORIES
 const GET = config.REQ_TYPES.GET
 const POST = config.REQ_TYPES.POST
 const APPLICATION_JSON = config.CONTENT_TYPES.APPLICATION_JSON
@@ -30,38 +32,14 @@ export function fetchToken(usr, psw){
     }
 
     return axios({
-        method: 'POST',
+        method: POST,
         url: route,
         data: credentials
     });
 }
-/*
-    curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer ${AUTH_TOKEN}" \
-    -s http://localhost:8000/api/v1/users/me
-*/
-// Lo user ID è necessario per poter poi ottenere le stats dell'utente
-export function fetchUserId(token){
-    let route = `taigaRoute${USERS}/me`
 
-    return axios({
-        type: GET,
-        url: route,
-        headers: {
-            'Content-Type': APPLICATION_JSON,
-            'Authorization': BEARER(token)
-        }
-    })
-}
-/*
-    curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer ${AUTH_TOKEN}" \
-    -s http://localhost:8000/api/v1/users/6/stats
-*/
 export function fetchUserStats(id, token){
-    let route = `taigaRoute${USERS}/${id}/stats`
+    let route = `${aminsep}${USERS}/${id}/stats`
 
     return axios({
         type: GET,
@@ -73,14 +51,21 @@ export function fetchUserStats(id, token){
     })
 }
 
-/*
-    curl -X GET \
-    -H "Content-Type: application/json" \
-    -H "Authorization: Bearer ${AUTH_TOKEN}" \
-    -s http://localhost:8000/api/v1/projects?member=1
-*/
 export function fetchUserProjects(id, token){
-    let route = `taigaRoute${PROJECTS}?member=${id}`
+    let route = `${aminsep}${PROJECTS}?member=${id}`
+
+    return axios({
+        type: GET,
+        url: route,
+        headers: {
+            'Content-Type': APPLICATION_JSON,
+            'Authorization': BEARER(token)
+        }
+    })
+}
+
+export function fetchUserTasks(id, token, project){
+    let route = `${aminsep}${TASKS}?project=${project}&assigned_to=${id}`
 
     return axios({
         type: GET,

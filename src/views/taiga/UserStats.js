@@ -16,8 +16,8 @@ import {
 import TaigaIcon from 'src/assets/icons/TaigaIcon'
 import UserDetail from './UserDetail'
 import { connect } from "react-redux";
-import { taigaCreator } from 'src/redux/actions/taigaCreator';
-import { taigaActions } from 'src/redux/actions/taiga-actions';
+import { taigaCreator } from 'src/redux/actions/Taiga/creator';
+import { taigaActions } from 'src/redux/actions/Taiga/actions';
 
 
 const useStyles = makeStyles((theme) => ({

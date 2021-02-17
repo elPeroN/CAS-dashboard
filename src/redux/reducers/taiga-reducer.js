@@ -1,39 +1,47 @@
-import { taigaTypes, taigaKeys } from "../constants/taiga-types";
+import { taigaTypes } from "../constants/action-types";
+
+const TOKEN = 'taigaToken'
+const ID = 'taigaId'
 
 const initialState = ({
-    taigaToken: localStorage.getItem(taigaKeys.TOKEN) ?
-        localStorage.getItem(taigaKeys.TOKEN) : null,
-    taigaId: localStorage.getItem(taigaKeys.ID) ?
-        localStorage.getItem(taigaKeys.ID) : null,
-    taigaView: "recap"
+    token: localStorage.getItem(TOKEN) ?
+        localStorage.getItem(TOKEN) : null,
+
+    ID: localStorage.getItem(ID) ?
+        localStorage.getItem(ID) : null,
+
+    roles: null,
+    user: null,
+    projects: null,
+    stories: null
+
+
 })
 
 export const taigaReducer = (state = initialState, action) => {
     switch(action.type) {
 
-        case taigaTypes.LOGIN:
+        case(taigaTypes.SUCCESSFUL_LOGIN):
             return {
                 ...state,
-                taigaToken: action.payload
+                token: action.payload.auth_token,
+                ID: action.payload.id,
+                roles: action.payload.roles,
+                user: action.payload.username
             }
 
-        case taigaTypes.PROJECTS_STATS_RECEIVED:
-            return {
+        case(taigaTypes.SET_PROJECTS):
+            return{
                 ...state,
-                taigaProjects: action.payload
+                projects: action.payload
             }
 
-        case taigaTypes.USER_ID_RECEIVED:
+        case(taigaTypes.SET_USTORIES):
             return {
                 ...state,
-                taigaUserId: action.payload
+                stories: action.payload
             }
 
-        case taigaTypes.USER_STATS_RECEIVED:
-            return {
-                ...state,
-                taigaUserStats: action.payload
-            }
         default: return state;
     }
 }

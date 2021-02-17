@@ -16,6 +16,13 @@ export const loggerConstants = {
   SET_START_DATE: "SET_START_DATE"
 }
 
+export const taigaTypes = {
+  SUCCESSFUL_LOGIN: "SUCCESSFUL_LOGIN",
+  SET_PROJECTS: "SET_PROJECTS",
+  SET_USTORIES: "SET_USTORIES",
+  LOGOUT: "LOGOUT"
+}
+
 export const gitlabConstants = {
   SET_GITLAB_TOKEN:"SET_GITLAB_TOKEN",
   GITLAB_REPORT:"GITLAB_REPORT",

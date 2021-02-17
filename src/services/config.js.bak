@@ -1,5 +1,5 @@
 export const config = {
-  URL: "http://192.168.122.57",
+  URL: "http://localhost",
 
   PORT_NUMBER: "8120",
   GITLAB_PORT_NUMBER: "8929",
@@ -37,7 +37,6 @@ export const config = {
     TAIGA_TOKEN: "api/v1/auth",
     TAIGA_PROJECTS: "api/v1/projects",
     TAIGA_USERS: "api/v1/users",
-    TAIGA_U_STORIES: "api/v1/userstories",
     GITLAB_PROJECTS: "api/v4/projects",
     MATTERMOST_LOGIN: "api/v4/users/login"
 

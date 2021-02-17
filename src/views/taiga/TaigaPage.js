@@ -2,11 +2,12 @@ import React from 'react';
 import DashPage from 'src/components/DashPage';
 
 import TaigaLogin from './TaigaLogin';
+import TaigaDash from './TaigaDash'
 //import Commits from './Commits';
 //import NoRepositoryFound from './NoRepositoryFound';
 import UserStats from './UserStats'
 import { connect } from "react-redux";
-import { taigaActions } from 'src/redux/actions/taiga-actions'
+import { taigaActions } from 'src/redux/actions/Taiga/actions'
 
 function TaigaPage(props) {
 
@@ -14,9 +15,8 @@ function TaigaPage(props) {
 
     if (!props.taigaToken)
         content = <TaigaLogin/>
-    // gestire else
-    else if (props.taigaId)
-        content = <UserStats/>
+    else
+        content = <TaigaDash/>
 
     return (
         <DashPage>
@@ -27,8 +27,8 @@ function TaigaPage(props) {
 
 function mapStateToProps(state){
     return {
-        taigaToken: state.taigaToken,
-        taigaId: state.taigaId
+        taigaToken: state.taiga.taigaToken,
+        taigaId: state.taiga.taigaId
     }
 }
 
