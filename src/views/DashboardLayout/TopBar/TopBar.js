@@ -60,7 +60,7 @@ function TopBar(props) {
           onClick={handleClick}
         >
           <Badge
-            badgeContent={0}
+            badgeContent={props.counter}
             color="secondary"
             showZero
           >
@@ -80,7 +80,7 @@ function TopBar(props) {
                horizontal: 'right',
              }}
            >
-           <Mattermost/>
+           <Mattermost close={handleClose}/>
          </Popover>
         <Hidden lgUp>
           <IconButton
@@ -96,7 +96,10 @@ function TopBar(props) {
 };
 
 function mapStateToProps(state){
-  return { mobileNav: state.app.mobileNav};
+  return {
+    mobileNav: state.app.mobileNav,
+    counter: state.mattermost.counter
+  };
 };
 
 const act = {

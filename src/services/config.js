@@ -1,5 +1,5 @@
 export const config = {
-  URL: "http://192.168.122.57",
+  URL: "http://localhost",
 
   PORT_NUMBER: "8120",
   GITLAB_PORT_NUMBER: "8929",

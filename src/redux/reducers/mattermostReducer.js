@@ -1,10 +1,12 @@
 import { mattermostConstants } from "../constants/action-types";
 
 const initialState = ({
-  mattermostToken: localStorage.getItem('mattermostToken') ? localStorage.getItem('mattermostToken') : null,
-  mattermostId: localStorage.getItem('mattermostId') ? localStorage.getItem('mattermostId') : null,
-  channels: null,
-  teams: null
+  mattermostToken: null,//localStorage.getItem('mattermostToken') ? localStorage.getItem('mattermostToken') : null,
+  mattermostId: null,//localStorage.getItem('mattermostId') ? localStorage.getItem('mattermostId') : null,
+  channels: [],
+  teams: null,
+  counter:0,
+  messages: []
 });
 
 export const mattermostReducer = (state = initialState, action) => {
@@ -21,7 +23,7 @@ export const mattermostReducer = (state = initialState, action) => {
         mattermostToken: null,
         mattermostId: null
       };
-    case mattermostConstants.FETCH_CHANNELS:
+    case mattermostConstants.SET_CHANNELS:
       return {
         ...state,
         channels: action.payload
@@ -41,6 +43,16 @@ export const mattermostReducer = (state = initialState, action) => {
       return {
         ...state,
         mattermostTeamId:action.payload
+      }
+    case mattermostConstants.INCREASE_COUNTER:
+      return {
+        ...state,
+        counter:action.payload
+      }
+    case mattermostConstants.SET_MESSAGES:
+      return {
+        ...state,
+        messages: action.payload
       }
     default: return state;
   }

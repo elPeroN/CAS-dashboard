@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 
 function Mattermost(props) {
   let content;
-  if (props.mattermostToken) content = <MattermostDialog/>;
-  else content = <MattermostLogin/>;
+  if (props.mattermostToken) content = <MattermostDialog />;
+  else content = <MattermostLogin close={props.close}/>;
 
   return (
       <React.Fragment>

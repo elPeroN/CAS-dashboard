@@ -8,11 +8,11 @@ export const mattermostActions = {
   logoutMattermost: () =>({
     type: mattermostConstants.MATTERMOST_LOGOUT
   }),
-  fetchChannels: data =>({
-    type: mattermostConstants.FETCH_CHANNELS,
+  setChannels: data =>({
+    type: mattermostConstants.SET_CHANNELS,
     payload: data
   }),
-  fetchTeams: data =>({
+  setTeams: data =>({
     type: mattermostConstants.FETCH_TEAMS,
     payload: data
   }),
@@ -22,6 +22,14 @@ export const mattermostActions = {
   }),
   setTeamId: data =>({
     type:mattermostConstants.SET_TEAM_ID,
+    payload:data
+  }),
+  increaseCounter: data =>({
+    type:mattermostConstants.INCREASE_COUNTER,
+    payload:data
+  }),
+  setMessages: data =>({
+    type:mattermostConstants.SET_MESSAGES,
     payload:data
   })
 };

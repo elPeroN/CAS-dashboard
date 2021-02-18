@@ -43,7 +43,9 @@ function MattermostLogin(props){
             password: Yup.string().max(255).required('Password is required')
           })}
           onSubmit={(values,act) => {
-            props.login(values).then(act.setSubmitting(false));
+            props.login(values).then(
+              act.setSubmitting(false));
+              props.close();
           }}
         >
           {({
