@@ -1,14 +1,14 @@
 import { taigaTypes } from "../constants/action-types";
 
-const TOKEN = 'taigaToken'
-const ID = 'taigaId'
+const TOKEN_STRING = 'taigaToken'
+const ID_STRING = 'taigaId'
 
 const initialState = ({
-    token: localStorage.getItem(TOKEN) ?
-        localStorage.getItem(TOKEN) : null,
+    token: localStorage.getItem(TOKEN_STRING) ?
+        localStorage.getItem(TOKEN_STRING) : null,
 
-    ID: localStorage.getItem(ID) ?
-        localStorage.getItem(ID) : null,
+    id: localStorage.getItem(ID_STRING) ?
+        localStorage.getItem(ID_STRING) : null,
 
     roles: null,
     user: null,
@@ -25,7 +25,7 @@ export const taigaReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: action.payload.auth_token,
-                ID: action.payload.id,
+                id: action.payload.id,
                 roles: action.payload.roles,
                 user: action.payload.username
             }
@@ -36,7 +36,7 @@ export const taigaReducer = (state = initialState, action) => {
                 projects: action.payload
             }
 
-        case(taigaTypes.SET_USTORIES):
+        case(taigaTypes.SET_STORIES):
             return {
                 ...state,
                 stories: action.payload

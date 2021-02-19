@@ -39,8 +39,8 @@ function LoginView(props){
         <Container className={classes.root} maxWidth="sm">
           <Formik
             initialValues={{
-              username: '',
-              password: ''
+              username: 'perrisalvatore95@gmail.com',
+              password: '***REMOVED***'
             }}
             validationSchema={Yup.object().shape({
               username: Yup.string().max(32).required('Username is required'),
