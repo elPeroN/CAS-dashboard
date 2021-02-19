@@ -18,17 +18,18 @@ import {
   ArrowForwardIos as ArrowForwardIosIcon,
   Refresh as RefreshIcon
 } from "@material-ui/icons";
-//import PieChart from './DevelPieChart';
+import PieChart from './StoriesPieChart';
 import SelectedMenu from 'src/components/SelectedMenu';
-import { fetchGitlabRepositories } from "src/services/gitlab";
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
+import {sortUserStories, completedStories} from './assets/utils'
 
 function Recap(props){
     let proj_names = []
     let stories = props.stories
-    console.log(stories)
+    let tot_completed = 0
     let last = null
+    let stats = null
 
     if(stories) {
         /*
@@ -43,11 +44,13 @@ function Recap(props){
         finished_date , (range di data, seleziono un intervallo in cui mostrare le US terminate da me)
         milestone_slug,
         */
-        console.log("Stories found")
-        stories.sort( (a,b) => (a.finished_date > b.finished_date) ? 1 : -1)
-        // console.log(stories)
-        last = stories[stories.length-1]
-        console.log(last)
+
+        tot_completed = completedStories(stories)
+        last = sortUserStories(stories)[stories.length-1]
+        stats = {
+            labels: ["tot", "completed"],
+            numbers: [stories.length, tot_completed]
+        }
     }
 
 
@@ -128,8 +131,9 @@ function Recap(props){
               <CardHeader
                 title=
                   <div>
-                    Developer details
-                    <PieChart stats={devs}/>
+                    About stories & tasks
+                    <PieChart stats={stats}
+                    />
                   </div>
 
               />
