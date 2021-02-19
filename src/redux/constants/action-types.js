@@ -19,7 +19,7 @@ export const loggerConstants = {
 export const taigaTypes = {
   SUCCESSFUL_LOGIN: "SUCCESSFUL_LOGIN",
   SET_PROJECTS: "SET_PROJECTS",
-  SET_USTORIES: "SET_USTORIES",
+  SET_STORIES: "SET_STORIES",
   LOGOUT: "LOGOUT"
 }
 

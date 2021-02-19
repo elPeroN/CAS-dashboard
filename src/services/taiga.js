@@ -65,7 +65,20 @@ export function fetchUserProjects(id, token){
 }
 
 export function fetchUserTasks(id, token, project){
-    let route = `${aminsep}${TASKS}?project=${project}&assigned_to=${id}`
+    let route = `${aminsep}${TASKS}?assigned_to=${id}`
+
+    return axios({
+        type: GET,
+        url: route,
+        headers: {
+            'Content-Type': APPLICATION_JSON,
+            'Authorization': BEARER(token)
+        }
+    })
+}
+
+export function fetchUserStories(id, token, project){
+    const route = `${aminsep}${STORIES}?assigned_to=${id}`
 
     return axios({
         type: GET,
