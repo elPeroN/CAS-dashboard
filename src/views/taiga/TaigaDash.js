@@ -19,7 +19,7 @@ import Recap from './Recap';
 import NoRepositoryFound from '../gitlab/NoRepositoryFound';
 
 import { connect } from "react-redux";
-import { taigaActions } from 'src/redux/actions/Taiga/actions';
+import { taiga } from 'src/redux/actions/Taiga/actions';
 import { taigaCreator } from "src/redux/actions/Taiga/creator";
 
 
@@ -39,8 +39,8 @@ function TaigaDash(props){
     const classes = useStyles();
 
     let content;
-
-    if(!props.taigaProjects)
+    //console.log(props, "Props in taigadash")
+    if(!props.user)
         content = <NoRepositoryFound/>
     else
         content = <Recap/>
@@ -116,13 +116,17 @@ function TaigaDash(props){
 
 function mapStateToProps(state){
     return {
-        taigaProjects: state.taiga.taigaProjects,
-        taigaUStories: state.taiga.taigaUStories,
-        taigaRoles: state.taiga.taigaRoles
+        projects: state.taiga.projects,
+        stories: state.taiga.stories,
+        roles: state.taiga.roles,
+        user: state.taiga.user
     }
 }
 
-// const actions = {
-//         taigaLogout: taiga
-// }
-export default connect(mapStateToProps, null)(TaigaDash);
+const actions = {
+        setDetails: taiga.succLogin,
+        setProjects: taiga.setProjects,
+        setStories: taiga.setStories
+
+}
+export default connect(mapStateToProps, actions)(TaigaDash);

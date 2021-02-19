@@ -40,9 +40,9 @@ function checkstate() {
 
 function getProjects() {
     return (dispatch, getState) => {
-        const id = getState().taiga.ID
+        const id = getState().taiga.id
         const token = getState().taiga.token
-
+        // console.log(id,token)
         fetchUserProjects(id, token)
 
             .then( res => {
@@ -89,7 +89,7 @@ milestone_slug,
 
 function getUserUStories() {
     return (dispatch, getState) => {
-        const id = getState().taiga.ID
+        const id = getState().taiga.id
         const token = getState().taiga.token
         const projects = getState().taiga.projects
 
@@ -98,7 +98,23 @@ function getUserUStories() {
             fetchUserTasks(id,token,proj)
 
                 .then( res => {
-                    console.log(res.data)
+                    if (res.data.length > 0) {
+                        let stories = []
+                        res.data.map( s => {
+                            let x = {
+                                subject: s.subject,
+                                finished_date: s.finished_date,
+                                is_closed: s.is_closed,
+                                milestone: s.milestone_slug,
+                                belongs_to: s.user_story_extra_info ?
+                                    s.user_story_extra_info.subject : null
+                            }
+                            stories.push(x)
+                        })
+                        dispatch(taiga.setStories(stories))
+                        console.log(stories)
+                        // dispatch(checkstate())
+                    }
                 })
 
                 .catch( err => console.error(err))
