@@ -4,10 +4,10 @@ import axios from 'axios';
 /*
  * NB: ONLY FOR TESTING WE USE AMINSEP SERVER
 */
-const aminsep = "http://aminsep.disi.unibo.it/"
-const taigaRoute = `${config.URL}:${config.TAIGA_PORT_NUMBER}/`
+export const aminsep = "http://aminsep.disi.unibo.it/"
+
 const PROJECTS = config.API.TAIGA_PROJECTS
-const TASKS = 'api/v1/tasks'
+const TASKS = config.API.TAIGA_TASKS
 const USERS = config.API.TAIGA_USERS
 const STORIES = config.API.TAIGA_U_STORIES
 const GET = config.REQ_TYPES.GET
@@ -21,7 +21,6 @@ function BEARER(token) {
 /*
     Reference: https://taigaio.github.io/taiga-doc/dist/api.html
 */
-
 // POST request to API in order to login and receive the user token
 export function fetchToken(usr, psw){
     const route = `${aminsep}${config.API.TAIGA_TOKEN}`

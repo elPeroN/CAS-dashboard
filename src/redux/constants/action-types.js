@@ -23,6 +23,15 @@ export const taigaTypes = {
   LOGOUT: "LOGOUT"
 }
 
+export const sonarTypes = {
+    SUCCESSFUL_LOGIN: "SUCCESSFUL_LOGIN",
+    LOGOUT: "LOGOUT",
+    SET_PROJECTS: "SET_PROJECTS",
+    SET_GATE: "SET_GATE",
+    SET_MEASURE: "SET_MEASURE",
+    SET_TOKEN: "SET_TOKEN"
+}
+
 export const gitlabConstants = {
   SET_GITLAB_TOKEN:"SET_GITLAB_TOKEN",
   GITLAB_REPORT:"GITLAB_REPORT",

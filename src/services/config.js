@@ -32,14 +32,20 @@ export const config = {
     PROJECT_DATA: "projectData",
     PROJECT_LIST: "projectList",
     PERMISSION_FOR_USER: "Admin/User/Permissions",
+
     GITLAB_TOKEN: "api/v4/personal_access_tokens",
+    GITLAB_PROJECTS: "api/v4/projects",
 
     TAIGA_TOKEN: "api/v1/auth",
     TAIGA_PROJECTS: "api/v1/projects",
     TAIGA_USERS: "api/v1/users",
+    TAIGA_TASKS: "api/v1/tasks",
     TAIGA_U_STORIES: "api/v1/userstories",
-    GITLAB_PROJECTS: "api/v4/projects",
-    MATTERMOST_LOGIN: "api/v4/users/login"
+
+
+    MATTERMOST_LOGIN: "api/v4/users/login",
+
+    SONAR_TOKEN: "api/user_tokens"
 
   },
 

@@ -16,9 +16,9 @@ import {
 //import HelpIcon from '@material-ui/icons/Help';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
-import TaigaIcon from 'src/assets/icons/TaigaIcon';
+import SonarQubeIcon from 'src/assets/icons/SonarQube';
 import {connect} from 'react-redux';
-import { taigaCreator } from "src/redux/actions/Taiga/creator"
+import { sonarCreator } from "src/redux/actions/Sonar/creator"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,12 +39,10 @@ function LoginView(props){
         <Container className={classes.root} maxWidth="sm">
           <Formik
             initialValues={{
-              username: '',
-              password: ''
+              token: 'JustSubmit',
             }}
             validationSchema={Yup.object().shape({
-              username: Yup.string().max(32).required('Username is required'),
-              password: Yup.string().max(20).required('Passowrd is required')
+              token: Yup.string().max(32).required('Username is required'),
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
@@ -65,38 +63,18 @@ function LoginView(props){
                     color="textPrimary"
                     variant="h2"
                   >
-                    Taiga Sign in
+                    SonarQube Sign in
                   </Typography>
                 </Box>
                 <TextField
                   error={Boolean(touched.username && errors.username)}
                   fullWidth
-                  label="USERNAME"
+                  label="Token"
                   margin="normal"
-                  name="username"
+                  name="token"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.username}
-                  variant="outlined"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <FingerprintIcon />
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-
-                <TextField
-                  error={Boolean(touched.password && errors.password)}
-                  fullWidth
-                  label="PASSWORD"
-                  margin="normal"
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="password"
-                  value={values.password}
+                  value={values.token}
                   variant="outlined"
                   InputProps={{
                     startAdornment: (
@@ -130,9 +108,9 @@ function LoginView(props){
                     variant="contained"
                     color="secondary"
                     //onClick={() => window.location = "http://localhost:8929/users/sign_up"}
-                    startIcon={<TaigaIcon/>}
+                    startIcon={<SonarQubeIcon/>}
                   >
-                    Taiga
+                    SonarQube
                   </Button>
                 </Typography>
               </form>
@@ -147,7 +125,7 @@ function mapStateToProps(state){
 };
 
 const actions = {
-  login: taigaCreator.login,
+  login: sonarCreator.login,
 }
 
 export default connect(mapStateToProps,actions)(LoginView);

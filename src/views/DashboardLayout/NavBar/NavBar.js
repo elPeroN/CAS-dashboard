@@ -22,6 +22,7 @@ import {
 } from '@material-ui/icons';
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
+import SonarQubeIcon from "src/assets/icons/SonarQube"
 import NavItem from './NavItem';
 import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
 import {appActions} from "src/redux/actions/App/appActions"
@@ -47,6 +48,11 @@ const items = [
     href: '/taiga',
     icon: TaigaIcon,
     title: 'Taiga'
+  },
+  {
+    href: '/sonar',
+    icon: SonarQubeIcon,
+    title: 'SonarQube'
   },
   {
     href: '/app/products',

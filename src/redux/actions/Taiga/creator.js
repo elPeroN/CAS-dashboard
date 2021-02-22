@@ -4,7 +4,7 @@ import { appActions } from "src/redux/actions/App/appActions"
 import { fetchToken,
         fetchUserProjects,
         fetchUserStories,
-        fetchUserTasks } from "src/services/taiga"
+        fetchUserTasks, aminsep } from "src/services/taiga"
 
 export const taigaCreator = {
     login,
@@ -49,13 +49,14 @@ function getProjects() {
             .then( res => {
                 let projects = []
                 res.data.map( proj => {
+                console.debug(proj)
                     let x = {
                         name: proj.name,
                         id: proj.id,
                         description: proj.description,
-                        role: proj.role,
                         members: proj.members,
-                        is_private: proj.is_private
+                        is_private: proj.is_private,
+                        address: `${aminsep}project/${proj.slug}`
                     }
                     projects.push(x)
 
@@ -95,27 +96,6 @@ function getUserUStories() {
         const projects = getState().taiga.projects
         let stories = []
 
-        fetchUserStories(id, token, null)
-            .then( res => {
-                console.debug(res.data)
-                if (res.data.length > 0) {
-                    res.data.map( s => {
-                        let x = {
-                            subject: s.subject,
-                            finished_date: s.finished_date,
-                            is_closed: s.is_closed,
-                            milestone: s.milestone_slug,
-                            belongs_to: s.user_story_extra_info ?
-                                s.user_story_extra_info.subject : null
-                        }
-                        stories.push(x)
-
-                    })
-                }
-            })
-            .catch( err => console.error(err))
-
-
         fetchUserTasks(id,token,null)
 
             .then( res => {
@@ -132,10 +112,32 @@ function getUserUStories() {
                         }
                         stories.push(x)
                     })
-                    dispatch(taiga.setStories(stories))
-                    console.log(stories)
+
                     // dispatch(checkstate())
                 }
+            })
+            .then( () => {
+                fetchUserStories(id, token, null)
+                    .then( res => {
+                        // console.debug(res.data)
+                        if (res.data.length > 0) {
+                            res.data.map( s => {
+                                let x = {
+                                    subject: s.subject,
+                                    finished_date: s.finished_date,
+                                    is_closed: s.is_closed,
+                                    milestone: s.milestone_slug,
+                                    belongs_to: s.user_story_extra_info ?
+                                        s.user_story_extra_info.subject : null
+                                }
+                                stories.push(x)
+
+                            })
+                            dispatch(taiga.setStories(stories))
+                            // console.log(stories)
+                        }
+                    })
+                    .catch( err => console.error(err))
             })
 
             .catch( err => console.error(err))

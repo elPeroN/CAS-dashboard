@@ -4,6 +4,7 @@ import { loggerReducer } from './loggerReducer';
 import { gitlabReducer } from './gitlabReducer';
 import { mattermostReducer } from './mattermostReducer';
 import { taigaReducer } from './taiga-reducer';
+import { sonarReducer } from './sonar-reducer'
 
 export const createRootReducer = () =>
   combineReducers({
@@ -11,5 +12,6 @@ export const createRootReducer = () =>
     logger: loggerReducer,
     gitlab: gitlabReducer,
     mattermost: mattermostReducer,
-    taiga: taigaReducer
+    taiga: taigaReducer,
+    sonar: sonarReducer
   });

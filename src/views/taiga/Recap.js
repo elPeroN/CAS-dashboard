@@ -18,46 +18,45 @@ import {
   ArrowForwardIos as ArrowForwardIosIcon,
   Refresh as RefreshIcon
 } from "@material-ui/icons";
-import PieChart from './StoriesPieChart';
 import SelectedMenu from 'src/components/SelectedMenu';
+import PieChart from './StoriesPieChart';
+import LineChart from './BarChart'
 import {connect} from 'react-redux';
+
 import {colorsForGraphs} from 'src/theme/colors';
-import {sortUserStories, completedStories} from './assets/utils'
+import {sortUserStories,
+        isClosed,
+        completedStories} from './assets/utils'
 
 function Recap(props){
-    let proj_names = []
+    let projects = []
     let stories = props.stories
     let tot_completed = 0
     let last = null
     let stats = null
 
     if(stories) {
-        /*
-        proj_id,
-        subject,
-        is_closed,
-        user_story,
-        user_story_extra_info: {
-        	subject,
-        	id,
-        }
-        finished_date , (range di data, seleziono un intervallo in cui mostrare le US terminate da me)
-        milestone_slug,
-        */
 
         tot_completed = completedStories(stories)
-        last = sortUserStories(stories)[stories.length-1]
+        stories = sortUserStories(stories)
+        let closedStories = stories.filter(isClosed)
+        last = closedStories[closedStories.length-1]
         stats = {
             labels: ["tot", "completed"],
             numbers: [stories.length, tot_completed]
         }
     }
 
-
-    if (props.projects)
+    if (props.projects){
+        console.debug(props.projects)
         props.projects.map(x => {
-            proj_names.push(x.name)
+            let p = {
+                name: x.name,
+                address: x.address
+            }
+            projects.push(p)
         })
+    }
 
 
     return (
@@ -72,6 +71,7 @@ function Recap(props){
             md={6}
             lg={6}
           >
+            <PieChart stats={stats}/>
           </Grid>
           <Grid
             item
@@ -112,11 +112,18 @@ function Recap(props){
 
                   <TableRow>
                     <TableCell>
-                        Projects: {proj_names.join(', ')}
+                        Projects:
+                        <ol>
+                            {
+                                projects.map( el => {
+                                    return <li><a href={el.address}> {el.name} </a></li>
+                                })
+                            }
+                        </ol>
                     </TableCell>
 
                     <TableCell>
-                        Last completed: {last ? last.subject+` (${last.milestone})` : 'N/A'}
+                        Last completed: {last ? last.subject+` ${last.milestone ? "from "+last.milestone : ""}` : 'N/A'}
                     </TableCell>
                   </TableRow>
 
@@ -125,22 +132,18 @@ function Recap(props){
               </Table>
             </Card>
 
-            <Divider />
-
-            <Card >
-              <CardHeader
-                title=
-                  <div>
-                    About stories & tasks
-                    <PieChart stats={stats}
-                    />
-                  </div>
-
-              />
-            </Card>
-
           </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={12}
+            lg={12}
+            xl={12}
+          >
+            <LineChart stats={stats}/>
         </Grid>
+    </Grid>
         );
 }
 

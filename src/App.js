@@ -10,6 +10,7 @@ import LoggerView from 'src/views/logger/Logger';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import GitlabPage from 'src/views/gitlab/GitlabPage';
 import TaigaPage from 'src/views/taiga/TaigaPage'
+import SonarPage from 'src/views/sonar/SonarPage'
 
 import theme from 'src/theme/theme';
 import store from 'src/redux/store/store';
@@ -31,6 +32,7 @@ class App extends Component{
                 <Route exact path="/register" component={RegisterView}/>
                 <Route exact path='/gitlab' component={GitlabPage}/>
                 <Route exact path='/taiga' component={TaigaPage}/>
+                <Route exact path='/sonar' component={SonarPage}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>

@@ -1,6 +1,10 @@
 import { taigaTypes } from "../../constants/action-types";
 
 export const taiga = {
+    setToken: data => ({
+        type: taigaTypes.SET_TOKEN,
+        payload: data
+    }),
     succLogin: data => ({
         type: taigaTypes.SUCCESSFUL_LOGIN,
         payload: data
