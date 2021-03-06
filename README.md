@@ -4,7 +4,7 @@
 
 > Dashboard for CAS server made with React and material UI
 
-## N.B. Ubuntu Server 20.04 is mandatory to run this environment!
+## N.B. Ubuntu Server 20.04 is mandatory to run this environment's back end!
 
 ## Quick start
 
