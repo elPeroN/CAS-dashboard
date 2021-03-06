@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {colors} from '@material-ui/core';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Box,
@@ -7,7 +8,8 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  useTheme
+  useTheme,
+  Typography
 } from '@material-ui/core';
 
 import { createPieStats } from './assets/utils';
@@ -15,14 +17,16 @@ import { pieData, pieOptions } from './assets/datasets';
 
 function PieChart(props) {
     const theme = useTheme();
-
+    let percentage = 0
     let stats = {
         labels: ["No data to show"],
         numbers: [0]
     }
 
-    if (props.stats)
+    if (props.stats){
         stats = createPieStats(props.stats)
+        percentage = props.stats.numbers[1]/props.stats.numbers[0]*100
+    }
 
     return(
         <Card>
@@ -38,6 +42,31 @@ function PieChart(props) {
                         options={pieOptions(theme)}
                     />
                 </Box>
+
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      mt={2}
+                    >
+                        <Box
+                          key="percentage"
+                          p={1}
+                          textAlign="center"
+                        >
+                          <Typography
+                            color="textPrimary"
+                            variant="body1"
+                          >
+                            Stories completed
+                          </Typography>
+                          <Typography
+                            variant="h2"
+                          >
+                            {percentage.toFixed(1)}
+                            %
+                          </Typography>
+                        </Box>
+                    </Box>
             </CardContent>
         </Card>
     );

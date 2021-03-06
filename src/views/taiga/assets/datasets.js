@@ -16,7 +16,7 @@ export const lines = (stats) => {
         {
             title: 'Tasks completed',
             value: stats.completed,
-            color: colors.red[600]
+            color: colors.green[600]
         }
     ]
 }
@@ -34,8 +34,8 @@ export const pieData = (stats) => {
             {
                 data: stats.numbers,
                 backgroundColor: [
-                    colors.indigo[500],
-                    colors.red[600]
+                    colors.red[600],
+                    colors.green[500]
                 ],
                 borderWidth: 8,
                 borderColor: colors.common.white,

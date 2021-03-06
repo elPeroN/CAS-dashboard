@@ -29,7 +29,7 @@ function LineChart(props) {
 
     return (
         <Card>
-            <CardHeader title="Last week completed"/>
+            <CardHeader title="Last tasks completed"/>
             <Divider/>
             <CardContent>
                 <Box

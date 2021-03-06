@@ -1,6 +1,9 @@
 export function createPieStats(stories){
-    // console.debug('createPieStats ', stories)
-    return stories
+    console.debug('createPieStats', stories)
+    return {
+        labels: ['To complete', 'Completed'],
+        numbers: [stories.numbers[0]-stories.numbers[1], stories.numbers[1]]
+    }
 }
 
 /* In input un array di story vanno create le entry con giorno e numero

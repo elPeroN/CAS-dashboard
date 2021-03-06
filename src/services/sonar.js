@@ -4,9 +4,11 @@ import React from 'react'
 
 
 /*
- * NB: ONLY FOR TESTING WE USE AMINSEP SERVER
+ * NB: in fase di sviluppo non è stato possibile utilizzare il frontend Aminsep,
+    a causa di CORS.
+    I risultati restituiti dalle chiamate sulla API costituiscono solo un
+    esempio dimostrativo
 */
-// export const url = "http://aminsep.disi.unibo.it:9000/"
 
 const TOKEN = config.API.SONAR_TOKEN
 const GET = config.REQ_TYPES.GET
