@@ -20,8 +20,6 @@ import NoRepositoryFound from '../gitlab/NoRepositoryFound';
 
 import { connect } from "react-redux";
 import { taiga } from 'src/redux/actions/Taiga/actions';
-import { taigaCreator } from "src/redux/actions/Taiga/creator";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -10,12 +10,12 @@ import React from 'react'
     esempio dimostrativo
 */
 
-const TOKEN = config.API.SONAR_TOKEN
-const GET = config.REQ_TYPES.GET
-const POST = config.REQ_TYPES.POST
-const APPLICATION_JSON = config.CONTENT_TYPES.APPLICATION_JSON
+const TOKEN = config.API.SONAR_TOKEN;
+const GET = config.REQ_TYPES.GET;
+const POST = config.REQ_TYPES.POST;
+const APPLICATION_JSON = config.CONTENT_TYPES.APPLICATION_JSON;
 
-const route = "http://localhost:3000"
+const route = `${config.URL}:${config.SONAR_PORT_NUMBER}`;
 
 
 function BASIC(token) {

@@ -1,12 +1,11 @@
 export const config = {
-  URL: "http://192.168.122.57",
+  URL: "http://localhost",
 
   PORT_NUMBER: "8120",
-  GITLAB_PORT_NUMBER: "8929",
-  OAUTH_PORT: "9094",
-  TAIGA_PORT_NUMBER: "8000",
-  MATTERMOST_PORT_NUMBER:"1080",
-
+  GITLAB_PORT_NUMBER: "9001",
+  TAIGA_PORT_NUMBER: "9002",
+  MATTERMOST_PORT_NUMBER:"9003",
+  SONAR_PORT_NUMBER:"9000",
 
   API: {
     VERSION: "V1",
@@ -21,17 +20,8 @@ export const config = {
     ACTIVITIES_REPORT: "activitiesReport",
     TIME_REPORT: "timeReport",
     CUMUL_REPORT: "cumulativeReport",
-    CATEGORY_REPORT: "categorytimeReport",
-    PROJECTS: "projects",
-    AGENT_GATEWAY: "AgentGateway",
-    AGENT_CONFIG: "AgentConfiguration",
-    AGENT_LIST: "AgentList",
+
     CONNECT_PROJECT: "ConnectProject",
-    OAUTH: "OAuth",
-    OAUTH20: "OAuth20",
-    PROJECT_DATA: "projectData",
-    PROJECT_LIST: "projectList",
-    PERMISSION_FOR_USER: "Admin/User/Permissions",
 
     GITLAB_TOKEN: "api/v4/personal_access_tokens",
     GITLAB_PROJECTS: "api/v4/projects",
@@ -42,8 +32,8 @@ export const config = {
     TAIGA_TASKS: "api/v1/tasks",
     TAIGA_U_STORIES: "api/v1/userstories",
 
-
-    MATTERMOST_LOGIN: "api/v4/users/login",
+    MATTERMOST_CHANNELS: "/api/v4/channels",
+    MATTERMOST_USERS: "api/v4/users",
 
     SONAR_TOKEN: "api/user_tokens"
 

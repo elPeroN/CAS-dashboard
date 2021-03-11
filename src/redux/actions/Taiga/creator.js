@@ -1,16 +1,17 @@
-import { taiga } from "./actions"
-import { appActions } from "src/redux/actions/App/appActions"
-
-import { fetchToken,
-        fetchUserProjects,
-        fetchUserStories,
-        fetchUserTasks, aminsep } from "src/services/taiga"
+import { taiga } from "./actions";
+import { appActions } from "src/redux/actions/App/appActions";
+import { config } from "src/services/config";
+import {
+  fetchToken,
+  fetchUserProjects,
+  fetchUserStories,
+  fetchUserTasks} from "src/services/taiga";
 
 export const taigaCreator = {
-    login,
-    logout,
-    getProjects,
-    getUserUStories
+  login,
+  logout,
+  getProjects,
+  getUserUStories
 }
 
 function login(args){
@@ -33,11 +34,11 @@ function login(args){
         })
 }
 
-function checkstate() {
-    return (dispatch, getState) => {
-        console.log(getState().taiga)
-    }
-}
+// function checkstate() {
+//     return (dispatch, getState) => {
+//         console.log(getState().taiga)
+//     }
+// }
 
 function getProjects() {
     return (dispatch, getState) => {
@@ -48,7 +49,7 @@ function getProjects() {
 
             .then( res => {
                 let projects = []
-                res.data.map( proj => {
+                res.data.forEach( proj => {
                 console.debug(proj)
                     let x = {
                         name: proj.name,
@@ -56,7 +57,7 @@ function getProjects() {
                         description: proj.description,
                         members: proj.members,
                         is_private: proj.is_private,
-                        address: `${aminsep}project/${proj.slug}`
+                        address: `${config.URL}:${config.TAIGA_PORT_NUMBER}/project/${proj.slug}`
                     }
                     projects.push(x)
 
@@ -93,7 +94,7 @@ function getUserUStories() {
     return (dispatch, getState) => {
         const id = getState().taiga.id
         const token = getState().taiga.token
-        const projects = getState().taiga.projects
+        //const projects = getState().taiga.projects
         let stories = []
 
         fetchUserTasks(id,token,null)
@@ -101,7 +102,7 @@ function getUserUStories() {
             .then( res => {
                 if (res.data.length > 0) {
 
-                    res.data.map( s => {
+                    res.data.forEach( s => {
                         let x = {
                             subject: s.subject,
                             finished_date: s.finished_date,
@@ -121,7 +122,7 @@ function getUserUStories() {
                     .then( res => {
                         // console.debug(res.data)
                         if (res.data.length > 0) {
-                            res.data.map( s => {
+                            res.data.forEach( s => {
                                 let x = {
                                     subject: s.subject,
                                     finished_date: s.finished_date,

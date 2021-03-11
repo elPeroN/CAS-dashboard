@@ -18,7 +18,8 @@ import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import {connect} from 'react-redux';
-import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator"
+import {gitlabCreator} from "src/redux/actions/Gitlab/gitlabCreator";
+import {config} from "src/services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -105,7 +106,7 @@ function GitlabLogin(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    onClick={() => window.location = `${config.URL}:${config.GITLAB_PORT_NUMBER}/users/sign_up`}
                     startIcon={<GitlabIcon/>}
                   >
                     Gitlab

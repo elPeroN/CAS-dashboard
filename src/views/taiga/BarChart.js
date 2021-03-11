@@ -10,7 +10,7 @@ import {
   useTheme
 } from '@material-ui/core';
 
-import { createFileStats, createBarStats } from './assets/utils';
+import { createBarStats } from './assets/utils';
 import {storiesData, storiesOptions } from './assets/datasets'
 
 function LineChart(props) {

@@ -10,11 +10,10 @@ export function createPieStats(stories){
     di story chiuse
 */
 export function createBarStats(stories) {
-    let labels = []
     let numbers = []
     // Filtrare per avere solo stories finite
     let completed = [];
-    stories.map(s => {
+    stories.forEach(s => {
         if (s.is_closed === true)
             completed.push(s)
     })
@@ -40,7 +39,7 @@ export function sortUserStories(stories){
 
 export function completedStories(stories) {
     let tot = 0
-    stories.map( el => {
+    stories.forEach( el => {
         if (isClosed(el))
             tot++
     })

@@ -1,6 +1,6 @@
 import React from 'react'
 // npm install --save-dev @iconify/react @iconify-icons/logos
-import { Icon, InlineIcon } from '@iconify/react';
+import { InlineIcon } from '@iconify/react';
 import taigaIcon from '@iconify-icons/logos/taiga';
 
 

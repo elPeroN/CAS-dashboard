@@ -5,7 +5,6 @@ import SonarLogin from './SonarLogin';
 import SonarDash from './SonarDash'
 
 import { connect } from "react-redux";
-import { sonarActions } from 'src/redux/actions/Sonar/actions'
 
 function SonarPage(props) {
 

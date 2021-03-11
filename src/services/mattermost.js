@@ -1,13 +1,13 @@
 import { config } from "./config";
 import axios from 'axios';
 
-const loginRoute = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/${config.API.MATTERMOST_LOGIN}`
-const teamsRoute = 'http://localhost:1080/api/v4/teams';
-const channelsRoute = 'http://localhost:1080/api/v4/channels';
+const usersRoute = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/${config.API.MATTERMOST_USERS}`;
+const channelsRoute = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/${config.API.MATTERMOST_CHANNELS}`;
 
 export function loginUser(values){
+  const route = usersRoute+'/login';
   return axios.post(
-    loginRoute,
+    route,
     {
       "login_id": values.login_id,
       "password": values.password
@@ -16,7 +16,7 @@ export function loginUser(values){
 }
 
 export function fetchTeams(token, userId){
-  const route = 'http://localhost:1080/api/v4/users/'+userId+'/teams';
+  const route = usersRoute+"/"+userId+'/teams';
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
@@ -28,7 +28,7 @@ export function fetchTeams(token, userId){
 }
 
 export function getUserChannels(token, userId, teamId){
-  const route = 'http://localhost:1080/api/v4/users/'+userId+'/teams/'+teamId+'/channels';
+  const route = usersRoute+"/"+userId+'/teams/'+teamId+'/channels';
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
@@ -40,7 +40,7 @@ export function getUserChannels(token, userId, teamId){
 }
 
 export function getChannelData(token, channelId){
-  const route = 'http://localhost:1080/api/v4/channels/'+channelId;
+  const route = channelsRoute+"/"+channelId;
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
@@ -52,7 +52,7 @@ export function getChannelData(token, channelId){
 }
 
 export function fetchUnread(token, userId, channelId){
-  const route = 'http://localhost:1080/api/v4/users/'+userId+'/channels/'+channelId+'/unread';
+  const route = usersRoute+"/"+userId+'/channels/'+channelId+'/unread';
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,
@@ -64,7 +64,7 @@ export function fetchUnread(token, userId, channelId){
 }
 
 export function fetchThreads(token, userId, teamId){
-  const threadsRoute= "http://localhost:1080/api/v4/users/"+userId+"/threads";
+  const threadsRoute= usersRoute+"/"+userId+"/threads";
   console.log(threadsRoute);
   const headers = {
     'Content-Type': 'application/json',

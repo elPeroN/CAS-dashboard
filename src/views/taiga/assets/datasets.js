@@ -1,9 +1,4 @@
 import {colors} from '@material-ui/core';
-import {
-  AddCircleOutline as AddCircleOutlineIcon,
-  RemoveCircleOutline as RemoveCircleOutlineIcon,
-  Edit as EditIcon
-} from '@material-ui/icons';
 
 export const lines = (stats) => {
     return [

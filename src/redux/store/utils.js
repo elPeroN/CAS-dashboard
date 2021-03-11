@@ -1,7 +1,6 @@
 import {loggerCreator} from '../actions/Logger/loggerCreator';
 import {taigaCreator} from '../actions/Taiga/creator';
 import {gitlabCreator} from '../actions/Gitlab/gitlabCreator';
-import {mattermostCreator} from '../actions/Mattermost/mattermostCreator';
 
 export function startApp(store){
   store.dispatch(loggerCreator.loggedFlow(store.getState().logger.token));

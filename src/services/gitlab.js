@@ -1,7 +1,7 @@
 import { config } from "./config";
 import axios from 'axios';
 
-const gitlabProjectsRoute = `http://aminsep.disi.unibo.it/gitlab/${config.API.GITLAB_PROJECTS}`
+const gitlabProjectsRoute = `${config.URL}:${config.GITLAB_PORT_NUMBER}/${config.API.GITLAB_PROJECTS}`;
 
 export function checkToken(token){
   return axios({url: gitlabProjectsRoute, headers :{"PRIVATE-TOKEN":token}});

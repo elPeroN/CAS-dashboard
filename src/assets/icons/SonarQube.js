@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, InlineIcon } from '@iconify/react';
+import { InlineIcon } from '@iconify/react';
 import sonarqubeIcon from '@iconify-icons/simple-icons/sonarqube';
 
 export default function SonarQubeIcon(props){

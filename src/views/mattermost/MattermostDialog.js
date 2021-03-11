@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import {
   Badge,
@@ -6,7 +6,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon,
   ListItemSecondaryAction
 } from "@material-ui/core";
 import MailIcon from '@material-ui/icons/Mail';

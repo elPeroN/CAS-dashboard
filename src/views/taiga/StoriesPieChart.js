@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {colors} from '@material-ui/core';
 import { Doughnut } from 'react-chartjs-2';
 import {
   Box,

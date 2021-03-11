@@ -2,10 +2,8 @@ import React from 'react';
 import DashPage from 'src/components/DashPage';
 
 import TaigaLogin from './TaigaLogin';
-import TaigaDash from './TaigaDash'
-import UserStats from './UserStats'
+import TaigaDash from './TaigaDash';
 import { connect } from "react-redux";
-import { taigaActions } from 'src/redux/actions/Taiga/actions'
 
 function TaigaPage(props) {
 

@@ -1,5 +1,6 @@
-import { sonarActions as sonar } from './actions'
-import { appActions } from "src/redux/actions/App/appActions"
+import { sonarActions as sonar } from './actions';
+import { appActions } from "src/redux/actions/App/appActions";
+import  { config } from "src/services/config";
 
 import {
         projects, details, measure,
@@ -55,13 +56,13 @@ function getProjects(){
         let projs = [];
         fetchProjects(token)
             .then( res => {
-                projects.projects.map( p => {
+                projects.projects.forEach( p => {
                     let x = {
                         key: p.key,
                         last_analysis: p.lastAnalysisDate,
                         name: p.name,
                         quality_gate: p.qualityGate,
-                        address: `http://aminsep.disi.unibo.it:9000/dashboard?id=${p.key}`
+                        address: `${config.URL}:${config.SONAR_PORT_NUMBER}?id=${p.key}`
                     }
                     projs.push(x)
                 })
@@ -77,7 +78,7 @@ function getMeasureAndGate(){
         const token = getState().sonar.token
         const projects = getState().sonar.projects
 
-        projects.map( P => {
+        projects.forEach( P => {
             fetchGate(token)
                 .then( res => {
 

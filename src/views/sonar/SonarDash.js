@@ -14,12 +14,11 @@ import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 
-import SonarQubeIcon from "src/assets/icons/SonarQube"
-import Recap from './Recap'
+import SonarQubeIcon from "src/assets/icons/SonarQube";
+import Recap from './Recap';
 import NoRepositoryFound from '../gitlab/NoRepositoryFound';
 import { connect } from "react-redux";
-import {sonar} from 'src/redux/actions/Sonar/actions'
-import { sonarCreator } from 'src/redux/actions/Sonar/creator'
+import { sonarCreator } from 'src/redux/actions/Sonar/creator';
 
 const useStyles = makeStyles((theme) => ({
   root: {

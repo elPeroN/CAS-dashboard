@@ -60,7 +60,7 @@ function fetchChannels(){
 function getUnread(channels){
   return (dispatch, getState) => {
     channels.forEach( channel => {
-      if(channel.team_id!= '') fetchUnread(getState().mattermost.mattermostToken,getState().mattermost.mattermostId,channel.id).then((response) => {
+      if(channel.team_id!== '') fetchUnread(getState().mattermost.mattermostToken,getState().mattermost.mattermostId,channel.id).then((response) => {
         let num = response.data.msg_count;
         if(num > 0) getChannelData(getState().mattermost.mattermostToken,response.data.channel_id).then( response =>{
           let element = {

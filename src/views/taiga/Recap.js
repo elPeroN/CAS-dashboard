@@ -1,29 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
-  Button,
   Card,
   CardHeader,
   Divider,
   Grid,
   IconButton,
   Table,
-  TableBody,
   TableCell,
   TableHead,
   TableRow
 } from '@material-ui/core';
-import { v4 as uuid } from 'uuid';
 import {
-  DataUsage as CircleIcon,
-  ArrowForwardIos as ArrowForwardIosIcon,
   Refresh as RefreshIcon
 } from "@material-ui/icons";
-import SelectedMenu from 'src/components/SelectedMenu';
 import PieChart from './StoriesPieChart';
 import LineChart from './BarChart'
 import {connect} from 'react-redux';
 
-import {colorsForGraphs} from 'src/theme/colors';
 import {sortUserStories,
         isClosed,
         completedStories} from './assets/utils'
@@ -49,7 +42,7 @@ function Recap(props){
 
     if (props.projects){
         console.debug(props.projects)
-        props.projects.map(x => {
+        props.projects.forEach(x => {
             let p = {
                 name: x.name,
                 address: x.address

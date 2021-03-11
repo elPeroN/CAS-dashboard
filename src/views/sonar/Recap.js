@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Button,
   Card,
@@ -12,9 +12,7 @@ import {
   TableHead,
   TableRow
 } from '@material-ui/core';
-import { v4 as uuid } from 'uuid';
 import {
-  DataUsage as CircleIcon,
   ArrowForwardIos as ArrowForwardIosIcon,
   Refresh as RefreshIcon
 } from "@material-ui/icons";

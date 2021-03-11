@@ -1,10 +1,9 @@
 import { config } from "./config";
 import axios from 'axios';
-
 /*
  * NB: ONLY FOR TESTING WE USE AMINSEP SERVER
 */
-export const aminsep = "http://aminsep.disi.unibo.it/"
+//export const aminsep = "http://aminsep.disi.unibo.it/"
 
 const PROJECTS = config.API.TAIGA_PROJECTS
 const TASKS = config.API.TAIGA_TASKS
@@ -23,7 +22,7 @@ function BEARER(token) {
 */
 // POST request to API in order to login and receive the user token
 export function fetchToken(usr, psw){
-    const route = `${aminsep}${config.API.TAIGA_TOKEN}`
+    const route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${config.API.TAIGA_TOKEN}`
     const credentials = {
         username: usr,
         password: psw,
@@ -38,7 +37,7 @@ export function fetchToken(usr, psw){
 }
 
 export function fetchUserStats(id, token){
-    let route = `${aminsep}${USERS}/${id}/stats`
+    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${USERS}/${id}/stats`
 
     return axios({
         type: GET,
@@ -51,7 +50,7 @@ export function fetchUserStats(id, token){
 }
 
 export function fetchUserProjects(id, token){
-    let route = `${aminsep}${PROJECTS}?member=${id}`
+    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${PROJECTS}?member=${id}`
 
     return axios({
         type: GET,
@@ -64,7 +63,7 @@ export function fetchUserProjects(id, token){
 }
 
 export function fetchUserTasks(id, token, project){
-    let route = `${aminsep}${TASKS}?assigned_to=${id}`
+    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${TASKS}?assigned_to=${id}`
 
     return axios({
         type: GET,
@@ -77,7 +76,7 @@ export function fetchUserTasks(id, token, project){
 }
 
 export function fetchUserStories(id, token, project){
-    const route = `${aminsep}${STORIES}?assigned_to=${id}`
+    const route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${STORIES}?assigned_to=${id}`
 
     return axios({
         type: GET,

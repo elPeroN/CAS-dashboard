@@ -15,6 +15,7 @@ export const loggerCreator = {
 
 function login(values){
   return dispatch => loginUser(values.email, values.password).then( response =>{
+    console.log("ciao");
     console.log(response);
     localStorage.setItem('token', response.data.token);
     localStorage.setItem('name', response.data.name);
@@ -23,6 +24,7 @@ function login(values){
     dispatch(appActions.sendNotification({message:'SUCCESSFULLY LOGIN', severity:'success'}));
   })
   .catch( error => {
+    console.log("hello");
     dispatch(loggerActions.loginError(error));
     dispatch(appActions.sendNotification({message:error.toString(), severity:'error'}));
   });

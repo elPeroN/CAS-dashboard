@@ -18,6 +18,7 @@ import {
 import MattermostIcon from 'src/assets/icons/MattermostIcon';
 import {connect} from 'react-redux';
 import {mattermostCreator} from "src/redux/actions/Mattermost/mattermostCreator"
+import {config} from "src/services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -135,7 +136,7 @@ function MattermostLogin(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = "http://localhost:1080/login"}
+                    onClick={() => window.location = `${config.URL}:${config.SONAR_PORT_NUMBER}/login`}
                     startIcon={<MattermostIcon/>}
                   >
                     Mattermost
