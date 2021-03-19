@@ -90,7 +90,7 @@ function mapStateToProps(state){
   return {
     state:state,
     user: state.logger.user,
-    token: state.logger.token
+    token: state.logger.loggerToken
   };
 };
 

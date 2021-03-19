@@ -82,4 +82,7 @@ cas-dashboard
 	- perrisalvatore95@gmail.com
 
 ## TODO:
-	-impostare un massimo di metriche visibile nei grafici?
+	- ricaricare sonarqube aggiunge progetti senza cancellarli
+
+## DOUBTS:
+	- impostare un massimo di metriche visibile nei grafici?

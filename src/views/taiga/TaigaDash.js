@@ -14,12 +14,12 @@ import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 
-import GitlabIcon from 'src/assets/icons/TaigaIcon'
+import TaigaIcon from 'src/assets/icons/TaigaIcon'
 import Recap from './Recap';
-import NoRepositoryFound from '../gitlab/NoRepositoryFound';
 
 import { connect } from "react-redux";
 import { taiga } from 'src/redux/actions/Taiga/actions';
+import { taigaCreator } from 'src/redux/actions/Taiga/creator';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,13 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 function TaigaDash(props){
     const classes = useStyles();
-
-    let content;
-    //console.log(props, "Props in taigadash")
-    if(!props.user)
-        content = <NoRepositoryFound/>
-    else
-        content = <Recap/>
 
     return (
         <Container maxWidth={false} className= {classes.root}>
@@ -69,8 +62,7 @@ function TaigaDash(props){
                       md={9}
                     >
                       <Typography variant="h3">
-                        <GitlabIcon/>
-                        Taiga Recap
+                        <TaigaIcon/> Taiga Recap
                       </Typography>
                     </Grid>
                     <Grid item
@@ -87,7 +79,7 @@ function TaigaDash(props){
                           variant="contained"
                           color="secondary"
                           endIcon={<ExitToAppIcon/>}
-                          onClick={() => props.taigaLogout()}
+                          onClick={() => props.logout()}
                         >
                           Logout
                         </Button>
@@ -105,7 +97,7 @@ function TaigaDash(props){
               lg={12}
               xl={12}
             >
-              {content}
+              <Recap/>
             </Grid>
           </Grid>
         </Container>
@@ -124,7 +116,8 @@ function mapStateToProps(state){
 const actions = {
         setDetails: taiga.succLogin,
         setProjects: taiga.setProjects,
-        setStories: taiga.setStories
+        setStories: taiga.setStories,
+        logout: taigaCreator.logout
 
 }
 export default connect(mapStateToProps, actions)(TaigaDash);

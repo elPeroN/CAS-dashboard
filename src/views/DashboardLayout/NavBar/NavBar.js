@@ -8,6 +8,7 @@ import {
   Drawer,
   Hidden,
   List,
+  ListSubheader,
   Typography,
   makeStyles
 } from '@material-ui/core';
@@ -15,25 +16,23 @@ import {
 import {connect} from 'react-redux';
 import {
   ExitToApp as ExitToAppIcon,
-  BarChart as BarChartIcon,
-  Settings as SettingsIcon,
-  Shop as ShoppingBagIcon,
-  Person as UserIcon
+  BarChart as BarChartIcon
 } from '@material-ui/icons';
+
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
-import SonarQubeIcon from "src/assets/icons/SonarQube"
+import SonarQubeIcon from "src/assets/icons/SonarQube";
+import JenkinsIcon from "src/assets/icons/JenkinsIcon";
+import BugzillaIcon from "src/assets/icons/BugzillaIcon";
 import NavItem from './NavItem';
-import {loggerCreator} from "src/redux/actions/Logger/loggerCreator";
-import {appActions} from "src/redux/actions/App/appActions"
-
+import { loggerCreator } from "src/redux/actions/Logger/loggerCreator";
+import { appActions } from "src/redux/actions/App/appActions";
 
 const user = {
-  avatar: '/static/images/avatars/avatar_3.png',
-  jobTitle: 'Senior Developer',
+  avatar: ''
 };
 
-const items = [
+const dashItems = [
   {
     href: '/logger',
     icon: BarChartIcon,
@@ -53,22 +52,20 @@ const items = [
     href: '/sonar',
     icon: SonarQubeIcon,
     title: 'SonarQube'
+  }
+];
+
+const otherItems = [
+  {
+    href: '/jenkins',
+    icon: JenkinsIcon,
+    title: 'Jenkins'
   },
   {
-    href: '/app/products',
-    icon: ShoppingBagIcon,
-    title: 'Products'
-  },
-  {
-    href: '/app/account',
-    icon: UserIcon,
-    title: 'Account'
-  },
-  {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: 'Settings'
-  },
+    href:  '/bugzilla',
+    icon: BugzillaIcon,
+    title: 'Bugzilla'
+  }
 ];
 
 const useStyles = makeStyles(() => ({
@@ -117,7 +114,7 @@ function NavBar(props){
          className={classes.avatar}
          component={RouterLink}
          src={user.avatar}
-         to="/app/account"
+         to="/"
        />
        <Typography
          className={classes.name}
@@ -138,7 +135,24 @@ function NavBar(props){
      <Divider />
      <Box p={2}>
        <List>
-         {items.map((item) => (
+         <ListSubheader component="div" id="1">
+            Dashboard Services
+         </ListSubheader>
+         <Divider/>
+         {dashItems.map((item) => (
+           <NavItem
+             href={item.href}
+             key={item.title}
+             title={item.title}
+             icon={item.icon}
+           />
+         ))}
+         <Divider/>
+         <ListSubheader component="div" id="2">
+            Other CAS Services
+         </ListSubheader>
+         <Divider/>
+         {otherItems.map((item) => (
            <NavItem
              href={item.href}
              key={item.title}

@@ -13,7 +13,7 @@ function loginGitlab(values){
   return (dispatch, getState) => checkToken(values.token).then( (res) =>{
     localStorage.setItem('gitlabToken', values.token);
     dispatch(gitlabActions.setGitlabToken(values.token));
-    dispatch(gitlabFlow(getState().gitlab.gitlabToken));
+    dispatch(gitlabFlow());
   })
   .catch( (e) => {
     dispatch(appActions.sendNotification({message:"Wrong token", severity:'error'}));
@@ -21,8 +21,9 @@ function loginGitlab(values){
 }
 
 
-function gitlabFlow(token){
-  return dispatch => {
+function gitlabFlow(){
+  return (dispatch, getState) => {
+    let token = getState().gitlab.gitlabToken;
     dispatch(appActions.setBackdrop(true));
     fetchGitlabRepositories(token).then( response => {
       let filter = response.data.filter( (item) =>{

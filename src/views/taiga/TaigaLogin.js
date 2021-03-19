@@ -10,13 +10,15 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-//import Help from './Help';
-//import HelpIcon from '@material-ui/icons/Help';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import {
+  MailOutline as MailOutlineIcon,
+  VpnKey as VpnKeyIcon
+} from '@material-ui/icons'
 
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import {connect} from 'react-redux';
 import { taigaCreator } from "src/redux/actions/Taiga/creator"
+import {config} from "src/services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,7 +71,7 @@ function LoginView(props){
                 <TextField
                   error={Boolean(touched.username && errors.username)}
                   fullWidth
-                  label="USERNAME"
+                  label="E-mail Address"
                   margin="normal"
                   name="username"
                   onBlur={handleBlur}
@@ -79,7 +81,7 @@ function LoginView(props){
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FingerprintIcon />
+                        <MailOutlineIcon />
                       </InputAdornment>
                     ),
                   }}
@@ -88,7 +90,7 @@ function LoginView(props){
                 <TextField
                   error={Boolean(touched.password && errors.password)}
                   fullWidth
-                  label="PASSWORD"
+                  label="Password"
                   margin="normal"
                   name="password"
                   onBlur={handleBlur}
@@ -99,7 +101,7 @@ function LoginView(props){
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FingerprintIcon />
+                        <VpnKeyIcon />
                       </InputAdornment>
                     ),
                   }}
@@ -121,13 +123,13 @@ function LoginView(props){
                   color="textSecondary"
                   variant="body1"
                 >
-                  Don&apos;t have a Token? Request it on
+                  Don&apos;t have an Account? Register on
                   {' '}
 
                   <Button
                     variant="contained"
                     color="secondary"
-                    //onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    onClick={() => window.location = `${config.URL}:${config.TAIGA_PORT_NUMBER}/register`}
                     startIcon={<TaigaIcon/>}
                   >
                     Taiga

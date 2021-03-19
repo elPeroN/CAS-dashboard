@@ -1,21 +1,19 @@
 import { taigaTypes } from "../../constants/action-types";
 
 export const taiga = {
-    setToken: data => ({
-        type: taigaTypes.SET_TOKEN,
-        payload: data
-    }),
     succLogin: data => ({
-        type: taigaTypes.SUCCESSFUL_LOGIN,
+        type: taigaTypes.TAIGA_LOGIN,
         payload: data
     }),
 
     askLogout: () => ({
-        type: taigaTypes.LOGOUT
+        type: taigaTypes.TAIGA_LOGOUT
     }),
-
+    clean: () =>({
+        type: taigaTypes.TAIGA_CLEAN
+    }),
     setProjects: data => ({
-        type: taigaTypes.SET_PROJECTS,
+        type: taigaTypes.TAIGA_SET_PROJECTS,
         payload: data
     }),
     setStories: data => ({

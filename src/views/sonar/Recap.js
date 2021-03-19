@@ -1,7 +1,8 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {
-  Button,
   Card,
+  Button,
   CardHeader,
   Divider,
   Grid,
@@ -16,18 +17,16 @@ import {
   ArrowForwardIos as ArrowForwardIosIcon,
   Refresh as RefreshIcon
 } from "@material-ui/icons";
+import {sonarCreator} from 'src/redux/actions/Sonar/creator';
 
-import {connect} from 'react-redux';
-
-import {measure, q_gate} from 'src/services/sonar'
+import {measure, q_gate} from './assets/utils';
 
 function Recap(props){
-    let projects = []
+    let projects = [];
 
     if (props.projects) {
         projects = props.projects
     }
-
     return (
         <Grid
           container
@@ -47,7 +46,7 @@ function Recap(props){
                 <div>
                   Developer details
                   <IconButton aria-label="refresh"
-                    onClick={()=>props.refresh(props.token)}
+                    onClick={()=>props.refresh()}
                   >
                     <RefreshIcon
                       color="primary"
@@ -65,9 +64,6 @@ function Recap(props){
                   <TableRow>
                     <TableCell>
                       Username : {props.username}
-                    </TableCell>
-                    <TableCell>
-                      Roles: {props.roles.join(', ')}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -116,7 +112,7 @@ function Recap(props){
                   </TableCell>
 
                   <TableCell>
-                      {q_gate()}
+                      {q_gate(P.quality_gate)}
                   </TableCell>
 
                   <TableCell>
@@ -124,7 +120,7 @@ function Recap(props){
                   </TableCell>
 
                   <TableCell>
-                      {measure()}
+                      {measure(P.debt)}
                   </TableCell>
 
                   <TableCell>
@@ -153,12 +149,12 @@ function mapStateToProps(state){
         token: state.sonar.token,
         username: state.sonar.username,
         projects: state.sonar.projects,
-        roles: state.sonar.roles
+        measure: state.sonar.measure
     }
 }
 
 const actions = {
-    refresh: null
+    refresh: sonarCreator.refresh
 }
 
 export default connect(mapStateToProps, actions)(Recap)

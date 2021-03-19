@@ -11,43 +11,37 @@ export const taigaCreator = {
   login,
   logout,
   getProjects,
-  getUserUStories
+  getUserUStories,
+  refresh
 }
 
 function login(args){
     return dispatch => fetchToken(args.username, args.password)
         .then( res => {
-
             let payload = {
                 auth_token:    res.data.auth_token,
                 id:            res.data.id,
                 roles:         res.data.roles,
                 username:      res.data.username
             }
-            dispatch(taiga.succLogin(payload))
-            dispatch(appActions.sendNotification({message:'Logged in!', severity:'info'}))
-            dispatch(getProjects())
-            //dispatch(checkstate())
+            localStorage.setItem('taigaToken', res.data.auth_token);
+            localStorage.setItem('taigaId', res.data.id);
+            localStorage.setItem('taigaRoles', res.data.roles);
+            localStorage.setItem('taigaUsername', res.data.username);
+            dispatch(taiga.succLogin(payload));
+            dispatch(appActions.sendNotification({message:'Logged in!', severity:'success'}));
+            dispatch(getProjects());
         })
         .catch( err => {
-            console.error(err)
+          dispatch(appActions.sendNotification({message:'Something goes wrong, try again', severity:'error'}));
         })
 }
-
-// function checkstate() {
-//     return (dispatch, getState) => {
-//         console.log(getState().taiga)
-//     }
-// }
 
 function getProjects() {
     return (dispatch, getState) => {
         const id = getState().taiga.id
         const token = getState().taiga.token
-        // console.log(id,token)
-        fetchUserProjects(id, token)
-
-            .then( res => {
+        fetchUserProjects(id, token).then( res => {
                 let projects = []
                 res.data.forEach( proj => {
                 console.debug(proj)
@@ -65,30 +59,28 @@ function getProjects() {
                 dispatch(taiga.setProjects(projects))
                 dispatch(getUserUStories())
             })
-
-            .catch( err => console.error(err))
+            .catch( err => {
+              dispatch(logout());
+            })
     }
 }
 
 function logout() {
+  localStorage.removeItem('taigaId');
+  localStorage.removeItem('taigaToken');
+  localStorage.removeItem('taigaRoles');
+  localStorage.removeItem('taigaUsername');
     return dispatch => {
-        localStorage.removeItem('taigaId')
-        localStorage.removeItem('taigaToken')
+      dispatch(taiga.askLogout());
     }
 }
 
-/*
-proj_id,
-subject,
-is_closed,
-user_story,
-user_story_extra_info: {
-	subject,
-	id,
+function refresh(){
+  return dispatch => {
+    dispatch(taiga.clean());
+    dispatch(getProjects());
+  }
 }
-finished_date , (range di data, seleziono un intervallo in cui mostrare le US terminate da me)
-milestone_slug,
-*/
 
 function getUserUStories() {
     return (dispatch, getState) => {
@@ -113,14 +105,11 @@ function getUserUStories() {
                         }
                         stories.push(x)
                     })
-
-                    // dispatch(checkstate())
                 }
             })
             .then( () => {
                 fetchUserStories(id, token, null)
                     .then( res => {
-                        // console.debug(res.data)
                         if (res.data.length > 0) {
                             res.data.forEach( s => {
                                 let x = {
@@ -134,8 +123,7 @@ function getUserUStories() {
                                 stories.push(x)
 
                             })
-                            dispatch(taiga.setStories(stories))
-                            // console.log(stories)
+                            dispatch(taiga.setStories(stories));
                         }
                     })
                     .catch( err => console.error(err))

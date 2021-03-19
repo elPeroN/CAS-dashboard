@@ -69,7 +69,7 @@ function GitlabLogin(props){
                 <TextField
                   error={Boolean(touched.token && errors.token)}
                   fullWidth
-                  label="PERSONAL TOKEN"
+                  label="Personal Token"
                   margin="normal"
                   name="token"
                   onBlur={handleBlur}

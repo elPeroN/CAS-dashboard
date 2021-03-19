@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {
   Card,
   CardHeader,
@@ -14,8 +15,8 @@ import {
   Refresh as RefreshIcon
 } from "@material-ui/icons";
 import PieChart from './StoriesPieChart';
-import LineChart from './BarChart'
-import {connect} from 'react-redux';
+import LineChart from './BarChart';
+import {taigaCreator} from 'src/redux/actions/Taiga/creator';
 
 import {sortUserStories,
         isClosed,
@@ -41,7 +42,6 @@ function Recap(props){
     }
 
     if (props.projects){
-        console.debug(props.projects)
         props.projects.forEach(x => {
             let p = {
                 name: x.name,
@@ -79,7 +79,7 @@ function Recap(props){
                 <div>
                   Developer details
                   <IconButton aria-label="refresh"
-                    onClick={()=>props.refresh(props.token)}
+                    onClick={()=>props.refresh()}
                   >
                     <RefreshIcon
                       color="primary"
@@ -99,7 +99,7 @@ function Recap(props){
                       Username : {props.user}
                     </TableCell>
                     <TableCell>
-                      Roles: {props.roles.join(', ')}
+                      Roles: {props.roles}
                     </TableCell>
                   </TableRow>
 
@@ -108,8 +108,8 @@ function Recap(props){
                         Projects:
                         <ol>
                             {
-                                projects.map( el => {
-                                    return <li><a href={el.address}> {el.name} </a></li>
+                                projects.map( (el ,i) => {
+                                    return <li key={i}><a href={el.address}> {el.name} </a></li>
                                 })
                             }
                         </ol>
@@ -142,7 +142,7 @@ function Recap(props){
 
 function mapStateToProps(state){
     return {
-        token: state.taiga.token,
+        token: state.taiga.taigaToken,
         user: state.taiga.user,
         projects: state.taiga.projects,
         stories: state.taiga.stories,
@@ -151,7 +151,7 @@ function mapStateToProps(state){
 }
 
 const actions = {
-    refresh: null
+    refresh: taigaCreator.refresh
 }
 
 export default connect(mapStateToProps, actions)(Recap);

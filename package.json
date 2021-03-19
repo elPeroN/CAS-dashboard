@@ -30,6 +30,8 @@
   "dependencies": {
     "@date-io/core": "^2.10.6",
     "@date-io/date-fns": "1.x",
+    "@iconify-icons/bx": "^1.1.0",
+    "@iconify-icons/cib": "^1.1.0",
     "@iconify-icons/logos": "^1.1.4",
     "@iconify-icons/mdi": "^1.1.2",
     "@iconify-icons/simple-icons": "^1.1.7",

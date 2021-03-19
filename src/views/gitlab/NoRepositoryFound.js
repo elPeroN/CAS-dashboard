@@ -81,7 +81,7 @@ function NoRepositoryFound(props){
               variant="contained"
               color="primary"
               endIcon={<RefreshIcon/>}
-              onClick={() => props.refresh(props.gitlabToken)}
+              onClick={() => props.refresh(props.token)}
             >
               Refresh
             </Button>
@@ -103,7 +103,7 @@ function NoRepositoryFound(props){
 
 function mapStateToProps(state){
   return {
-        gitlabToken: state.gitlab.gitlabToken
+        token: state.gitlab.gitlabToken
   };
 };
 

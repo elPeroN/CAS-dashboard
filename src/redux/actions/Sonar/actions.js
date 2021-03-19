@@ -2,32 +2,21 @@ import { sonarTypes } from "../../constants/action-types";
 
 export const sonarActions = {
     succLogin: data => ({
-        type: sonarTypes.SUCCESSFUL_LOGIN,
+        type: sonarTypes.SONAR_LOGIN,
         payload: data
     }),
 
     setToken: data => ({
-        type: sonarTypes.SET_TOKEN,
+        type: sonarTypes.SET_SONAR_TOKEN,
         payload: data
     }),
 
-    askLogout: () => ({
-        type: sonarTypes.LOGOUT
+    clean: () => ({
+        type: sonarTypes.SONAR_CLEAN
     }),
 
     setProjects: data => ({
-        type: sonarTypes.SET_PROJECTS,
-        payload: data
-    }),
-
-    setGate: data => ({
-        type: sonarTypes.SET_GATE,
-        payload: data
-    }),
-
-    setMeasure: data => ({
-        type: sonarTypes.SET_MEASURE,
+        type: sonarTypes.SONAR_SET_PROJECTS,
         payload: data
     })
-
 }

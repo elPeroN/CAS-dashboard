@@ -102,7 +102,7 @@ function NoRepositoryFound(props){
 
 function mapStateToProps(state){
   return {
-        gitlabToken: state.gitlab.gitlabToken
+        token: state.gitlab.gitlabToken
   };
 };
 

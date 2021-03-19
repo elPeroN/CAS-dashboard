@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import {
@@ -10,13 +11,11 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-//import Help from './Help';
-//import HelpIcon from '@material-ui/icons/Help';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
 import SonarQubeIcon from 'src/assets/icons/SonarQube';
-import {connect} from 'react-redux';
-import { sonarCreator } from "src/redux/actions/Sonar/creator"
+import { sonarCreator } from "src/redux/actions/Sonar/creator";
+import { config } from "src/services/config.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,17 +29,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function LoginView(props){
+function SonarLogin(props){
   const classes = useStyles();
-
   return (
         <Container className={classes.root} maxWidth="sm">
           <Formik
             initialValues={{
-              token: 'JustSubmit',
+              token: '1e2291f3c23e3f808cb788829b617e469c6c239f'
             }}
             validationSchema={Yup.object().shape({
-              token: Yup.string().max(32).required('Username is required'),
+              token: Yup.string().max(40).required('Personal Token is required'),
             })}
             onSubmit={(values,act) => {
               props.login(values).then(act.setSubmitting(false));
@@ -65,7 +63,7 @@ function LoginView(props){
                   </Typography>
                 </Box>
                 <TextField
-                  error={Boolean(touched.username && errors.username)}
+                  error={Boolean(touched.token && errors.token)}
                   fullWidth
                   label="Token"
                   margin="normal"
@@ -105,7 +103,7 @@ function LoginView(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    //onClick={() => window.location = "http://localhost:8929/users/sign_up"}
+                    onClick={() => window.location = `${config.URL}:${config.SONAR_PORT_NUMBER}`}
                     startIcon={<SonarQubeIcon/>}
                   >
                     SonarQube
@@ -118,12 +116,8 @@ function LoginView(props){
   );
 };
 
-function mapStateToProps(state){
-  return {state: state};
-};
-
 const actions = {
-  login: sonarCreator.login,
+  login: sonarCreator.login
 }
 
-export default connect(mapStateToProps,actions)(LoginView);
+export default connect(null, actions)(SonarLogin);

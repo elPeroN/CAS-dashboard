@@ -16,7 +16,6 @@ function loginMattermost(values){
     dispatch(mattermostFlow());
   })
   .catch( (e) => {
-    console.log(e);
     dispatch(appActions.sendNotification({message:"Wrong token", severity:'error'}));
   });
 }
@@ -32,13 +31,12 @@ function logoutMattermost(){
 
 function mattermostFlow(){
   return (dispatch, getState) =>{
-    fetchTeams(getState().mattermost.mattermostToken,getState().mattermost.mattermostId).then((response)=>{
+    fetchTeams(getState().mattermost.mattermostToken, getState().mattermost.mattermostId).then((response)=>{
       dispatch(mattermostActions.setTeams(response.data));
       dispatch(fetchChannels());
     })
     .catch(e =>{
-      console.log(e);
-      dispatch(appActions.sendNotification({message:'No channels', severity:'warning'}));
+      dispatch(mattermostActions.logoutMattermost());
     })
   }
 }
@@ -63,6 +61,7 @@ function getUnread(channels){
       if(channel.team_id!== '') fetchUnread(getState().mattermost.mattermostToken,getState().mattermost.mattermostId,channel.id).then((response) => {
         let num = response.data.msg_count;
         if(num > 0) getChannelData(getState().mattermost.mattermostToken,response.data.channel_id).then( response =>{
+          console.log(response);
           let element = {
             channel: response.data.name,
             num: num

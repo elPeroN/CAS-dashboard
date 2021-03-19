@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 function  GitlabPage(props) {
   let content;
 
-  if (!props.gitlabToken) content = <GitlabLogin/>;
+  if (!props.token) content = <GitlabLogin/>;
   else content = <GitlabDash/>;
 
   return (
@@ -21,7 +21,7 @@ function  GitlabPage(props) {
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlab.gitlabToken
+    token: state.gitlab.gitlabToken
   };
 };
 

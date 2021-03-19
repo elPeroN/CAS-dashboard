@@ -62,7 +62,6 @@ function TopBar(props) {
           <Badge
             badgeContent={props.counter}
             color="secondary"
-            showZero
           >
             <MattermostIcon />
           </Badge>

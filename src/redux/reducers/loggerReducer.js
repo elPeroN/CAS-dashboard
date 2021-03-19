@@ -9,8 +9,8 @@ const isValidToken = (token) => {
 const initialState = ({
   name: localStorage.getItem('name') ? localStorage.getItem('name') : null,
   surname: localStorage.getItem('surname') ? localStorage.getItem('surname') : null,
-  user: localStorage.getItem('token') ? isValidToken(localStorage.getItem('token')) : null,
-  token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+  user: localStorage.getItem('loggerToken') ? isValidToken(localStorage.getItem('loggerToken')) : null,
+  loggerToken: localStorage.getItem('loggerToken') ? localStorage.getItem('loggerToken') : null,
   startDate: null,
   endDate: null
 });
@@ -22,7 +22,7 @@ export const loggerReducer = (state = initialState, action) => {
         ...state,
         name: action.payload.name,
         surname: action.payload.surname,
-        token: action.payload.token,
+        loggerToken: action.payload.token,
         user: jwt_decode(action.payload.token),
       };
     case loggerConstants.LOGIN_ERROR:
@@ -32,7 +32,7 @@ export const loggerReducer = (state = initialState, action) => {
       };
     case loggerConstants.LOGOUT:
       return { ...initialState,
-        token: null,
+        loggerToken: null,
         user: null
       };
     case loggerConstants.REGISTER_SUCCESS:

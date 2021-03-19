@@ -1,37 +1,35 @@
 import { sonarTypes } from "../constants/action-types"
 
-const TOKEN_STRING = 'sonarToken'
-
 const initialState = ({
-    token: localStorage.getItem(TOKEN_STRING) ?
-        localStorage.getItem(TOKEN_STRING) : null,
-    username: null,
-    projects: null,
-    roles: null
+    sonarToken: localStorage.getItem('sonarToken') ? localStorage.getItem('sonarToken') : null,
+    username: localStorage.getItem('sonarUsername') ? localStorage.getItem('sonarUsername') : null,
+    projects: [],
+    measure: null,
+
 })
 
 export const sonarReducer = (state = initialState, action) => {
     switch(action.type){
-
-        case(sonarTypes.SET_TOKEN):
-            return {
-                ...state,
-                token: action.payload
-            }
-
-        case(sonarTypes.SUCCESSFUL_LOGIN):
-            return {
-                ...state,
-                username: action.payload.username,
-                roles: action.payload.roles
-            }
-
-        case(sonarTypes.SET_PROJECTS):
-            return {
-                ...state,
-                projects: action.payload
-            }
-
-        default: return state;
+      case(sonarTypes.SONAR_LOGIN):
+        return {
+          ...state,
+          username: action.payload
+        }
+      case(sonarTypes.SONAR_CLEAN):
+        return {
+          ...state,
+          projects: []
+        }
+      case(sonarTypes.SET_SONAR_TOKEN):
+        return {
+            ...state,
+            sonarToken: action.payload
+        }
+      case(sonarTypes.SONAR_SET_PROJECTS):
+        return {
+            ...state,
+            projects: [ ...state.projects , action.payload]
+        }
+      default: return state;
     }
 }

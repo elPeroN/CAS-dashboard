@@ -25,7 +25,7 @@ function Metrics(props) {
   let text;
   if(props.activities){
     text = props.activities.length;
-  }else text = "Loading...";
+  }else text = "N/A";
 
   return (
         <Grid

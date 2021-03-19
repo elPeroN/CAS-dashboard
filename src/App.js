@@ -14,6 +14,7 @@ import SonarPage from 'src/views/sonar/SonarPage'
 
 import theme from 'src/theme/theme';
 import store from 'src/redux/store/store';
+import {config} from 'src/services/config';
 
 class App extends Component{
 
@@ -27,12 +28,14 @@ class App extends Component{
                 <Route exact path="/">
                   <Redirect to="/logger" />
                 </Route>
-                <Route exact path='/logger' component={LoggerView}/>
                 <Route exact path="/login" component={LoginView} />
                 <Route exact path="/register" component={RegisterView}/>
+                <Route exact path='/logger' component={LoggerView}/>
                 <Route exact path='/gitlab' component={GitlabPage}/>
                 <Route exact path='/taiga' component={TaigaPage}/>
                 <Route exact path='/sonar' component={SonarPage}/>
+                <Route exact path='/jenkins' component={() => window.location = `${config.URL}:${config.JENKINS_PORT_NUMBER}`}/>
+                <Route exact path='/bugzilla' component={() => window.location = `${config.URL}:${config.BUGZILLA_PORT_NUMBER}/bugzilla`}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>

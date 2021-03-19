@@ -16,7 +16,6 @@ import {
 
 import SonarQubeIcon from "src/assets/icons/SonarQube";
 import Recap from './Recap';
-import NoRepositoryFound from '../gitlab/NoRepositoryFound';
 import { connect } from "react-redux";
 import { sonarCreator } from 'src/redux/actions/Sonar/creator';
 
@@ -33,14 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function SonarDash(props){
-    const classes = useStyles()
-    let content
-
-    if(!props.projects)
-        content = <NoRepositoryFound/>
-    else
-        content = <Recap/>
-
+    const classes = useStyles();
     return (
         <Container maxWidth={false} className= {classes.root}>
           <Grid
@@ -85,7 +77,7 @@ function SonarDash(props){
                           variant="contained"
                           color="secondary"
                           endIcon={<ExitToAppIcon/>}
-                          onClick={() => null}
+                          onClick={() => props.logout()}
                         >
                           Logout
                         </Button>
@@ -103,7 +95,7 @@ function SonarDash(props){
               lg={12}
               xl={12}
             >
-              {content}
+              <Recap/>
             </Grid>
           </Grid>
         </Container>
@@ -112,6 +104,7 @@ function SonarDash(props){
 
 function mapStateToProps(state){
     return {
+        state: state,
         projects: state.sonar.projects,
         roles: state.sonar.roles,
         username: state.sonar.username
@@ -119,6 +112,7 @@ function mapStateToProps(state){
 }
 const actions = {
     setProjects: sonarCreator.setProjects,
-    setDetails: sonarCreator.setDetails
+    setDetails: sonarCreator.setDetails,
+    logout: sonarCreator.logout
 }
 export default connect(mapStateToProps, actions)(SonarDash)

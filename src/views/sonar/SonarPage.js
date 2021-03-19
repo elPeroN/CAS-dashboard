@@ -7,7 +7,6 @@ import SonarDash from './SonarDash'
 import { connect } from "react-redux";
 
 function SonarPage(props) {
-
     let content;
 
     if (!props.token)
@@ -24,8 +23,7 @@ function SonarPage(props) {
 
 function mapStateToProps(state){
     return {
-        token: state.sonar.token,
-        username: state.taiga.username
+        token: state.sonar.sonarToken
     }
 }
 

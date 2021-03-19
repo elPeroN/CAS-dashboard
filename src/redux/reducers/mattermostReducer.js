@@ -1,8 +1,8 @@
 import { mattermostConstants } from "../constants/action-types";
 
 const initialState = ({
-  mattermostToken: null,//localStorage.getItem('mattermostToken') ? localStorage.getItem('mattermostToken') : null,
-  mattermostId: null,//localStorage.getItem('mattermostId') ? localStorage.getItem('mattermostId') : null,
+  mattermostToken: localStorage.getItem('mattermostToken') ? localStorage.getItem('mattermostToken') : null,
+  mattermostId: localStorage.getItem('mattermostId') ? localStorage.getItem('mattermostId') : null,
   channels: [],
   teams: null,
   counter:0,
@@ -14,8 +14,8 @@ export const mattermostReducer = (state = initialState, action) => {
     case mattermostConstants.SET_MATTERMOST_TOKEN:
       return {
         ...state,
-        mattermostToken: action.payload.token,
-        mattermostId: action.payload.id
+        mattermostToken: action.payload.mattermostToken,
+        mattermostId: action.payload.mattermostId
       };
     case mattermostConstants.MATTERMOST_LOGOUT:
       return {
@@ -28,7 +28,7 @@ export const mattermostReducer = (state = initialState, action) => {
         ...state,
         channels: action.payload
       };
-    case mattermostConstants.FETCH_TEAMS:
+    case mattermostConstants.SET_TEAMS:
       return {
         ...state,
         teams: action.payload,

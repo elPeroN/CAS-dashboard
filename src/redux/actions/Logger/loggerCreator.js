@@ -15,16 +15,13 @@ export const loggerCreator = {
 
 function login(values){
   return dispatch => loginUser(values.email, values.password).then( response =>{
-    console.log("ciao");
-    console.log(response);
-    localStorage.setItem('token', response.data.token);
+    localStorage.setItem('loggerToken', response.data.token);
     localStorage.setItem('name', response.data.name);
     localStorage.setItem('surname', response.data.surname);
     dispatch(loggerActions.loginSuccess(response.data));
     dispatch(appActions.sendNotification({message:'SUCCESSFULLY LOGIN', severity:'success'}));
   })
   .catch( error => {
-    console.log("hello");
     dispatch(loggerActions.loginError(error));
     dispatch(appActions.sendNotification({message:error.toString(), severity:'error'}));
   });
@@ -67,7 +64,6 @@ function fetchActivities(token,startDate,endDate){
   })
   .catch( error =>{
      dispatch(loggerActions.activitiesReport(null));
-     dispatch(appActions.sendNotification({message:"NO DATA IN SELECTED PERIOD", severity:'warning'}));
      dispatch(appActions.setBackdrop(false));
   })
 }
@@ -76,7 +72,7 @@ function setEndDate(date){
   return (dispatch, getState) => {
     dispatch(appActions.setBackdrop(true));
     dispatch(loggerActions.setEndDate(date));
-    dispatch(fetchActivities(getState().logger.token,getState().logger.startDate,getState().logger.endDate));
+    dispatch(fetchActivities(getState().logger.loggerToken,getState().logger.startDate,getState().logger.endDate));
   }
 }
 
@@ -84,6 +80,6 @@ function setStartDate(date){
   return (dispatch, getState) => {
     dispatch(appActions.setBackdrop(true));
     dispatch(loggerActions.setStartDate(date));
-    dispatch(fetchActivities(getState().logger.token,getState().logger.startDate,getState().logger.endDate));
+    dispatch(fetchActivities(getState().logger.loggerToken,getState().logger.startDate,getState().logger.endDate));
   }
 }

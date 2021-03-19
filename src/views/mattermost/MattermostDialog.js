@@ -2,33 +2,38 @@ import React from 'react';
 import { connect } from "react-redux";
 import {
   Badge,
+  Divider,
   IconButton,
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
   ListItemSecondaryAction
 } from "@material-ui/core";
-import MailIcon from '@material-ui/icons/Mail';
-import {mattermostActions} from "src/redux/actions/Mattermost/mattermostActions";
+import {
+  MeetingRoom as MeetingRoomIcon,
+  Mail as MailIcon
+} from '@material-ui/icons';
 
+import MattermostIcon from 'src/assets/icons/MattermostIcon';
+import {mattermostActions} from "src/redux/actions/Mattermost/mattermostActions";
+import {config} from 'src/services/config';
 
 function MattermostDialog(props) {
 
   let list =
-    <List>
       <ListItem>
         <ListItemText primary="You haven't unread messages" />
       </ListItem>
-    </List>
 
   if(props.messages[0])
-    list =
-      <List >
+      list =
+      <React.Fragment>
         {props.messages.map((message, index) => (
         <ListItem key={index}>
           <ListItemText primary={message.channel} />
           <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="delete">
+            <IconButton edge="end" aria-label="mail" onClick={() => window.location = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}`}>
               <Badge badgeContent={message.num} color="primary">
                 <MailIcon />
               </Badge>
@@ -36,11 +41,25 @@ function MattermostDialog(props) {
           </ListItemSecondaryAction>
         </ListItem>
         ))}
-      </List>
+      </React.Fragment>
 
   return (
       <React.Fragment>
-        {list}
+        <List >
+          <ListItem key="title">
+            <ListItemIcon>
+              <MattermostIcon />
+            </ListItemIcon>
+            <ListItemText primary= "Mattermost" />
+            <ListItemSecondaryAction>
+              <IconButton variant="contained" edge="end" aria-label="logout" color="primary" onClick={()=> props.logout()}>
+                  <MeetingRoomIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+          <Divider/>
+          {list}
+        </List>
       </React.Fragment>
     );
 }
@@ -59,7 +78,8 @@ function mapStateToProps(state){
 
 const actions = {
   setMenuIndex: mattermostActions.setMattermostMenuIndex,
-  setTeamId: mattermostActions.setTeamId
+  setTeamId: mattermostActions.setTeamId,
+  logout: mattermostActions.logoutMattermost
 }
 
 export default connect(mapStateToProps,actions)(MattermostDialog);

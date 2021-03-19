@@ -42,7 +42,7 @@ function Recap(props){
   useEffect(() => {
     let route = props.gitlabRepos[props.gitlabMenuIndex]._links.self+"/repository/contributors" ;
     props.setRepositoryIndex(props.gitlabRepos[props.gitlabMenuIndex].id);
-    fetchGitlabRepositories(props.gitlabToken, route).then( response =>{
+    fetchGitlabRepositories(props.token, route).then( response =>{
       let filtered = response.data.filter( (item,i) =>{
         item["key"] = uuid();
         item["color"] = colorsForGraphs[i];
@@ -51,7 +51,7 @@ function Recap(props){
       setDevs(filtered);
     })
     .catch(e =>{
-      props.refresh(props.gitlabToken)
+      props.refresh(props.token)
     })
   },[props]);
 
@@ -82,7 +82,7 @@ function Recap(props){
               <div>
                 Developer stats
                 <IconButton aria-label="refresh"
-                  onClick={()=>props.refresh(props.gitlabToken)}
+                  onClick={()=>props.refresh()}
                 >
                   <RefreshIcon
                     color="primary"
@@ -132,7 +132,7 @@ function Recap(props){
                         variant="contained"
                         color="primary"
                         endIcon={<ArrowForwardIosIcon/>}
-                        onClick={ () => props.getDevelStats(props.gitlabToken, dev.name)}
+                        onClick={ () => props.getDevelStats(props.token, dev.name)}
                       > Details </Button>
                     </TableCell>
                   </TableRow>
@@ -147,7 +147,7 @@ function Recap(props){
 
 function mapStateToProps(state){
   return {
-    gitlabToken: state.gitlab.gitlabToken,
+    token: state.gitlab.gitlabToken,
     gitlabRepos: state.gitlab.gitlabRepos,
     gitlabMenuIndex: state.gitlab.gitlabMenuIndex
   };

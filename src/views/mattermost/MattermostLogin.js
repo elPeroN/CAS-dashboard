@@ -136,7 +136,7 @@ function MattermostLogin(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = `${config.URL}:${config.SONAR_PORT_NUMBER}/login`}
+                    onClick={() => window.location = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/login`}
                     startIcon={<MattermostIcon/>}
                   >
                     Mattermost

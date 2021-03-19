@@ -65,7 +65,6 @@ export function fetchUnread(token, userId, channelId){
 
 export function fetchThreads(token, userId, teamId){
   const threadsRoute= usersRoute+"/"+userId+"/threads";
-  console.log(threadsRoute);
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`,

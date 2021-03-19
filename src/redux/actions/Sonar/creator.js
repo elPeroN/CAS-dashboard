@@ -1,89 +1,82 @@
 import { sonarActions as sonar } from './actions';
 import { appActions } from "src/redux/actions/App/appActions";
-import  { config } from "src/services/config";
 
 import {
-        projects, details, measure,
-        checkToken,
-        fetchProjects,
-        fetchGate,
-        fetchUserDetails,
-        fetchMeasure}  from "src/services/sonar"
+  checkToken,
+  fetchProjects,
+  fetchMeasure}  from "src/services/sonar";
 
 export const sonarCreator = {
     login,
-
+    logout,
+    refresh,
+    getProjects
 }
 
 
-function login(token) {
-    return dispatch => checkToken(token)
+function login(values) {
+    return (dispatch, getState) => checkToken(values)
         .then( res => {
-            dispatch(sonar.setToken(token))
-            dispatch(getDetails())
+            localStorage.setItem('sonarToken', values.token);
+            localStorage.setItem('sonarUsername', res.data.login)
+            dispatch(sonar.setToken(values.token));
+            dispatch(sonar.succLogin(res.data.login));
+            dispatch(appActions.sendNotification({message:'Successfully login', severity:'success'}));
+            dispatch(getProjects());
         })
-        .catch( err => console.error(err))
-
+        .catch( err => {
+          dispatch(appActions.sendNotification({message:'Wrong token', severity:'error'}));
+        })
 }
 
-function checkstate(){
-    return (dispatch, getState) => {
-        console.debug(getState().sonar)
-    }
+function logout() {
+  return dispatch => {
+    localStorage.removeItem('sonarToken');
+    localStorage.removeItem('sonarUsername');
+    dispatch(sonar.setToken(null));
+    dispatch(sonar.askLogout());
+  }
 }
 
-function getDetails() {
-    return (dispatch, getState) => {
-        const token = getState().sonar.token
-        fetchUserDetails(token)
-            .then( res => {
-                res = details
-                let payload = {
-                    username: res.login,
-                    roles: res.permissions.global,
-                }
-                dispatch(sonar.succLogin(payload))
-                dispatch(appActions.sendNotification({message:'Logged in!', severity:'info'}))
-                dispatch(getProjects())
-            })
-            .catch( err => console.error(err))
-    }
+function refresh(){
+  return dispatch => {
+    dispatch(sonar.clean());
+    dispatch(getProjects());
+  }
 }
 
 function getProjects(){
     return (dispatch, getState) => {
-        const token = getState().sonar.token
-        let projs = [];
-        fetchProjects(token)
-            .then( res => {
-                projects.projects.forEach( p => {
-                    let x = {
-                        key: p.key,
-                        last_analysis: p.lastAnalysisDate,
-                        name: p.name,
-                        quality_gate: p.qualityGate,
-                        address: `${config.URL}:${config.SONAR_PORT_NUMBER}?id=${p.key}`
-                    }
-                    projs.push(x)
+        const token = getState().sonar.sonarToken;
+        fetchProjects(token).then( res => {
+                res.data.projects.forEach( p => {
+                  let proj;
+                  fetchMeasure(token,p.key).then( res => {
+                    let debt,analysis,qual;
+
+                    if(res.data.component.measures[0]) debt = res.data.component.measures[0].value;
+                    else debt = "n/a";
+
+                    if(p.lastAnalysisDate) analysis = p.lastAnalysisDate;
+                    else analysis = "Never Analyzed";
+
+                    if(p.qualityGate) qual = p.qualityGate;
+                    else qual = "notDef";
+
+                    proj = {
+                      key: p.key,
+                      last_analysis: analysis,
+                      name: p.name,
+                      quality_gate: qual,
+                      address: `http://localhost:8121?id=${p.key}`,
+                      debt: debt
+                    };
+                    dispatch(sonar.setProjects(proj));
+                  })
                 })
-                dispatch(sonar.setProjects(projs))
-                //dispatch(getMeasureAndGate())
             })
-            .catch( err => console.error(err))
-    }
-}
-
-function getMeasureAndGate(){
-    return (dispatch, getState) => {
-        const token = getState().sonar.token
-        const projects = getState().sonar.projects
-
-        projects.forEach( P => {
-            fetchGate(token)
-                .then( res => {
-
-                })
-        })
-
+            .catch( err => {
+              dispatch(logout());
+            })
     }
 }

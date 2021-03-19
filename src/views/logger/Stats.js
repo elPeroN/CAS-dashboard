@@ -60,7 +60,7 @@ function Stats(props){
 function mapStateToProps(state){
   return {
     activities: state.logger.activities ,
-    token: state.logger.token
+    token: state.logger.loggerToken
   };
 };
 

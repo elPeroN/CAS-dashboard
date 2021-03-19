@@ -1,4 +1,5 @@
 export const config = {
+  // URL: "http://pccabri2.mat.unimo.it",
   URL: "http://localhost",
 
   PORT_NUMBER: "8120",
@@ -6,6 +7,9 @@ export const config = {
   TAIGA_PORT_NUMBER: "9002",
   MATTERMOST_PORT_NUMBER:"9003",
   SONAR_PORT_NUMBER:"9000",
+  SONAR_API:"sonarqube-api",
+  BUGZILLA_PORT_NUMBER:"9005",
+  JENKINS_PORT_NUMBER:"9004",
 
   API: {
     VERSION: "V1",

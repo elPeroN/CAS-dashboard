@@ -3,7 +3,7 @@ import { mattermostConstants } from "src/redux/constants/action-types";
 export const mattermostActions = {
   setMattermostToken : (token,id) =>({
     type: mattermostConstants.SET_MATTERMOST_TOKEN,
-    payload: {token:token, id:id}
+    payload: {mattermostToken:token, mattermostId:id}
   }),
   logoutMattermost: () =>({
     type: mattermostConstants.MATTERMOST_LOGOUT
@@ -13,7 +13,7 @@ export const mattermostActions = {
     payload: data
   }),
   setTeams: data =>({
-    type: mattermostConstants.FETCH_TEAMS,
+    type: mattermostConstants.SET_TEAMS,
     payload: data
   }),
   setMattermostMenuIndex: data =>({
