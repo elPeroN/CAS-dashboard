@@ -29,6 +29,7 @@ Within the download you'll find the following directories and files:
 ├── docker-compose.yml
 ├── Dockerfile
 ├── LICENSE.md
+├── jsconfig.json
 ├── package.json
 ├── public
 │   ├── favicon.ico
