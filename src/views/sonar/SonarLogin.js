@@ -35,7 +35,7 @@ function SonarLogin(props){
         <Container className={classes.root} maxWidth="sm">
           <Formik
             initialValues={{
-              token: '1e2291f3c23e3f808cb788829b617e469c6c239f'
+              token: ''
             }}
             validationSchema={Yup.object().shape({
               token: Yup.string().max(40).required('Personal Token is required'),
