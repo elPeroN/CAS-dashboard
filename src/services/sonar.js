@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { config } from "./config";
 
 function BASIC(token) {
   return `basic ${btoa(token+':')}`
