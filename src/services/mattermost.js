@@ -1,8 +1,8 @@
 import { config } from "./config";
 import axios from 'axios';
 
-const usersRoute = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/${config.API.MATTERMOST_USERS}`;
-const channelsRoute = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/${config.API.MATTERMOST_CHANNELS}`;
+const usersRoute = `${config.URL}/mattermost/${config.API.MATTERMOST_USERS}`;
+const channelsRoute = `${config.URL}/mattermost/${config.API.MATTERMOST_CHANNELS}`;
 
 export function loginUser(values){
   const route = usersRoute+'/login';

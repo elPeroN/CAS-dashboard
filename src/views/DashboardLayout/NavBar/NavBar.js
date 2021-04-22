@@ -21,7 +21,7 @@ import {
 
 import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
-import SonarQubeIcon from "src/assets/icons/SonarQube";
+import SonarQubeIcon from "src/assets/icons/SonarQubeIcon";
 import JenkinsIcon from "src/assets/icons/JenkinsIcon";
 import BugzillaIcon from "src/assets/icons/BugzillaIcon";
 import NavItem from './NavItem';
@@ -190,7 +190,7 @@ function NavBar(props){
       </Hidden>
     </>
   );
-};
+}
 
 function mapStateToProps(state){
   return {

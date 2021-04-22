@@ -99,13 +99,13 @@ function NoRepositoryFound(props){
       </Grid>
     </Container>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
         token: state.gitlab.gitlabToken
   };
-};
+}
 
 const actions = {
   gitlabLogout: gitlabCreator.logoutGitlab,

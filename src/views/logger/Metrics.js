@@ -61,11 +61,11 @@ function Metrics(props) {
           </Grid>
         </Grid>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     activities: state.logger.activities};
-};
+}
 
 export default connect(mapStateToProps)(Metrics);

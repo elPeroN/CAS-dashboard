@@ -92,6 +92,6 @@ function mapStateToProps(state){
     user: state.logger.user,
     token: state.logger.loggerToken
   };
-};
+}
 
 export default connect(mapStateToProps)(Logger);

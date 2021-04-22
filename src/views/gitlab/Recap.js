@@ -19,7 +19,7 @@ import {
   Refresh as RefreshIcon
 } from "@material-ui/icons";
 import PieChart from './DevelPieChart';
-import SelectedMenu from 'src/components/SelectedMenu';
+import SelectedMenu from 'src/components/SimpleListMenu';
 import { fetchGitlabRepositories } from "src/services/gitlab";
 import {connect} from 'react-redux';
 import {colorsForGraphs} from 'src/theme/colors';
@@ -143,7 +143,7 @@ function Recap(props){
         </Grid>
       </Grid>
     );
-  };
+  }
 
 function mapStateToProps(state){
   return {
@@ -151,7 +151,7 @@ function mapStateToProps(state){
     gitlabRepos: state.gitlab.gitlabRepos,
     gitlabMenuIndex: state.gitlab.gitlabMenuIndex
   };
-};
+}
 
 const actions = {
     setGitlabMenuIndex: gitlabActions.setGitlabMenuIndex,

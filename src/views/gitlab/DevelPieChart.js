@@ -40,11 +40,11 @@ function PieChart(props) {
       </CardContent>
     </Card>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     activities: state.gitlab.activities };
-};
+}
 
 export default connect(mapStateToProps)(PieChart);

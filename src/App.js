@@ -22,7 +22,7 @@ class App extends Component{
     return (
       <ThemeProvider theme={theme}>
         <ReduxProvider store={store}>
-          <Router >
+          <Router basename={process.env.PUBLIC_URL}>
             <DashboardLayout >
               <Switch>
                 <Route exact path="/">
@@ -34,8 +34,8 @@ class App extends Component{
                 <Route exact path='/gitlab' component={GitlabPage}/>
                 <Route exact path='/taiga' component={TaigaPage}/>
                 <Route exact path='/sonar' component={SonarPage}/>
-                <Route exact path='/jenkins' component={() => window.location = `${config.URL}:${config.JENKINS_PORT_NUMBER}`}/>
-                <Route exact path='/bugzilla' component={() => window.location = `${config.URL}:${config.BUGZILLA_PORT_NUMBER}/bugzilla`}/>
+                <Route exact path='/jenkins' component={() => window.location = `${config.URL}/jenkins`}/>
+                <Route exact path='/bugzilla' component={() => window.location = `${config.URL}/bugzilla/bugzilla`}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>
@@ -44,6 +44,6 @@ class App extends Component{
       </ThemeProvider>
     );
   }
-};
+}
 
 export default App;

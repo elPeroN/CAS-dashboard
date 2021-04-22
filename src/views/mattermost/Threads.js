@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { connect } from "react-redux";
 import SelectedMenu from "./SelectedMenu";
 import {mattermostActions} from "src/redux/actions/Mattermost/mattermostActions";
@@ -6,10 +6,6 @@ import {mattermostActions} from "src/redux/actions/Mattermost/mattermostActions"
 function Threads(props) {
 
   let menu = props.teams.map( item => item.display_name);
-
-  // useEffect(() => {
-  //   props.setTeamId(props.teams[props.mattermostMenuIndex].id);
-  // },[props.mattermostMenuIndex]);
 
   return (
       <React.Fragment>
@@ -29,7 +25,7 @@ function mapStateToProps(state){
     mattermostMenuIndex: state.mattermost.mattermostMenuIndex,
     mattermostTeamId:state.mattermostTeamId
   };
-};
+}
 
 const actions = {
   setMattermostMenuIndex: mattermostActions.setMattermostMenuIndex,

@@ -92,14 +92,14 @@ function TopBar(props) {
       </Toolbar>
     </AppBar>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     mobileNav: state.app.mobileNav,
     counter: state.mattermost.counter
   };
-};
+}
 
 const act = {
   setMobileNavOpen : appActions.setMobileNavOpen

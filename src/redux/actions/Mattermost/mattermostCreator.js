@@ -60,10 +60,9 @@ function getUnread(channels){
     channels.forEach( channel => {
       if(channel.team_id!== '') fetchUnread(getState().mattermost.mattermostToken,getState().mattermost.mattermostId,channel.id).then((response) => {
         let num = response.data.msg_count;
-        if(num > 0) getChannelData(getState().mattermost.mattermostToken,response.data.channel_id).then( response =>{
-          console.log(response);
+        if(num > 0) getChannelData(getState().mattermost.mattermostToken,response.data.channel_id).then( res =>{
           let element = {
-            channel: response.data.name,
+            channel: res.data.name,
             num: num
           }
           let mess = getState().mattermost.messages;

@@ -27,4 +27,4 @@ export function startApp(store){
     if(store.getState().mattermost.mattermostToken)
       store.dispatch(mattermostCreator.mattermostFlow());
   }
-};
+}

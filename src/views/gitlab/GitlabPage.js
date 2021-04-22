@@ -23,6 +23,6 @@ function mapStateToProps(state){
   return {
     token: state.gitlab.gitlabToken
   };
-};
+}
 
 export default connect(mapStateToProps)(GitlabPage);

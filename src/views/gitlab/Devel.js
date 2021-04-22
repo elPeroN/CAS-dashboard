@@ -67,7 +67,7 @@ function mapStateToProps(state){
   return {
     develStats: state.gitlab.develStats
   };
-};
+}
 
 const actions = {
   setGitlabView: gitlabActions.setGitlabView

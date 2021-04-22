@@ -7,7 +7,7 @@ function BASIC(token) {
 // 1e2291f3c23e3f808cb788829b617e469c6c239f
 
 export function checkToken(values){
-    let tokenRoute = `${config.URL}:${config.SONAR_PORT_NUMBER}/api/user_tokens/search`;
+    let tokenRoute = `${config.URL}/sonarqube/api/user_tokens/search`;
     return axios({
         type: 'get',
         url: tokenRoute,
@@ -22,7 +22,7 @@ export function checkToken(values){
     GET api/projects/search_my_projects
 */
 export function fetchProjects(token){
-  let userRoute = `${config.URL}:${config.SONAR_PORT_NUMBER}/api/projects/search_my_projects`;
+  let userRoute = `${config.URL}/sonarqube/api/projects/search_my_projects`;
     return axios({
         type: 'get',
         url: userRoute,
@@ -38,7 +38,7 @@ export function fetchProjects(token){
     GET api/project_badges/quality_gate?project=key
 */
 export function fetchMeasure(values, key) {
-  let measureRoute = `${config.URL}:${config.SONAR_PORT_NUMBER}/api/measures/component`;
+  let measureRoute = `${config.URL}/sonarqube/api/measures/component`;
     return axios({
         type: 'get',
         url: measureRoute,

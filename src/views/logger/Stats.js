@@ -24,7 +24,7 @@ function Stats(props){
     labels:["No data to show"]
   }
 
-  if (props.activities){ stats = createLineStats(props.activities)};
+  if (props.activities){ stats = createLineStats(props.activities)}
 
   return (
     <Card>
@@ -55,14 +55,14 @@ function Stats(props){
       </CardContent>
     </Card>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     activities: state.logger.activities ,
     token: state.logger.loggerToken
   };
-};
+}
 
 const actions = {
   loggedFlow : loggerCreator.loggedFlow

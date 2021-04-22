@@ -2,7 +2,7 @@ import React from 'react';
 
 export function measure(value){
     return (
-     <svg xmlns="http://www.w3.org/2000/svg" height="20" width="142">
+     <svg xmlns="https://www.w3.org/2000/svg" height="20" width="142">
         <linearGradient id="b" x2="0" y2="100%">
             <stop offset="0" stopColor="#bbb" stopOpacity=".1"/>
             <stop offset="1" stopOpacity=".1"/>
@@ -32,11 +32,11 @@ export function measure(value){
 export function q_gate(val){
     let color = "#4995c4";
     let string = val;
-    if(val === "OK") {color ="#29be4c"; string= "PASS";};
-    if(val === "ERROR"){color ="#c21919"; string= "FAILED";};
+    if(val === "OK") {color ="#29be4c"; string= "PASS";}
+    if(val === "ERROR"){color ="#c21919"; string= "FAILED";}
     if(val === "notDef") string= "UNTESTED";
     return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 350 262.5" width="128" height="96">
+    <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 350 262.5" width="128" height="96">
 
     	<path fill="#fff" d="M328.4 259.5H21.5C10.9 259.5 2 250.8 2 240V21.9C2 11.3 10.7 2.4 21.5 2.4h307.1c10.6 0 19.5 8.7 19.5 19.5V240c-.2 10.8-8.8 19.5-19.7 19.5z"/>
     	<path fill="#cfd3d7" d="M328.4 260.4H21.5c-11.2 0-20.4-9.2-20.4-20.4V21.9c0-11.2 9-20.4 20.4-20.4h307.1c11.2 0 20.4 9.2 20.4 20.4V240c-.2 11.2-9.2 20.4-20.6 20.4zM21.5 3.3c-10.3 0-18.6 8.3-18.6 18.6V240c0 10.3 8.3 18.6 18.6 18.6h307.1c10.3 0 18.6-8.3 18.6-18.6V21.9c0-10.3-8.3-18.6-18.6-18.6H21.5z"/>

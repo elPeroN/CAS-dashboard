@@ -51,7 +51,7 @@ function getProjects() {
                         description: proj.description,
                         members: proj.members,
                         is_private: proj.is_private,
-                        address: `${config.URL}:${config.TAIGA_PORT_NUMBER}/project/${proj.slug}`
+                        address: `${config.URL}/taiga/project/${proj.slug}`
                     }
                     projects.push(x)
 
@@ -86,7 +86,6 @@ function getUserUStories() {
     return (dispatch, getState) => {
         const id = getState().taiga.id
         const token = getState().taiga.token
-        //const projects = getState().taiga.projects
         let stories = []
 
         fetchUserTasks(id,token,null)

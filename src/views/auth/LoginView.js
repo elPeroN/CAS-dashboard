@@ -163,11 +163,11 @@ function LoginView(props){
     </Container>
   </AuthPage>
   );
-};
+}
 
 function mapStateToProps(state){
   return {state: state};
-};
+}
 
 const actions = {
   login: loggerCreator.login,

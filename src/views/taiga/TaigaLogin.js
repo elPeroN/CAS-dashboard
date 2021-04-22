@@ -129,7 +129,7 @@ function LoginView(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = `${config.URL}:${config.TAIGA_PORT_NUMBER}/register`}
+                    onClick={() => window.location = `${config.URL}/taiga/register`}
                     startIcon={<TaigaIcon/>}
                   >
                     Taiga
@@ -140,11 +140,11 @@ function LoginView(props){
           </Formik>
         </Container>
   );
-};
+}
 
 function mapStateToProps(state){
   return {state: state};
-};
+}
 
 const actions = {
   login: taigaCreator.login,

@@ -1,15 +1,8 @@
 export const config = {
-  // URL: "http://pccabri2.mat.unimo.it",
-  URL: "http://localhost",
+  URL: "https://www.stefanopropato.it",
 
-  PORT_NUMBER: "8120",
-  GITLAB_PORT_NUMBER: "9001",
-  TAIGA_PORT_NUMBER: "9002",
-  MATTERMOST_PORT_NUMBER:"9003",
-  SONAR_PORT_NUMBER:"9000",
+  PORT_NUMBER: "443",
   SONAR_API:"sonarqube-api",
-  BUGZILLA_PORT_NUMBER:"9005",
-  JENKINS_PORT_NUMBER:"9004",
 
   API: {
     VERSION: "V1",

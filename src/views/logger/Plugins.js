@@ -19,21 +19,21 @@ const data = [
   {
     id: uuid(),
     name: 'Atom',
-    imageUrl: '/static/images/plugins/atom.png',
+    imageUrl: `${process.env.PUBLIC_URL}/static/images/plugins/atom.png`,
     repository: 'https://github.com/elPeroN/atom-logger',
     repositoryIcon: [<GitHubIcon key={uuid()}/>]
   },
   {
     id: uuid(),
     name: 'Eclipse',
-    imageUrl: '/static/images/plugins/eclipse.png',
+    imageUrl: `${process.env.PUBLIC_URL}/static/images/plugins/eclipse.png`,
     repository: 'https://gitlab.com/Siber93/cas-eclipse-plugin',
     repositoryIcon: [<GitlabIcon key={uuid()}/>]
   },
   {
     id: uuid(),
     name: 'IntelliJ Idea',
-    imageUrl: '/static/images/plugins/idea.png',
+    imageUrl: `${process.env.PUBLIC_URL}/static/images/plugins/idea.png`,
     repository: 'https://gitlab.com/fulvio1993/logger-intellij',
     repositoryIcon: [<GitlabIcon key={uuid()}/>]
   }
@@ -90,6 +90,6 @@ function Plugins(props){
       <Divider />
     </Card>
   );
-};
+}
 
 export default Plugins;

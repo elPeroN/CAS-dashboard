@@ -43,7 +43,7 @@ export function createPieStats(developers){
   }
 
   developers.forEach((item, i) => {
-    filtered.labels.push(item.name);;
+    filtered.labels.push(item.name);
     filtered.numbers.push(item.commits);
   });
   return filtered;

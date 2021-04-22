@@ -22,7 +22,7 @@ function BEARER(token) {
 */
 // POST request to API in order to login and receive the user token
 export function fetchToken(usr, psw){
-    const route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${config.API.TAIGA_TOKEN}`
+    const route = `${config.URL}/taiga/${config.API.TAIGA_TOKEN}`
     const credentials = {
         username: usr,
         password: psw,
@@ -37,7 +37,7 @@ export function fetchToken(usr, psw){
 }
 
 export function fetchUserStats(id, token){
-    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${USERS}/${id}/stats`
+    let route = `${config.URL}/taiga/${USERS}/${id}/stats`
 
     return axios({
         type: GET,
@@ -50,7 +50,7 @@ export function fetchUserStats(id, token){
 }
 
 export function fetchUserProjects(id, token){
-    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${PROJECTS}?member=${id}`
+    let route = `${config.URL}/taiga/${PROJECTS}?member=${id}`
 
     return axios({
         type: GET,
@@ -63,7 +63,7 @@ export function fetchUserProjects(id, token){
 }
 
 export function fetchUserTasks(id, token, project){
-    let route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${TASKS}?assigned_to=${id}`
+    let route = `${config.URL}/taiga/${TASKS}?assigned_to=${id}`
 
     return axios({
         type: GET,
@@ -76,7 +76,7 @@ export function fetchUserTasks(id, token, project){
 }
 
 export function fetchUserStories(id, token, project){
-    const route = `${config.URL}:${config.TAIGA_PORT_NUMBER}/${STORIES}?assigned_to=${id}`
+    const route = `${config.URL}/taiga/${STORIES}?assigned_to=${id}`
 
     return axios({
         type: GET,

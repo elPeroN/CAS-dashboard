@@ -23,6 +23,6 @@ function mapStateToProps(state){
     state: state,
     mattermostToken: state.mattermost.mattermostToken
   };
-};
+}
 
 export default connect(mapStateToProps)(Mattermost);

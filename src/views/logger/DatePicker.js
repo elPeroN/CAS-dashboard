@@ -76,13 +76,13 @@ function StaticDatePicker(props) {
       </CardContent>
     </Card>
   );
-};
+}
 
 function mapStateToProps(state){
   return{
     startDate: state.logger.startDate,
     endDate: state.logger.endDate }
-};
+}
 
 const actions = {
   setStartDate: loggerCreator.setStartDate,

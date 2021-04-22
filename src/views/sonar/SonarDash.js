@@ -14,7 +14,7 @@ import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
 
-import SonarQubeIcon from "src/assets/icons/SonarQube";
+import SonarQubeIcon from "src/assets/icons/SonarQubeIcon";
 import Recap from './Recap';
 import { connect } from "react-redux";
 import { sonarCreator } from 'src/redux/actions/Sonar/creator';

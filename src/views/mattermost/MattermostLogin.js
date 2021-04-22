@@ -136,7 +136,7 @@ function MattermostLogin(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}/login`}
+                    onClick={() => window.location = `${config.URL}/mattermost/login`}
                     startIcon={<MattermostIcon/>}
                   >
                     Mattermost
@@ -147,7 +147,7 @@ function MattermostLogin(props){
           </Formik>
         </Container>
   );
-};
+}
 
 const actions = {
   login: mattermostCreator.loginMattermost

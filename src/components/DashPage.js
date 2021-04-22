@@ -26,12 +26,12 @@ function DashPage (props){
       </div>
     );
   }else return (<Redirect to="/login"/>)
-};
+}
 
 function mapStateToProps(state){
   return {
     user: state.logger.user
   };
-};
+}
 
 export default connect(mapStateToProps)(DashPage);

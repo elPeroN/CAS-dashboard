@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 function RegisterView(props){
   const classes = useStyles();
 
-  if(props.logger.registered) return(<Redirect to='/login'/>);//TODO: se voglio ritornare a register?
+  if(props.logger.registered) return(<Redirect to='/login'/>);
   else return (
     <AuthPage >
       <Container className={classes.root} maxWidth="sm">
@@ -251,11 +251,11 @@ function RegisterView(props){
       </Container>
     </AuthPage>
   );
-};
+}
 
 function mapStateToProps(state){
   return {logger: state.logger};
-};
+}
 
 const actions = {
   register: loggerCreator.register

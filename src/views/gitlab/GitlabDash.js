@@ -111,7 +111,7 @@ function GitlabDash(props) {
         </Grid>
       </Container>
   )
-};
+}
 
 function mapStateToProps(state){
   return {
@@ -119,7 +119,7 @@ function mapStateToProps(state){
     gitlabMenuIndex: state.gitlab.gitlabMenuIndex,
     gitlabView: state.gitlab.gitlabView
   };
-};
+}
 
 const actions = {
   setRepositoryIndex: gitlabActions.setRepositoryIndex,

@@ -12,13 +12,10 @@ import {
 import {
   ExitToApp as ExitToAppIcon,
 } from '@material-ui/icons';
-//TODO: unire gitlabPage.js con Commits.js
 import TaigaIcon from 'src/assets/icons/TaigaIcon'
 import UserDetail from './UserDetail'
 import { connect } from "react-redux";
 import { taigaCreator } from 'src/redux/actions/Taiga/creator';
-import { taigaActions } from 'src/redux/actions/Taiga/actions';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -104,13 +101,13 @@ function UserStats(props) {
         </Grid>
       </Container>
   )
-};
+}
 
 function mapStateToProps(state){
 	return {
 	  taigaId: state.taigaId
 	};
-};
+}
 
 const actions = {
 	login: taigaCreator.login,

@@ -37,12 +37,12 @@ function DashboardLayout(props){
       {props.children}
     </div>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     user: state.logger.user
    };
-};
+}
 
 export default connect(mapStateToProps)(DashboardLayout);

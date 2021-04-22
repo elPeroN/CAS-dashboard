@@ -1,8 +1,9 @@
 {
   "name": "cas-dashboard",
-  "author": "",
+  "author": "Stefano Propato, Salvatore Perri",
   "licence": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "homepage":".",
   "private": false,
   "scripts": {
     "start": "react-scripts start",

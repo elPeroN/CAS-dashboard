@@ -33,7 +33,7 @@ function MattermostDialog(props) {
         <ListItem key={index}>
           <ListItemText primary={message.channel} />
           <ListItemSecondaryAction>
-            <IconButton edge="end" aria-label="mail" onClick={() => window.location = `${config.URL}:${config.MATTERMOST_PORT_NUMBER}`}>
+            <IconButton edge="end" aria-label="mail" onClick={() => window.location = `${config.URL}/mattermost`}>
               <Badge badgeContent={message.num} color="primary">
                 <MailIcon />
               </Badge>
@@ -74,7 +74,7 @@ function mapStateToProps(state){
     userId: state.mattermost.mattermostId,
     teamId: state.mattermost.mattermostTeamId
   };
-};
+}
 
 const actions = {
   setMenuIndex: mattermostActions.setMattermostMenuIndex,

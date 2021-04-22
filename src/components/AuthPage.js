@@ -29,7 +29,7 @@ function AuthPage(props){
       </div>
     );
   }else return (<Redirect to="/"/>)
-};
+}
 
 AuthPage.propTypes = {
   children: PropTypes.node.isRequired,
@@ -40,6 +40,6 @@ function mapStateToProps(state){
   return {
     user: state.logger.user
   };
-};
+}
 
 export default connect(mapStateToProps)(AuthPage);

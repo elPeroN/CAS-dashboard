@@ -39,7 +39,7 @@ export function createFileStats(activities){
   },{});
 
   for (const prop in map) {
-    //show only files with metrics > 50 
+    //show only files with metrics > 50
     if(map[prop].items > 50){
       stats.labels.push(prop);
       stats.time.push(map[prop].time);
@@ -47,7 +47,7 @@ export function createFileStats(activities){
     }
   }
   return stats;
-};
+}
 
 export function createPieStats(activities){
   let stats = {};

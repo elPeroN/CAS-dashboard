@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 
-import SonarQubeIcon from 'src/assets/icons/SonarQube';
+import SonarQubeIcon from 'src/assets/icons/SonarQubeIcon';
 import { sonarCreator } from "src/redux/actions/Sonar/creator";
 import { config } from "src/services/config.js";
 
@@ -103,7 +103,7 @@ function SonarLogin(props){
                   <Button
                     variant="contained"
                     color="secondary"
-                    onClick={() => window.location = `${config.URL}:${config.SONAR_PORT_NUMBER}`}
+                    onClick={() => window.location = `${config.URL}/sonarqube`}
                     startIcon={<SonarQubeIcon/>}
                   >
                     SonarQube
@@ -114,7 +114,7 @@ function SonarLogin(props){
           </Formik>
         </Container>
   );
-};
+}
 
 const actions = {
   login: sonarCreator.login

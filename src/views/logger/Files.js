@@ -42,11 +42,11 @@ function Stats(props){
       </CardContent>
     </Card>
   );
-};
+}
 
 function mapStateToProps(state){
   return {
     activities: state.logger.activities };
-};
+}
 
 export default connect(mapStateToProps)(Stats);

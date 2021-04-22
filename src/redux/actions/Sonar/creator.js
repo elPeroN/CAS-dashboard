@@ -48,8 +48,8 @@ function refresh(){
 function getProjects(){
     return (dispatch, getState) => {
         const token = getState().sonar.sonarToken;
-        fetchProjects(token).then( res => {
-                res.data.projects.forEach( p => {
+        fetchProjects(token).then( response => {
+                response.data.projects.forEach( p => {
                   let proj;
                   fetchMeasure(token,p.key).then( res => {
                     let debt,analysis,qual;

@@ -125,7 +125,7 @@ function GitlabLogin(props){
           </Formik>
         </Container>
   );
-};
+}
 
 const actions = {
   login: gitlabCreator.loginGitlab
