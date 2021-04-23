@@ -1,5 +1,5 @@
 export const config = {
-  URL: "https://www.stefanopropato.it",
+  URL: "http://localhost:9005",
 
   PORT_NUMBER: "443",
   SONAR_API:"sonarqube-api",

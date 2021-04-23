@@ -1,7 +1,7 @@
 import { config } from "./config";
 import axios from 'axios';
 
-const activitiesRoute = `${config.URL}:${config.PORT_NUMBER}/${config.API.ACTIVITY}`;
+const activitiesRoute = `${config.URL}/logger/${config.API.ACTIVITY}`;
 
 export function getActivities(token,startDate,endDate){
 	return axios({
