@@ -1,5 +1,6 @@
 import { sonarActions as sonar } from './actions';
 import { appActions } from "src/redux/actions/App/appActions";
+import { config } from "src/services/config";
 
 import {
   checkToken,
