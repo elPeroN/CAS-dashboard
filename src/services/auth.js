@@ -1,8 +1,8 @@
 import { config } from "./config";
 import axios from 'axios';
 
-const loginRoute = `${config.URL}:${config.PORT_NUMBER}/${config.API.LOGIN}`;
-const registerRoute = `${config.URL}:${config.PORT_NUMBER}/${config.API.REGISTER}`;
+const loginRoute = `${config.URL}/logger/${config.API.LOGIN}`;
+const registerRoute = `${config.URL}/logger/${config.API.REGISTER}`;
 
 export function loginUser(email,password){
   return axios.post(loginRoute,
