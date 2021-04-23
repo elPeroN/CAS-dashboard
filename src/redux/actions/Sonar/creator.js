@@ -68,7 +68,7 @@ function getProjects(){
                       last_analysis: analysis,
                       name: p.name,
                       quality_gate: qual,
-                      address: `http://localhost:8121?id=${p.key}`,
+                      address: `${config.URL}/sonarqube?id=${p.key}`,
                       debt: debt
                     };
                     dispatch(sonar.setProjects(proj));

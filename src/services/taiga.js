@@ -37,7 +37,7 @@ export function fetchToken(usr, psw){
 }
 
 export function fetchUserStats(id, token){
-    let route = `${config.URL}/taiga/${USERS}/${id}/stats`
+    let route = `${config.URL}/${USERS}/${id}/stats`
 
     return axios({
         type: GET,
@@ -50,7 +50,7 @@ export function fetchUserStats(id, token){
 }
 
 export function fetchUserProjects(id, token){
-    let route = `${config.URL}/taiga/${PROJECTS}?member=${id}`
+    let route = `${config.URL}/${PROJECTS}?member=${id}`
 
     return axios({
         type: GET,
@@ -63,7 +63,7 @@ export function fetchUserProjects(id, token){
 }
 
 export function fetchUserTasks(id, token, project){
-    let route = `${config.URL}/taiga/${TASKS}?assigned_to=${id}`
+    let route = `${config.URL}/${TASKS}?assigned_to=${id}`
 
     return axios({
         type: GET,
@@ -76,7 +76,7 @@ export function fetchUserTasks(id, token, project){
 }
 
 export function fetchUserStories(id, token, project){
-    const route = `${config.URL}/taiga/${STORIES}?assigned_to=${id}`
+    const route = `${config.URL}/${STORIES}?assigned_to=${id}`
 
     return axios({
         type: GET,
