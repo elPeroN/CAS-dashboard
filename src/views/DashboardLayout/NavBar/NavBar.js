@@ -23,7 +23,6 @@ import GitlabIcon from 'src/assets/icons/GitlabIcon';
 import TaigaIcon from 'src/assets/icons/TaigaIcon';
 import SonarQubeIcon from "src/assets/icons/SonarQubeIcon";
 import JenkinsIcon from "src/assets/icons/JenkinsIcon";
-import BugzillaIcon from "src/assets/icons/BugzillaIcon";
 import NavItem from './NavItem';
 import { loggerCreator } from "src/redux/actions/Logger/loggerCreator";
 import { appActions } from "src/redux/actions/App/appActions";
@@ -60,11 +59,6 @@ const otherItems = [
     href: '/jenkins',
     icon: JenkinsIcon,
     title: 'Jenkins'
-  },
-  {
-    href:  '/bugzilla',
-    icon: BugzillaIcon,
-    title: 'Bugzilla'
   }
 ];
 

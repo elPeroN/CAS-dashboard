@@ -35,7 +35,6 @@ class App extends Component{
                 <Route exact path='/taiga' component={TaigaPage}/>
                 <Route exact path='/sonar' component={SonarPage}/>
                 <Route exact path='/jenkins' component={() => window.location = `${config.URL}/jenkins`}/>
-                <Route exact path='/bugzilla' component={() => window.location = `${config.URL}/bugzilla/bugzilla`}/>
                 <Route path="/*" component={NotFoundView}/>
               </Switch>
             </DashboardLayout>
