@@ -22,7 +22,7 @@ function BEARER(token) {
 */
 // POST request to API in order to login and receive the user token
 export function fetchToken(usr, psw){
-    const route = `${config.URL}/taiga/${config.API.TAIGA_TOKEN}`
+    const route = `${config.URL}/${config.API.TAIGA_TOKEN}`
     const credentials = {
         username: usr,
         password: psw,

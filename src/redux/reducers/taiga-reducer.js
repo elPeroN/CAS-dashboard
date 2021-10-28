@@ -19,7 +19,7 @@ const initialState = ({
 export const taigaReducer = (state = initialState, action) => {
     switch(action.type) {
 
-        case(taigaTypes.SUCCESSFUL_LOGIN):
+        case(taigaTypes.TAIGA_LOGIN):
           return {
             ...state,
             token: action.payload.auth_token,

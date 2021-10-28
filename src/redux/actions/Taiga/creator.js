@@ -51,7 +51,7 @@ function getProjects() {
                         description: proj.description,
                         members: proj.members,
                         is_private: proj.is_private,
-                        address: `${config.URL}/taiga/project/${proj.slug}`
+                        address: `${config.URL}/project/${proj.slug}`
                     }
                     projects.push(x)
 
