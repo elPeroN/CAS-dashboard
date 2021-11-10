@@ -17,9 +17,8 @@ export function createBarStats(stories) {
         if (s.is_closed === true)
             completed.push(s)
     })
-
-    const dates = new Map(Array.from(completed, obj => [obj.finished_date.split('T')[0], []]))
-    completed.forEach( obj => dates.get(obj.finished_date.split('T')[0]).push(obj))
+    const dates = new Map(Array.from(completed, obj => [obj.finish_date.split('T')[0], []]))
+    completed.forEach( obj => dates.get(obj.finish_date.split('T')[0]).push(obj))
 
     dates.forEach( obj => {
         numbers.push(obj.length)
@@ -33,7 +32,7 @@ export function createBarStats(stories) {
 
 export function sortUserStories(stories){
     return (
-        stories.sort( (a,b) => (a.finished_date > b.finished_date) ? 1 : -1)
+        stories.sort( (a,b) => (a.finish_date > b.finish_date) ? 1 : -1)
     )
 }
 

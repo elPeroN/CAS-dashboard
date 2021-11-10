@@ -15,7 +15,7 @@ import {storiesData, storiesOptions } from './assets/datasets'
 
 function LineChart(props) {
     const theme = useTheme()
-    let stats
+    let stats;
 
     if (props.stories)
         stats = createBarStats(props.stories)

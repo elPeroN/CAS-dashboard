@@ -84,25 +84,23 @@ function refresh(){
 
 function getUserUStories() {
     return (dispatch, getState) => {
-        const id = getState().taiga.id
-        const token = getState().taiga.token
-        let stories = []
+        const id = getState().taiga.id;
+        const token = getState().taiga.token;
+        let stories = [];
 
         fetchUserTasks(id,token,null)
-
             .then( res => {
                 if (res.data.length > 0) {
-
                     res.data.forEach( s => {
                         let x = {
                             subject: s.subject,
-                            finished_date: s.finished_date,
+                            finish_date: s.finish_date,
                             is_closed: s.is_closed,
                             milestone: s.milestone_slug,
                             belongs_to: s.user_story_extra_info ?
                                 s.user_story_extra_info.subject : null
                         }
-                        stories.push(x)
+                        stories.push(x);
                     })
                 }
             })
@@ -113,7 +111,7 @@ function getUserUStories() {
                             res.data.forEach( s => {
                                 let x = {
                                     subject: s.subject,
-                                    finished_date: s.finished_date,
+                                    finish_date: s.finish_date,
                                     is_closed: s.is_closed,
                                     milestone: s.milestone_slug,
                                     belongs_to: s.user_story_extra_info ?
