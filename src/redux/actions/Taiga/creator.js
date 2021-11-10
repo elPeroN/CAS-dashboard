@@ -40,7 +40,7 @@ function login(args){
 function getProjects() {
     return (dispatch, getState) => {
         const id = getState().taiga.id
-        const token = getState().taiga.token
+        const token = getState().taiga.taigaToken
         fetchUserProjects(id, token).then( res => {
                 let projects = []
                 res.data.forEach( proj => {
@@ -85,16 +85,22 @@ function refresh(){
 function getUserUStories() {
     return (dispatch, getState) => {
         const id = getState().taiga.id;
-        const token = getState().taiga.token;
+        const token = getState().taiga.taigaToken;
         let stories = [];
-
         fetchUserTasks(id,token,null)
             .then( res => {
                 if (res.data.length > 0) {
                     res.data.forEach( s => {
+                        let finishDate;
+                        if(s.finished_date){
+                          finishDate = s.finished_date;
+                        }else{
+                          finishDate= s.finish_date;
+                        }
+
                         let x = {
                             subject: s.subject,
-                            finish_date: s.finish_date,
+                            finish_date: finishDate,
                             is_closed: s.is_closed,
                             milestone: s.milestone_slug,
                             belongs_to: s.user_story_extra_info ?

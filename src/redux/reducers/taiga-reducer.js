@@ -6,7 +6,7 @@ const USER_STRING = 'taigaUsername';
 const ROLES_STRING = 'taigaRoles';
 
 const initialState = ({
-    token: localStorage.getItem(TOKEN_STRING) ? localStorage.getItem(TOKEN_STRING) : null,
+    taigaToken: localStorage.getItem(TOKEN_STRING) ? localStorage.getItem(TOKEN_STRING) : null,
     id: localStorage.getItem(ID_STRING) ? localStorage.getItem(ID_STRING) : null,
     roles: localStorage.getItem(ROLES_STRING) ? localStorage.getItem(ROLES_STRING) : null,
     user: localStorage.getItem(USER_STRING) ? localStorage.getItem(USER_STRING) : null,
@@ -22,7 +22,7 @@ export const taigaReducer = (state = initialState, action) => {
         case(taigaTypes.TAIGA_LOGIN):
           return {
             ...state,
-            token: action.payload.auth_token,
+            taigaToken: action.payload.auth_token,
             id: action.payload.id,
             roles: action.payload.roles,
             user: action.payload.username
@@ -30,7 +30,7 @@ export const taigaReducer = (state = initialState, action) => {
         case(taigaTypes.TAIGA_LOGOUT) :
           return {
             ...state,
-            token: null,
+            taigaToken: null,
             id: null,
             roles: null,
             user: null

@@ -23,7 +23,7 @@ function TaigaPage(props) {
 
 function mapStateToProps(state){
     return {
-        token: state.taiga.token,
+        token: state.taiga.taigaToken,
         id: state.taiga.id
     }
 }
